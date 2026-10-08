@@ -38,6 +38,23 @@ function Index() {
   const [api, setApi] = useState<CarouselApi>();
   const [active, setActive] = useState(0);
   const [paused, setPaused] = useState(false);
+  const [typedCharacters, setTypedCharacters] = useState(0);
+  const greeting = "Hi I'm";
+  const name = "Paavan Randhawa";
+  const greetingLength = greeting.length + name.length;
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setTypedCharacters(greetingLength);
+      return;
+    }
+    const timer = window.setInterval(() => {
+      setTypedCharacters(count => {
+        if (count + 1 >= greetingLength) window.clearInterval(timer);
+        return Math.min(count + 1, greetingLength);
+      });
+    }, 85);
+    return () => window.clearInterval(timer);
+  }, [greetingLength]);
   useEffect(() => {
     if (!api) return;
     const update = () => setActive(api.selectedScrollSnap());
@@ -60,33 +77,33 @@ function Index() {
     <main>
       <section id="about" className="original-about">
         <div className="original-about-copy">
-          <p className="hello">hi i'm</p>
-          <h1>Paavan!</h1>
+          <p className="hello" aria-label={greeting}><span aria-hidden="true">{greeting.slice(0, typedCharacters)}<span className="typewriter-pending">{greeting.slice(typedCharacters)}</span></span></p>
+          <h1 aria-label={name} data-typing={typedCharacters > greeting.length && typedCharacters < greetingLength}><span aria-hidden="true">{name.slice(0, Math.max(0, typedCharacters - greeting.length))}<span className="typewriter-pending">{name.slice(Math.max(0, typedCharacters - greeting.length))}</span></span></h1>
           <p className="lead">Student at Simon Fraser University</p>
           <p className="bio">{content.bio}</p>
           <div className="btn-group"><ResumeLink /><Button asChild className="portfolio-button"><a href="#contact">Contact <ArrowUpRight size={16} /></a></Button></div>
           <div className="socials"><Button asChild variant="ghost" size="icon"><a href={github} target="_blank" rel="noopener noreferrer" aria-label="GitHub" title="GitHub"><Github /></a></Button><Button asChild variant="ghost" size="icon"><a href={linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" title="LinkedIn"><Linkedin /></a></Button></div>
         </div>
-        <figure className="original-portrait"><img src={portrait.url} alt="Paavan Randhawa" fetchPriority="high" /><PixelSticker className="portrait-star" /></figure>
+        <figure className="original-portrait"><img src={portrait.url} alt="Paavan Randhawa" fetchPriority="high" /><PixelSticker className="portrait-star" /><PixelSticker kind="heart" className="portrait-heart" /></figure>
       </section>
       <section id="projects" className="original-projects">
-        <h2 className="section-title">Projects</h2>
+        <div className="section-heading"><h2 className="section-title">Projects</h2><PixelSticker className="projects-star" /></div>
         <Carousel opts={{ loop: true }} setApi={setApi} className="original-carousel" aria-label="Projects" onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)} onFocusCapture={() => setPaused(true)} onBlurCapture={event => { if (!event.currentTarget.contains(event.relatedTarget)) setPaused(false); }}>
           <CarouselContent>{content.projects.map((project, index) => <CarouselItem key={project.title} aria-hidden={active !== index}><article className="original-project"><h3>{project.title}</h3><Button asChild variant="outline" className="portfolio-button"><a href={project.href} target="_blank" rel="noopener noreferrer" tabIndex={active === index ? 0 : -1}>View project <ArrowUpRight size={16} /></a></Button><p>{project.description}</p></article></CarouselItem>)}</CarouselContent>
-          <CarouselPrevious aria-label="Previous project" title="Previous project" /><CarouselNext aria-label="Next project" title="Next project" />
+          <CarouselPrevious className="project-arrow" aria-label="Previous project" title="Previous project" /><CarouselNext className="project-arrow" aria-label="Next project" title="Next project" />
           <div className="carousel-dots">{content.projects.map((project, index) => <Button key={project.title} variant="ghost" size="icon" className="carousel-dot" data-active={active === index} aria-label={`Go to project ${index + 1}`} aria-pressed={active === index} onClick={() => api?.scrollTo(index)}><span /></Button>)}</div>
         </Carousel>
       </section>
       <section id="education" className="original-education">
-        <h2 className="section-title">Education</h2>
+        <div className="section-heading"><h2 className="section-title">Education</h2><PixelSticker kind="cursor" className="education-cursor" /></div>
         <div className="education-grid"><div><h3>Courses</h3><ul>{content.courses.map(course => <li key={course}>{course}</li>)}</ul></div><div><h3>Skills</h3>{content.skills.map(skill => <div key={skill.title} className="skill-group"><h4>{skill.title}</h4><p>{skill.description}</p></div>)}</div></div>
       </section>
       <section id="interests" className="original-interests">
-        <div><h2 className="section-title">Interests</h2><p>{content.interests}</p></div>
+        <div><div className="section-heading"><h2 className="section-title">Interests</h2><PixelSticker kind="heart" className="interests-heart" /></div><p>{content.interests}</p></div>
         <div className="interest-photos"><img src={whistler.url} alt="Whistler" loading="lazy" /><img src={lostlake.url} alt="Lost Lake" loading="lazy" /><img src={tunnelbluffs.url} alt="Tunnel Bluffs" loading="lazy" /></div>
       </section>
       <section id="contact" className="original-contact">
-        <div><h2 className="section-title">Contact Me</h2><p>{content.contact}</p><ResumeLink /><div className="contact-meta"><p>GitHub<br /><a href={github} target="_blank" rel="noopener noreferrer">github.com/paavanr19</a></p><p>LinkedIn<br /><a href={linkedin} target="_blank" rel="noopener noreferrer">Paavan Randhawa</a></p></div></div>
+        <div><div className="section-heading"><h2 className="section-title">Contact Me</h2><PixelSticker kind="envelope" className="contact-envelope" /></div><p>{content.contact}</p></div>
         <form action="https://api.web3forms.com/submit" method="POST" className="contact-form">
           {/* Web3Forms public form identifier, preserved from the owner's original HTML. */}
           <input type="hidden" name="access_key" value="1725c347-0370-4255-8441-e8334e976b59" />
