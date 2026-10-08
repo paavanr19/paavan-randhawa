@@ -8,3 +8,7 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+- Keep portfolio presentation styles and typography roles in `src/styles.css` so the visual direction remains consistent.
+- Use original pixel SVG artwork for decorative stickers; uploaded screenshots are references, not page assets.
+- Keep sample portfolio content local and clearly identified until the owner provides real projects.
