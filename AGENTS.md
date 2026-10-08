@@ -12,3 +12,4 @@
 - Keep portfolio presentation styles and typography roles in `src/styles.css` so the visual direction remains consistent.
 - Use original pixel SVG artwork for decorative stickers; uploaded screenshots are references, not page assets.
 - Preserve owner-provided portfolio content, navigation, links, and media during presentation changes; never substitute invented projects or generated images for originals.
+- Keep recovered portfolio text in a local content module and original media in asset pointers, so presentation changes cannot replace the owner's source material.
