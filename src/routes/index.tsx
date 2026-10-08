@@ -9,7 +9,7 @@ import { PixelSticker } from "@/components/pixel-sticker";
 import content from "@/lib/portfolio-content.json";
 const portrait = { url: "/images/pfp.png" };
 const whistler = { url: "/images/whistler.jpeg" };
-const lostlake = { url: "/images/lostlake.jpeg" };
+const lostlake = { url: "/images/whistler_lost_lake.jpeg" };
 const tunnelbluffs = { url: "/images/tunnelbluffs.png" };
 const resume = { url: "/images/PaavanRandhawa-Resume.pdf" };
 
