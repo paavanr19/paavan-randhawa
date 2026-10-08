@@ -7,11 +7,11 @@ import { Textarea } from "@/components/ui/textarea";
 import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext, type CarouselApi } from "@/components/ui/carousel";
 import { PixelSticker } from "@/components/pixel-sticker";
 import content from "@/lib/portfolio-content.json";
-import portrait from "@/assets/original/pfp.png.asset.json";
-import whistler from "@/assets/original/whistler.jpeg.asset.json";
-import lostlake from "@/assets/original/lostlake.jpeg.asset.json";
-import tunnelbluffs from "@/assets/original/tunnelbluffs.png.asset.json";
-import resume from "@/assets/original/PaavanRandhawa-Resume.pdf.asset.json";
+const portrait = { url: "/images/pfp.png" };
+const whistler = { url: "/images/whistler.jpeg" };
+const lostlake = { url: "/images/lostlake.jpeg" };
+const tunnelbluffs = { url: "/images/tunnelbluffs.png" };
+const resume = { url: "/images/PaavanRandhawa-Resume.pdf" };
 
 export const Route = createFileRoute("/")({
   head: () => ({ meta: [
@@ -40,7 +40,7 @@ function Index() {
   const [paused, setPaused] = useState(false);
   const [typedCharacters, setTypedCharacters] = useState(0);
   const greeting = "Hi I'm";
-  const name = "Paavan Randhawa";
+  const name = "Paavan Randhawa!";
   const greetingLength = greeting.length + name.length;
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
