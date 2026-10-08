@@ -223,7 +223,7 @@ html { scroll-behavior: smooth; scroll-padding-top: 30px; }
 @media(min-width:1450px) { .hero-title {font-size:145px;} .hero-title span:last-child {font-size:185px;} .hero-signature {top:220px; font-size:120px;} }
 @media(max-width:1100px) { .hero-title {font-size:100px;} .hero-title span:last-child {font-size:125px;} .hero-signature {font-size:85px; top:175px;} .about-heading {font-size:61px;} .about-heading em {font-size:70px;} .section-heading {font-size:49px;} .section-heading em {font-size:58px;} .work-header {align-items:center;} }
 @media(max-width:767px) {
- .portfolio-nav {height:77px; padding:0 6%;} .wordmark {font-size:30px;} .nav-links {gap:17px; font-size:10px;} .nav-links .nav-about {display:none;} .nav-cta {padding:8px 11px;}
+ .portfolio-nav {min-height:77px; height:auto; padding:16px 6%; gap:12px; grid-template-columns:1fr;} .wordmark {font-size:30px;} .nav-links {gap:17px; font-size:10px; flex-wrap:wrap;} .nav-cta {padding:8px 11px;}
  .portfolio-hero {padding-top:29px; padding-bottom:31px;} .hero-eyebrow {font-size:8px; letter-spacing:.8px;} .hero-eyebrow span:last-child {display:none;}
  .hero-title {font-size:54px; margin-top:47px;} .hero-title span:last-child {font-size:51px; line-height:1.2;} .hero-signature {font-size:43px; top:151px; right:7%;} .hero-star {top:30px; right:8%; width:43px; height:43px;}
  .hero-bottom {margin-top:55px; gap:12px;} .hero-bottom p {font-size:11px; max-width:205px;} .scroll-link {font-size:8px; gap:6px;}
