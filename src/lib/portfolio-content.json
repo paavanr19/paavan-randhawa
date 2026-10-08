@@ -1,0 +1,56 @@
+{
+  "bio": "I'm a computing science student in Vancouver, focused on building\n                    software that is useful and carefully made — from games and solvers\n                    to systems programming.",
+  "projects": [
+    {
+      "title": "Rubik's Cube Solver",
+      "href": "https://github.com/paavanr19/rubikscubesolver",
+      "description": "A Rubik’s Cube solving program that takes a cube configuration as input and uses the two-phase Kociemba algorithm to calculate an efficient solution. It parses cube states from files, processes the cube configuration, and generates step-by-step instructions for solving the cube."
+    },
+    {
+      "title": "Pocoloco",
+      "href": "https://github.com/paavanr19/pocoloco",
+      "description": "A multiplayer dice game where players compete to be the first to lose all of their chips. The game features randomized turn order, custom scoring mechanics, and special dice combinations such as Poco, Loco, and three-of-a-kind rolls. It processes each player's dice rolls, applies the corresponding scoring rules, and updates chip counts throughout each round."
+    },
+    {
+      "title": "Mythos Seafarer",
+      "href": "https://github.sfu.ca/saba/CMPT276S26_Group7",
+      "description": "A Java-based arcade-style game built using Processing. Players navigate through multiple levels, avoid enemies, collect rewards, and progress through different maps. The game features interactive gameplay, level progression, and increasing challenges as players advance."
+    },
+    {
+      "title": "Unix Shell",
+      "href": "https://github.com/SFU-CMPT-201/a8-paavanr13",
+      "description": "A Unix-style command-line shell in C with support for process creation and execution, foreground and background processes, built-in commands, signal handling, and command history. Process management uses fork(), exec(), and waitpid(), with Linux system calls and CMake for configuration and builds."
+    }
+  ],
+  "courses": [
+    "CMPT 120/125 — Intro to Computer Science and Programming I & II",
+    "MATH 150/152/251 — Calculus I–III",
+    "MATH 232 — Applied Linear Algebra",
+    "MACM 201 — Discrete Mathematics I",
+    "CMPT 225 — Data Structures and Programming",
+    "STAT 270 — Introduction to Probability and Statistics",
+    "CMPT 276 — Introduction to Software Engineering",
+    "CMPT 201 — Systems Programming",
+    "CMPT 295 — Intro to Computer Systems"
+  ],
+  "skills": [
+    {
+      "title": "Programming Languages",
+      "description": "Java · C · C++ · Python · JavaScript · SQL · Bash / Shell scripting"
+    },
+    {
+      "title": "Web Development",
+      "description": "HTML · CSS · JavaScript · Tailwind CSS"
+    },
+    {
+      "title": "Systems & Tools",
+      "description": "Unix · Linux · CMake · Maven · MATLAB"
+    },
+    {
+      "title": "Testing & Documentation",
+      "description": "JUnit · JaCoCo · Javadoc"
+    }
+  ],
+  "interests": "Outside of school, I’ve spent most of my life around sports. I’ve played competitive soccer for over 15 years and ball hockey for 6, including at BC Provincials.\n                    These days, I enjoy running, cycling, hiking, and exploring the trails around Vancouver. I also enjoy reading in my downtime, especially when I want to slow down and step away from a screen.\n                    Whether it’s a long bike ride, a new hiking trail, a game with friends, or a good book, I enjoy staying active, being outdoors, and finding new things to explore.",
+  "contact": "Have a question, a project idea, or just want to say hello?\n                    Send a note and I’ll get back to you."
+}
