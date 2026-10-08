@@ -1,4 +1,5 @@
 # Portfolio redesign
+- [ ] Update Contact links, scrollbar visibility, About spacing/icons/subtitle, greeting animation, project arrows, and pixel accents.
 - [x] Restore original navbar, sections, unchanged wording, links, and pictures from the owner's GitHub portfolio.
 - [x] Remove all AI-generated images from the preview.
 - [x] Build an approval preview from the supplied layout, palette, and sticker references.
