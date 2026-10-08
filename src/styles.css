@@ -150,6 +150,22 @@
   }
 }
 
+/* Pixel cursors */
+html,
+body {
+  cursor: url("/cursor.png") 0 0, auto;
+}
+
+a,
+button,
+[role="button"],
+label,
+summary,
+.portfolio-button {
+  cursor: url("/cursor-pointer.png") 9 0, pointer;
+}
+
+
 html { scroll-behavior:smooth; scroll-padding-top:105px; scrollbar-width:none; }
 html::-webkit-scrollbar,body::-webkit-scrollbar { display:none; }
 ::selection { background:var(--secondary); color:var(--primary); }
