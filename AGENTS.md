@@ -14,3 +14,4 @@
 - Preserve owner-provided portfolio content, navigation, links, and media during presentation changes; never substitute invented projects or generated images for originals.
 - Keep recovered portfolio text in a local content module and original media in asset pointers, so presentation changes cannot replace the owner's source material.
 - Keep the animated greeting's full text in the layout and accessible labels, revealing characters after hydration and skipping motion when requested, to avoid layout shifts and preserve readability.
+- Keep the intro isolated in its own component with deterministic scene timers and original SVG/CSS textures; start the portfolio typewriter only after dismissal so presentation experiments cannot change portfolio content.
