@@ -39,10 +39,25 @@ function Index() {
   const [active, setActive] = useState(0);
   const [paused, setPaused] = useState(false);
   const [typedCharacters, setTypedCharacters] = useState(0);
+  const [intro, setIntro] = useState<"pending" | "playing" | "done">("pending");
   const greeting = "Hi I'm";
   const name = "Paavan Randhawa!";
   const greetingLength = greeting.length + name.length;
+  const finishIntro = useCallback(() => {
+    try { sessionStorage.setItem(INTRO_KEY, "1"); } catch { /* ignore */ }
+    setIntro("done");
+  }, []);
   useEffect(() => {
+    let played = false;
+    try { played = sessionStorage.getItem(INTRO_KEY) === "1"; } catch { /* ignore */ }
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    setIntro(played || reduce ? "done" : "playing");
+  }, []);
+  useEffect(() => {
+    document.documentElement.style.overflow = intro === "done" ? "" : "hidden";
+  }, [intro]);
+  useEffect(() => {
+    if (intro !== "done") { setTypedCharacters(0); return; }
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       setTypedCharacters(greetingLength);
       return;
@@ -54,7 +69,7 @@ function Index() {
       });
     }, 85);
     return () => window.clearInterval(timer);
-  }, [greetingLength]);
+  }, [greetingLength, intro]);
   useEffect(() => {
     if (!api) return;
     const update = () => setActive(api.selectedScrollSnap());
