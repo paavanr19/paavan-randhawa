@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+import { CinematicIntro, INTRO_KEY } from "@/components/cinematic-intro";
 import { ArrowUpRight, Download, Github, Linkedin, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -39,10 +40,25 @@ function Index() {
   const [active, setActive] = useState(0);
   const [paused, setPaused] = useState(false);
   const [typedCharacters, setTypedCharacters] = useState(0);
+  const [intro, setIntro] = useState<"pending" | "playing" | "done">("pending");
   const greeting = "Hi I'm";
   const name = "Paavan Randhawa!";
   const greetingLength = greeting.length + name.length;
+  const finishIntro = useCallback(() => {
+    try { sessionStorage.setItem(INTRO_KEY, "1"); } catch { /* ignore */ }
+    setIntro("done");
+  }, []);
   useEffect(() => {
+    let played = false;
+    try { played = sessionStorage.getItem(INTRO_KEY) === "1"; } catch { /* ignore */ }
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    setIntro(played || reduce ? "done" : "playing");
+  }, []);
+  useEffect(() => {
+    document.documentElement.style.overflow = intro === "done" ? "" : "hidden";
+  }, [intro]);
+  useEffect(() => {
+    if (intro !== "done") { setTypedCharacters(0); return; }
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       setTypedCharacters(greetingLength);
       return;
@@ -54,7 +70,7 @@ function Index() {
       });
     }, 85);
     return () => window.clearInterval(timer);
-  }, [greetingLength]);
+  }, [greetingLength, intro]);
   useEffect(() => {
     if (!api) return;
     const update = () => setActive(api.selectedScrollSnap());
@@ -68,6 +84,7 @@ function Index() {
     return () => window.clearInterval(timer);
   }, [api, paused, active]);
   return <div className="portfolio-shell">
+    {intro !== "done" && <CinematicIntro onDone={finishIntro} />}
     <header className="portfolio-nav">
       <a href="#about" className="wordmark">Paavan Randhawa</a>
       <Button variant="ghost" size="icon" className="menu-toggle" aria-label={menuOpen ? "Close menu" : "Open menu"} aria-expanded={menuOpen} aria-controls="main-navigation" onClick={() => setMenuOpen(!menuOpen)}>{menuOpen ? <X /> : <Menu />}</Button>
@@ -115,6 +132,6 @@ function Index() {
         </form>
       </section>
     </main>
-    <footer className="portfolio-footer"><nav aria-label="Footer navigation">{sections.map(section => <a key={section} href={`#${section.toLowerCase()}`}>{section}</a>)}</nav><p>© All Rights Reserved | Paavan Randhawa</p></footer>
+    <footer className="portfolio-footer"><nav aria-label="Footer navigation">{sections.map(section => <a key={section} href={`#${section.toLowerCase()}`}>{section}</a>)}</nav><button type="button" className="replay-intro" onClick={() => setIntro("playing")}>▶ Replay Intro</button><p>© All Rights Reserved | Paavan Randhawa</p></footer>
   </div>;
 }

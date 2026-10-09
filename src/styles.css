@@ -244,3 +244,55 @@ html::-webkit-scrollbar,body::-webkit-scrollbar { display:none; }
  .education-grid,.original-interests,.original-contact {grid-template-columns:1fr;gap:35px;} .education-grid h3 {font-size:28px;} .original-interests p {font-size:14px;} .portfolio-footer {font-size:11px;} .portfolio-footer nav {gap:15px;}
 }
 @media(prefers-reduced-motion:reduce) { html {scroll-behavior:auto;} *,*::before,*::after {transition:none!important;animation:none!important;} }
+
+/* Cinematic intro */
+.intro { position:fixed; inset:0; z-index:100; overflow:hidden; background:var(--foreground); color:var(--background); font-family:var(--font-body); }
+.intro-grain { position:absolute; inset:-50%; opacity:.35; background-image:radial-gradient(circle, currentColor 1px, transparent 1.2px); background-size:3px 3px; animation:intro-jitter .083s steps(1) infinite; mix-blend-mode:overlay; }
+@keyframes intro-jitter { 0%{transform:translate(0,0)} 25%{transform:translate(-7px,4px)} 50%{transform:translate(5px,-6px)} 75%{transform:translate(-3px,-2px)} }
+.intro-marks span { position:absolute; font-size:22px; opacity:.7; }
+.intro-marks span:nth-child(1){top:4%;left:4%} .intro-marks span:nth-child(2){top:4%;right:4%} .intro-marks span:nth-child(3){bottom:4%;left:4%} .intro-marks span:nth-child(4){bottom:4%;right:4%}
+.intro-tc { position:absolute; top:5%; left:50%; transform:translateX(-50%); font-family:ui-monospace,monospace; font-size:13px; letter-spacing:.15em; }
+.intro-skip { position:absolute; bottom:5%; right:6%; z-index:3; font-family:ui-monospace,monospace; font-size:13px; letter-spacing:.12em; padding:10px 14px; border:1px solid currentColor; background:transparent; color:inherit; cursor:pointer; }
+.intro-skip:hover,.intro-skip:focus-visible { background:var(--background); color:var(--foreground); }
+.intro-stage { position:absolute; inset:0; display:grid; place-items:center; }
+.intro-word { grid-area:1/1; font-family:var(--font-display); font-weight:500; font-size:clamp(90px,24vw,360px); line-height:.8; letter-spacing:-.04em; transform:scaleY(1.35); opacity:0; }
+.intro-ink,.intro-collage { grid-area:1/1; opacity:0; }
+.intro-ink { width:80vw; height:50vh; fill:none; stroke:var(--destructive, var(--primary)); stroke-width:4; stroke-linecap:round; }
+.intro-collage { position:absolute; inset:0; }
+.intro-collage span { position:absolute; font-family:var(--font-display); font-size:clamp(60px,14vw,200px); padding:0 .1em; }
+.intro-collage span:nth-child(1){top:6%;left:5%;background:var(--background);color:var(--foreground);transform:rotate(-6deg)}
+.intro-collage span:nth-child(2){top:35%;right:8%;background:var(--secondary);color:var(--primary);transform:rotate(4deg)}
+.intro-collage span:nth-child(3){bottom:10%;left:18%;background:var(--primary);color:var(--background);transform:rotate(-2deg)}
+.intro-collage span:nth-child(4){bottom:30%;left:40%;font-size:clamp(30px,6vw,80px);border:2px solid currentColor}
+.intro[data-scene=signal] .intro-grain { opacity:.6; }
+.intro[data-scene=signal] .intro-stage { animation:intro-flicker .25s steps(2) infinite; }
+@keyframes intro-flicker { 50%{opacity:.6} }
+.intro[data-scene=impact] .intro-word { opacity:1; animation:intro-slam .35s cubic-bezier(.2,1.6,.4,1) both; }
+.intro[data-scene=impact] .intro-c { color:var(--secondary); transform:translate(-10px,4px) scaleY(1.35); mix-blend-mode:screen; }
+.intro[data-scene=impact] .intro-r { color:var(--primary); transform:translate(10px,-4px) scaleY(1.35); }
+.intro[data-scene=impact] .intro-main { color:var(--background); mix-blend-mode:difference; }
+@keyframes intro-slam { from{transform:scale(2.4,3);opacity:0} }
+.intro[data-scene=zine] { background:var(--background); color:var(--foreground); }
+.intro[data-scene=zine] .intro-main { opacity:1; filter:contrast(3) blur(.4px); text-shadow:2px 2px 0 currentColor,-1px 3px 0 currentColor; clip-path:polygon(0 4%,8% 0,22% 5%,40% 1%,60% 6%,80% 0,100% 4%,98% 96%,78% 100%,55% 94%,30% 100%,10% 95%,0 100%); }
+.intro[data-scene=halftone] { background:var(--background); }
+.intro[data-scene=halftone] .intro-word { opacity:1; color:transparent; background-clip:text; -webkit-background-clip:text; background-size:8px 8px; }
+.intro[data-scene=halftone] .intro-c { background-image:radial-gradient(circle,var(--secondary) 45%,transparent 50%); transform:translate(-8px,6px) rotate(-2deg) scaleY(1.35); }
+.intro[data-scene=halftone] .intro-r { background-image:radial-gradient(circle,var(--primary) 45%,transparent 50%); transform:translate(6px,-3px) rotate(1.5deg) scaleY(1.35); }
+.intro[data-scene=ink] { background:var(--background); color:var(--foreground); }
+.intro[data-scene=ink] .intro-main { opacity:1; font-style:italic; }
+.intro[data-scene=ink] .intro-ink { opacity:1; stroke-dasharray:900; animation:intro-draw .7s ease-out both; }
+@keyframes intro-draw { from{stroke-dashoffset:900} to{stroke-dashoffset:0} }
+.intro[data-scene=pixel] .intro-main { opacity:1; color:var(--secondary); filter:url(#none) contrast(5); font-family:ui-monospace,monospace; letter-spacing:.05em; animation:intro-skip .125s steps(1) infinite; }
+@keyframes intro-skip { 0%{transform:translate(0,0) scaleY(1.35)} 33%{transform:translate(12px,0) scaleY(1.35);clip-path:inset(0 0 50% 0)} 66%{transform:translate(-8px,6px) scaleY(1.35)} }
+.intro[data-scene=collage] .intro-collage { opacity:1; }
+.intro[data-scene=collage] .intro-collage span { animation:intro-cut .2s steps(1) infinite; }
+.intro[data-scene=collage] .intro-collage span:nth-child(2n) { animation-delay:.1s; }
+@keyframes intro-cut { 50%{visibility:hidden} }
+.intro[data-scene=freeze] .intro-collage { opacity:1; }
+.intro[data-scene=freeze] .intro-grain,.intro[data-scene=freeze] .intro-stage { animation:none; }
+.intro[data-scene=resolve],.intro[data-scene=exit] { background:var(--background); color:var(--primary); }
+.intro[data-scene=resolve] .intro-main,.intro[data-scene=exit] .intro-main { opacity:1; color:var(--primary); }
+.intro[data-scene=resolve] .intro-grain,.intro[data-scene=exit] .intro-grain { opacity:0; }
+.intro[data-scene=exit] { animation:intro-wipe .3s cubic-bezier(.7,0,.3,1) forwards; }
+@keyframes intro-wipe { to{clip-path:inset(0 0 100% 0)} }
+.replay-intro { background:none; border:0; padding:0; color:inherit; font:inherit; cursor:pointer; text-decoration:underline; text-underline-offset:4px; }
