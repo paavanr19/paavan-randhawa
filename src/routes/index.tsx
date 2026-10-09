@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+import { CinematicIntro, INTRO_KEY } from "@/components/cinematic-intro";
 import { ArrowUpRight, Download, Github, Linkedin, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -83,6 +84,7 @@ function Index() {
     return () => window.clearInterval(timer);
   }, [api, paused, active]);
   return <div className="portfolio-shell">
+    {intro !== "done" && <CinematicIntro onDone={finishIntro} />}
     <header className="portfolio-nav">
       <a href="#about" className="wordmark">Paavan Randhawa</a>
       <Button variant="ghost" size="icon" className="menu-toggle" aria-label={menuOpen ? "Close menu" : "Open menu"} aria-expanded={menuOpen} aria-controls="main-navigation" onClick={() => setMenuOpen(!menuOpen)}>{menuOpen ? <X /> : <Menu />}</Button>
@@ -130,6 +132,6 @@ function Index() {
         </form>
       </section>
     </main>
-    <footer className="portfolio-footer"><nav aria-label="Footer navigation">{sections.map(section => <a key={section} href={`#${section.toLowerCase()}`}>{section}</a>)}</nav><p>© All Rights Reserved | Paavan Randhawa</p></footer>
+    <footer className="portfolio-footer"><nav aria-label="Footer navigation">{sections.map(section => <a key={section} href={`#${section.toLowerCase()}`}>{section}</a>)}</nav><button type="button" className="replay-intro" onClick={() => setIntro("playing")}>▶ Replay Intro</button><p>© All Rights Reserved | Paavan Randhawa</p></footer>
   </div>;
 }
