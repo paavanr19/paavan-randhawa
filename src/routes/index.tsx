@@ -8,6 +8,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext, type CarouselApi } from "@/components/ui/carousel";
 import { PixelSticker } from "@/components/pixel-sticker";
 import content from "@/lib/portfolio-content.json";
+import { sunRun } from "@/lib/sun-run";
 const portrait = { url: "/images/pfp.png" };
 const whistler = { url: "/images/whistler.jpeg" };
 const lostlake = { url: "/images/whistler_lost_lake.jpeg" };
@@ -116,7 +117,13 @@ function Index() {
         <div className="education-grid"><div><h3>Courses</h3><ul>{content.courses.map(course => <li key={course}>{course}</li>)}</ul></div><div><h3>Skills</h3>{content.skills.map(skill => <div key={skill.title} className="skill-group"><h4>{skill.title}</h4><p>{skill.description}</p></div>)}</div></div>
       </section>
       <section id="interests" className="original-interests">
-        <div><div className="section-heading"><h2 className="section-title">Interests</h2><PixelSticker kind="heart" className="interests-heart" /></div><p>{content.interests}</p></div>
+        <div><div className="section-heading"><h2 className="section-title">Interests</h2><PixelSticker kind="heart" className="interests-heart" /></div><p>{content.interests}</p>
+          <figure className="run-card" aria-label="Vancouver Sun Run 10K route">
+            <figcaption><span>Vancouver Sun Run</span><span>10K</span></figcaption>
+            <svg viewBox={`0 0 ${sunRun.w} ${sunRun.h}`} className="run-route" role="img" aria-label="Route map of the Sun Run"><path d={sunRun.route} /></svg>
+            <svg viewBox="0 0 300 52" preserveAspectRatio="none" className="run-profile" aria-hidden="true"><path d={sunRun.profile} /></svg>
+            <dl><div><dt>Distance</dt><dd>{sunRun.distance}</dd></div><div><dt>Elevation gain</dt><dd>{sunRun.gain}</dd></div><div><dt>Elevation</dt><dd>{sunRun.range}</dd></div></dl>
+          </figure></div>
         <div className="interest-photos"><img src={whistler.url} alt="Whistler" loading="lazy" /><img src={lostlake.url} alt="Lost Lake" loading="lazy" /><img src={tunnelbluffs.url} alt="Tunnel Bluffs" loading="lazy" /></div>
       </section>
       <section id="contact" className="original-contact">
