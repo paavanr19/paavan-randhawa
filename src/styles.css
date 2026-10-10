@@ -358,4 +358,3 @@ html::-webkit-scrollbar,body::-webkit-scrollbar { display:none; }
 .intro[data-scene=pixel] .intro-stickers svg { opacity:0; }
 .intro-tears { opacity:.4; }
 .intro[data-scene=exit] { animation:intro-fade .6s ease-in-out forwards; }
-.intro[data-scene=exit] > * { opacity:1; }
