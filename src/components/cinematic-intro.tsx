@@ -3,13 +3,13 @@ import { Button } from "@/components/ui/button";
 
 const SCENES = [
   { name: "signal", at: 0 },
-  { name: "impact", at: 1100 },
-  { name: "paint", at: 2300 },
-  { name: "fracture", at: 3500 },
-  { name: "pixel", at: 4600 },
+  { name: "impact", at: 1900 },
+  { name: "paint", at: 2900 },
+  { name: "fracture", at: 3900 },
+  { name: "pixel", at: 4800 },
   { name: "collage", at: 5600 },
-  { name: "freeze", at: 6750 },
-  { name: "resolve", at: 7050 },
+  { name: "freeze", at: 6600 },
+  { name: "resolve", at: 6900 },
   { name: "exit", at: 7900 },
 ] as const;
 const TOTAL = 8500;
@@ -20,13 +20,12 @@ const CRACKS = [
   "M535 273L407 293 335 238 230 247 85 160M670 340L783 248 801 136 956 51M766 454L716 579 735 760M974 598L1155 677",
   "M407 293L361 414 269 457 193 617 74 710M783 248L905 290 1013 239 1200 265M670 340L562 441 565 532 455 697M467 164L515 57M974 598L1118 533M335 238L307 152M897 474L1015 432M640 330L690 352 650 368 700 320M562 441L470 470 400 560M801 136L700 60M1013 239L1100 120M269 457L120 430",
 ];
-// Original pixel CS stickers (24x24 grid): floppy, terminal, CPU, braces, bug.
+// Original pixel CS stickers (24x24 grid): floppy, terminal, CPU, braces.
 const STICKERS = [
   <><path fill="var(--secondary)" d="M2 2h17l3 3v17H2z" /><path fill="var(--intro-ink)" d="M6 2h10v7H6zM5 13h14v9H5z" /><path fill="var(--secondary)" d="M13 3h2v5h-2z" /></>,
   <><path fill="var(--intro-ink)" d="M1 3h22v18H1z" /><path fill="var(--secondary)" d="M1 3h22v3H1zM4 9h2v2h2v2H6v2H4v-2h2v-2H4zM10 15h6v2h-6z" /></>,
   <><path fill="var(--secondary)" d="M7 1h2v4H7zM11 1h2v4h-2zM15 1h2v4h-2zM7 19h2v4H7zM11 19h2v4h-2zM15 19h2v4h-2zM1 7h4v2H1zM1 11h4v2H1zM1 15h4v2H1zM19 7h4v2h-4zM19 11h4v2h-4zM19 15h4v2h-4z" /><path fill="var(--intro-ink)" d="M5 5h14v14H5z" /><path fill="var(--secondary)" d="M9 9h6v6H9z" /></>,
   <><path fill="var(--intro-paper)" d="M7 2h4v3H8v5H5v4h3v5h3v3H7v-3H5v-5H2v-4h3V5h2zM13 2h4v3h2v5h3v4h-3v5h-2v3h-4v-3h3v-5h3v-4h-3V5h-3z" /></>,
-  <><path fill="var(--intro-ink)" d="M8 2h2v3h4V2h2v3h1v2h3V5h2v4h-5v2h5v2h-5v2h5v4h-2v-2h-3v3H7v-3H4v2H2v-4h5v-2H2v-2h5V9H2V5h2v2h3V5h1z" /><path fill="var(--secondary)" d="M11 8h2v11h-2z" /></>,
 ];
 
 export function CinematicIntro({ onDone }: { onDone: () => void }) {
@@ -80,7 +79,6 @@ export function CinematicIntro({ onDone }: { onDone: () => void }) {
         </svg>
         <div className="intro-name"><span>Paavan</span><span>Randhawa</span></div>
       </div>
-      <div className="intro-rip" aria-hidden="true"><span /><span /></div>
       <Button ref={skipRef} type="button" variant="ghost" className="intro-skip" onClick={onDone} aria-label="Skip intro">SKIP INTRO <span aria-hidden="true">↗</span></Button>
     </div>
   );
