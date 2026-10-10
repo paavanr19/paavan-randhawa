@@ -11,19 +11,29 @@
 
 ---
 
-## 1. Copy & Section Refinements
+## 1. Hero & About Section Polish
+
+### Heading Gap Fix
+- **Target:** `.original-about h1` in `src/styles.css`
+- **Change:**
+  - Reduce `min-height` from `2.2em` down to `1.15em` (`fit-content`).
+  - Reduce `margin-bottom` from `24px` to `12px` (and `8px` on mobile breakpoints).
+- **Outcome:** Eliminates the phantom empty block below "Paavan Randhawa!" so the name and "Student at Simon Fraser University" remain tightly and consistently paired across all viewport sizes, while `.typewriter-pending` keeps the greeting layout shift-free.
 
 ### About Section Bio
 - **Replace:** `"I'm a computing science student in Vancouver, focused on building software that is useful and carefully made — from games and solvers to systems programming."`
 - **With:** `"Hi, I'm Paavan! I'm a third-year Mathematics and Computing Science student at Simon Fraser University. I love solving problems, whether that's building software, working with data, or figuring out what makes a product great for the people using it."`
 
-### Contact Me Section
+---
+
+## 2. Contact Me Section
+
 - **Subtitle Alignment:** Centered text.
 - **Updated Text:** `"Have a question or just want to say hello? Send a note and I’ll get back to you."` (removes "a project idea" reference).
 
 ---
 
-## 2. Interests Section: Curved Arc & Mobile Photo Stack
+## 3. Interests Section: Curved Arc & Mobile Photo Stack
 
 ### The 11 Curated Items & Micro-Descriptions
 1. **Lost Lake** (`lostlake.jpeg`)
@@ -72,20 +82,21 @@
 
 ---
 
-## 3. Sun Run Telemetry & Map Registration
+## 4. Sun Run Telemetry & Map Registration
 - Wrap the OpenStreetMap tile grid and the GPX route SVG in a shared, aspect-ratio-locked viewport container so the route stays aligned over Vancouver streets on both mobile and desktop.
 - Pin the transparent Lululemon Split Shift shoe cutout along the map edge with no text tags.
 
 ---
 
-## 4. Origami Contact Form Animation
+## 5. Origami Contact Form Animation
 - On successful Web3Forms submission, fold the contact card into an SVG paper airplane that glides off-screen.
 - Show an in-place confirmation message.
 - Instant, non-motion fade when `prefers-reduced-motion` is enabled.
 
 ---
 
-## 5. Interactive Polish & Details
+## 6. Interactive Polish & Details
 - Draggable stickers with pointer lift physics, drop shadows, and soft release.
 - Strictly non-emoji SVG controls site-wide (including footer intro replay).
 - Preserved 85ms/character typewriter greeting ("Hi I'm Paavan Randhawa!") after the 8.5s intro completes.
+
