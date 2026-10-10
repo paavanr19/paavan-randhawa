@@ -120,7 +120,11 @@ function Index() {
         <div><div className="section-heading"><h2 className="section-title">Interests</h2><PixelSticker kind="heart" className="interests-heart" /></div><p>{content.interests}</p>
           <figure className="run-card" aria-label="Vancouver Sun Run 10K route">
             <figcaption><span>Vancouver Sun Run</span><span>10K</span></figcaption>
-            <svg viewBox={`0 0 ${sunRun.w} ${sunRun.h}`} className="run-route" role="img" aria-label="Route map of the Sun Run"><path d={sunRun.route} /></svg>
+            <div className="run-map" style={{ aspectRatio: `${sunRun.w} / ${sunRun.h}` }}>
+              <div className="run-tiles" style={{ width: sunRun.w, height: sunRun.h }}>{sunRun.tiles.map(t => <img key={`${t.x}-${t.y}`} src={`https://tile.openstreetmap.org/${sunRun.zoom}/${t.x}/${t.y}.png`} alt="" loading="lazy" style={{ left: t.left, top: t.top }} />)}</div>
+              <svg viewBox={`0 0 ${sunRun.w} ${sunRun.h}`} className="run-route" role="img" aria-label="Sun Run route over a map of Vancouver"><path d={sunRun.route} /></svg>
+              <small>© OpenStreetMap</small>
+            </div>
             <svg viewBox="0 0 300 52" preserveAspectRatio="none" className="run-profile" aria-hidden="true"><path d={sunRun.profile} /></svg>
             <dl><div><dt>Distance</dt><dd>{sunRun.distance}</dd></div><div><dt>Elevation gain</dt><dd>{sunRun.gain}</dd></div><div><dt>Elevation</dt><dd>{sunRun.range}</dd></div></dl>
           </figure></div>
