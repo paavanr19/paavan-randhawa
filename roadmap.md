@@ -1,5 +1,5 @@
 # Portfolio redesign
-- [ ] Build and verify the chaotic welcome intro, final name reveal, fade, and post-intro typewriter.
+- [x] Intro upgrades: staged cracks, boot loader, CS pixel stickers, paper-rip reveal.
 - [ ] Update Contact links, scrollbar visibility, About spacing/icons/subtitle, greeting animation, project arrows, and pixel accents.
 - [x] Restore original navbar, sections, unchanged wording, links, and pictures from the owner's GitHub portfolio.
 - [x] Remove all AI-generated images from the preview.
