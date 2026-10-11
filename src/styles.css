@@ -238,12 +238,12 @@ html::-webkit-scrollbar,body::-webkit-scrollbar { display:none; }
 .original-interests { padding:65px 8%; background:var(--secondary); display:grid; grid-template-columns:1fr 1.05fr; gap:8%; align-items:center; }
 .original-interests p { font-size:15px; line-height:1.95; }
 .polaroid-stack-wrap { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:20px; justify-self:center; }
-.polaroid-stack { position:relative; width:340px; height:420px; }
-.polaroid-stack .polaroid-card { position:absolute; top:0; left:0; transition:transform 0.3s ease; }
-.polaroid-card { background:#fff; padding:12px 12px 52px; box-shadow:0 4px 16px rgba(0,0,0,.18); width:340px; }
-.polaroid-card img { width:100%; aspect-ratio:1; object-fit:cover; display:block; }
+.polaroid-stack { position:relative; width:340px; height:440px; }
+.polaroid-stack .polaroid-card { position:absolute; top:0; left:0; }
+.polaroid-card { background:#f5f0e4; padding:12px 12px 56px; box-shadow:2px 4px 16px rgba(60,40,10,.2), 0 1px 3px rgba(0,0,0,.1); width:340px; border:1px solid #e2d8c6; }
+.polaroid-card img { width:100%; aspect-ratio:1; object-fit:cover; display:block; filter:sepia(10%) contrast(95%) brightness(0.97); }
+.polaroid-caption { display:block; font-family:"Reenie Beanie", cursive; font-size:22px; text-align:center; color:#5a4a36; padding-top:10px; line-height:1; }
 .polaroid-map-wrap { position:relative; width:100%; aspect-ratio:1; overflow:hidden; }
-.polaroid-controls { display:flex; gap:8px; }
 .original-contact { padding:65px 8%; display:grid; grid-template-columns:1fr 1fr; gap:9%; }
 .original-contact p { font-size:15px; line-height:1.85; margin-bottom:24px; }
 .contact-form { display:flex; flex-direction:column; gap:18px; padding-top:10px; }

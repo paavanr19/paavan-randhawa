@@ -1,29 +1,35 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { sunRun } from "@/lib/sun-run";
 
-type PhotoCard = { type?: "photo"; url: string; alt: string };
-type MapCard = { type: "map" };
+type PhotoCard = { type?: "photo"; url: string; alt: string; caption: string };
+type MapCard = { type: "map"; caption: string };
 type Card = PhotoCard | MapCard;
 
 const cards: Card[] = [
-  { url: "/images/whistler_lost_lake.jpeg", alt: "Biking in Whistler" },
-  { url: "/images/interests/canucks.png", alt: "Canucks at Rogers Arena" },
-  { url: "/images/interests/canada-switzerland.png", alt: "FIFA World Cup Canada vs Switzerland" },
-  { url: "/images/interests/paavan-matchday.png", alt: "Matchday on the pitch" },
-  { type: "map" },
-  { url: "/images/tunnelbluffs.png", alt: "Hiking Tunnel Bluffs" },
-  { url: "/images/interests/degas-ballerina.png", alt: "Degas' Little Dancer at The Met" },
-  { url: "/images/interests/monet.png", alt: "Monet Water Lilies at The Met" },
-  { url: "/images/interests/milo.png", alt: "Milo the dog" },
-  { url: "/images/interests/positano.png", alt: "Sunny days in Positano" },
-  { url: "/images/interests/wicked-gershwin-theatre.jpg", alt: "Wicked at the Gershwin Theatre" },
+  { url: "/images/whistler_lost_lake.jpeg", alt: "Biking in Whistler", caption: "biking in whistler" },
+  { url: "/images/interests/canucks.png", alt: "Canucks at Rogers Arena", caption: "canucks at rogers arena" },
+  { url: "/images/interests/canada-switzerland.png", alt: "FIFA World Cup Canada vs Switzerland", caption: "canada vs. switzerland" },
+  { url: "/images/interests/paavan-matchday.png", alt: "Matchday on the pitch", caption: "matchday" },
+  { type: "map", caption: "vancouver sun run" },
+  { url: "/images/tunnelbluffs.png", alt: "Hiking Tunnel Bluffs", caption: "tunnel bluffs hike" },
+  { url: "/images/interests/degas-ballerina.png", alt: "Degas' Little Dancer at The Met", caption: "degas @ the met" },
+  { url: "/images/interests/monet.png", alt: "Monet Water Lilies at The Met", caption: "monet @ the met" },
+  { url: "/images/interests/milo.png", alt: "Milo the dog", caption: "milo!" },
+  { url: "/images/interests/positano.png", alt: "Sunny days in Positano", caption: "positano" },
+  { url: "/images/interests/wicked-gershwin-theatre.jpg", alt: "Wicked at the Gershwin Theatre", caption: "wicked @ gershwin" },
 ];
 
-const stackTransforms = [
+const REST: [string, string, string] = [
   "rotate(-2deg)",
   "translate(10px, 8px) rotate(5deg)",
   "translate(-8px, 14px) rotate(-3deg)",
 ];
+const THRESHOLD = 18;
+const ANIM_MS = 260;
+
+function flyOff(dir: "left" | "right") {
+  return dir === "left" ? "translateX(-460px) rotate(-26deg)" : "translateX(460px) rotate(26deg)";
+}
 
 function SunRunMap() {
   const scale = 316 / sunRun.w;
@@ -39,59 +45,92 @@ function SunRunMap() {
           <path d={sunRun.route} />
         </svg>
       </div>
-      <small style={{ position: "absolute", bottom: 2, right: 4, fontSize: 9, color: "#555" }}>© OpenStreetMap</small>
+      <small style={{ position: "absolute", bottom: 2, right: 4, fontSize: 9, color: "#888" }}>© OpenStreetMap</small>
     </div>
   );
 }
 
 export function InterestsArc() {
   const [active, setActive] = useState(0);
+  const [dragX, setDragX] = useState(0);
+  const [departing, setDeparting] = useState<"left" | "right" | null>(null);
   const [grabbing, setGrabbing] = useState(false);
-  const dragStart = useRef<number | null>(null);
+  const dragRef = useRef<number | null>(null);
+  const animRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const stackRef = useRef<HTMLDivElement>(null);
   const n = cards.length;
 
-  const next = () => setActive(i => (i + 1) % n);
-  const prev = () => setActive(i => (i - 1 + n) % n);
+  // Prevent scroll while dragging on touch
+  useEffect(() => {
+    const el = stackRef.current;
+    if (!el) return;
+    const onTouchMove = (e: TouchEvent) => { if (dragRef.current !== null) e.preventDefault(); };
+    el.addEventListener("touchmove", onTouchMove, { passive: false });
+    return () => el.removeEventListener("touchmove", onTouchMove);
+  }, []);
 
-  const handleTouchStart = (e: React.TouchEvent) => { dragStart.current = e.touches[0].clientX; };
-  const handleTouchEnd = (e: React.TouchEvent) => {
-    if (dragStart.current === null) return;
-    const diff = dragStart.current - e.changedTouches[0].clientX;
-    if (Math.abs(diff) > 40) diff > 0 ? next() : prev();
-    dragStart.current = null;
+  useEffect(() => () => { if (animRef.current) clearTimeout(animRef.current); }, []);
+
+  const depart = (dir: "left" | "right") => {
+    if (departing) return;
+    setDeparting(dir);
+    animRef.current = setTimeout(() => {
+      setActive(i => dir === "left" ? (i + 1) % n : (i - 1 + n) % n);
+      setDeparting(null);
+      setDragX(0);
+    }, ANIM_MS);
   };
 
-  const handleMouseDown = (e: React.MouseEvent) => { dragStart.current = e.clientX; setGrabbing(true); };
-  const handleMouseMove = () => {};
-  const handleMouseUp = (e: React.MouseEvent) => {
-    if (dragStart.current === null) return;
-    const diff = dragStart.current - e.clientX;
-    if (Math.abs(diff) > 40) diff > 0 ? next() : prev();
-    dragStart.current = null;
+  const startDrag = (x: number) => { if (!departing) { dragRef.current = x; setGrabbing(true); } };
+  const moveDrag = (x: number) => { if (dragRef.current !== null && !departing) setDragX(x - dragRef.current); };
+  const endDrag = (x: number) => {
+    if (dragRef.current === null) return;
+    const diff = dragRef.current - x;
+    if (Math.abs(diff) > THRESHOLD) depart(diff > 0 ? "left" : "right");
+    else setDragX(0);
+    dragRef.current = null;
     setGrabbing(false);
   };
-  const handleMouseLeave = () => { dragStart.current = null; setGrabbing(false); };
+  const cancelDrag = () => { dragRef.current = null; setDragX(0); setGrabbing(false); };
+
+  // Build render list: 4 items during departure, 3 otherwise
+  // Key by card index so React preserves identity across active changes
+  type RItem = { cardIdx: number; transform: string; zIndex: number; transition: string };
+  const isDragging = grabbing && !departing;
+
+  const renderItems: RItem[] = departing ? [
+    { cardIdx: active % n,           transform: flyOff(departing), zIndex: 15, transition: `transform ${ANIM_MS}ms ease-in` },
+    { cardIdx: (active + 1) % n,     transform: REST[0],           zIndex: 10, transition: `transform ${ANIM_MS}ms ease` },
+    { cardIdx: (active + 2) % n,     transform: REST[1],           zIndex: 9,  transition: `transform ${ANIM_MS}ms ease` },
+    { cardIdx: (active + 3) % n,     transform: REST[2],           zIndex: 8,  transition: "none" },
+  ] : [
+    { cardIdx: active % n,           transform: dragX !== 0 ? `translateX(${dragX}px) rotate(${-2 + dragX * 0.04}deg)` : REST[0], zIndex: 10, transition: isDragging ? "none" : `transform ${ANIM_MS}ms ease` },
+    { cardIdx: (active + 1) % n,     transform: REST[1],           zIndex: 9,  transition: `transform ${ANIM_MS}ms ease` },
+    { cardIdx: (active + 2) % n,     transform: REST[2],           zIndex: 8,  transition: `transform ${ANIM_MS}ms ease` },
+  ];
 
   return (
     <div className="polaroid-stack-wrap">
       <div
+        ref={stackRef}
         className="polaroid-stack"
-        onTouchStart={handleTouchStart}
-        onTouchEnd={handleTouchEnd}
-        onMouseDown={handleMouseDown}
-        onMouseMove={handleMouseMove}
-        onMouseUp={handleMouseUp}
-        onMouseLeave={handleMouseLeave}
+        onTouchStart={e => startDrag(e.touches[0].clientX)}
+        onTouchEnd={e => endDrag(e.changedTouches[0].clientX)}
+        onMouseDown={e => startDrag(e.clientX)}
+        onMouseMove={e => moveDrag(e.clientX)}
+        onMouseUp={e => endDrag(e.clientX)}
+        onMouseLeave={cancelDrag}
         style={{ cursor: grabbing ? "grabbing" : "grab" }}
       >
-        {[2, 1, 0].map(offset => {
-          const card = cards[(active + offset) % n];
+        {renderItems.map(({ cardIdx, transform, zIndex, transition }) => {
+          const card = cards[cardIdx];
           return (
-            <div key={offset} className="polaroid-card" style={{ transform: stackTransforms[offset], zIndex: 10 - offset }}>
+            <div key={cardIdx} className="polaroid-card" style={{ transform, zIndex, transition }}>
               {card.type === "map"
                 ? <SunRunMap />
                 : <img src={(card as PhotoCard).url} alt={(card as PhotoCard).alt} loading="lazy" draggable={false} />
               }
+              <span className="polaroid-caption">{card.caption}</span>
             </div>
           );
         })}
