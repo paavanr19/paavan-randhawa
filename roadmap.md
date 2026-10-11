@@ -1,4 +1,6 @@
 # Portfolio redesign
+- [ ] Apply degree, GPA, linked courses, and certifications from PLAN.md.
+- [ ] Register uploaded photos with descriptive asset names and replace the Wicked Playbill source.
 - [x] Intro upgrades: staged cracks, boot loader, CS pixel stickers, paper-rip reveal.
 - [ ] Update Contact links, scrollbar visibility, About spacing/icons/subtitle, greeting animation, project arrows, and pixel accents.
 - [x] Restore original navbar, sections, unchanged wording, links, and pictures from the owner's GitHub portfolio.
