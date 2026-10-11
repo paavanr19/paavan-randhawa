@@ -3,7 +3,7 @@ import { useCallback, useEffect, useState } from "react";
 import { CinematicIntro } from "@/components/cinematic-intro";
 import { EducationSection } from "@/components/education-section";
 import { InterestsArc } from "@/components/interests-arc";
-import { ArrowUpRight, Download, Github, Linkedin, Menu, Play, X } from "lucide-react";
+import { ArrowUpRight, Download, Github, Linkedin, Menu, Moon, Play, Sun, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -36,6 +36,13 @@ function ResumeLink() {
 
 function Index() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [theme, setTheme] = useState<"light" | "dark">(() =>
+    typeof document !== "undefined" && document.documentElement.classList.contains("dark") ? "dark" : "light"
+  );
+  useEffect(() => {
+    document.documentElement.classList.toggle("dark", theme === "dark");
+    localStorage.setItem("theme", theme);
+  }, [theme]);
   const [formState, setFormState] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -100,6 +107,7 @@ function Index() {
       <a href="#about" className="wordmark">Paavan Randhawa</a>
       <Button variant="ghost" size="icon" className="menu-toggle" aria-label={menuOpen ? "Close menu" : "Open menu"} aria-expanded={menuOpen} aria-controls="main-navigation" onClick={() => setMenuOpen(!menuOpen)}>{menuOpen ? <X /> : <Menu />}</Button>
       <nav id="main-navigation" className="nav-links" data-open={menuOpen} aria-label="Main navigation">{sections.map(section => <a key={section} href={`#${section.toLowerCase()}`} onClick={() => setMenuOpen(false)}>{section}</a>)}</nav>
+      <Button variant="ghost" size="icon" className="theme-toggle" aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"} onClick={() => setTheme(t => t === "dark" ? "light" : "dark")}>{theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}</Button>
       <Button asChild className="nav-cta"><a href={github} target="_blank" rel="noopener noreferrer">Visit GitHub <ArrowUpRight size={15} /></a></Button>
     </header>
     <main>
