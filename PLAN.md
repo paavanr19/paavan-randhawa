@@ -27,45 +27,7 @@
 
 ---
 
-## 2. Education & Certifications Section
-
-### Degree & Academic Standing
-- **Institution:** Simon Fraser University (SFU)
-- **Degree:** Bachelor of Applied Science in Mathematics and Computing Science
-- **Timeline:** 2024 – April 2028 (Expected Graduation)
-- **Cumulative GPA:** 3.57 / 4.33
-
-### Coursework & Calendar Links
-- **Top Micro-Note:** `"Click on each course code to learn more"`
-- **Links Configuration:** Every course code is rendered as an accessible external link opening in a new tab (`target="_blank" rel="noopener noreferrer"`).
-- **In-Progress Flag:** Courses with `*` indicate currently in progress.
-- **Bottom Micro-Note:** `"* indicates course in progress"`
-
-#### Curated Course List:
-1. [MATH 150](https://www.sfu.ca/students/calendar/2026/fall/courses/math/150.html) / [MATH 152](https://www.sfu.ca/students/calendar/2026/fall/courses/math/152.html) / [MATH 251](https://www.sfu.ca/students/calendar/2026/fall/courses/math/251.html) — Calculus I–III
-2. [MATH 232](https://www.sfu.ca/students/calendar/2026/fall/courses/math/232.html) — Applied Linear Algebra
-3. [MACM 101](https://www.sfu.ca/students/calendar/2026/fall/courses/macm/101.html) / [MACM 201*](https://www.sfu.ca/students/calendar/2026/fall/courses/macm/201.html) — Discrete Mathematics I/II
-4. [CMPT 225](https://www.sfu.ca/students/calendar/2026/fall/courses/cmpt/225.html) — Data Structures and Programming
-5. [STAT 270](https://www.sfu.ca/students/calendar/2026/fall/courses/stat/270.html) — Introduction to Probability and Statistics
-6. [CMPT 276](https://www.sfu.ca/students/calendar/2026/fall/courses/cmpt/276.html) — Introduction to Software Engineering
-7. [CMPT 201](https://www.sfu.ca/students/calendar/2026/fall/courses/cmpt/201.html) — Systems Programming
-8. [CMPT 295](https://www.sfu.ca/students/calendar/2026/fall/courses/cmpt/295.html) — Intro to Computer Systems
-9. [CMPT 310*](https://www.sfu.ca/students/calendar/2026/fall/courses/cmpt/310.html) — Introduction to Artificial Intelligence
-10. [CMPT 371*](https://www.sfu.ca/students/calendar/2026/fall/courses/cmpt/371.html) — Data Communications and Networking
-11. [MATH 360*](https://www.sfu.ca/students/calendar/2026/fall/courses/math/360.html) — Introduction to Biomathematics
-
-### Compact Certifications Subsection
-A clean, compact badge/list displaying credentials with external verification links (`target="_blank" rel="noopener noreferrer"`):
-1. **Claude Code 101** — Anthropic (September 2026)  
-   *Credential:* [academy.claude.com/verify/ea78f9af75f6f61de17a240430d2ed9b](https://academy.claude.com/verify/ea78f9af75f6f61de17a240430d2ed9b)
-2. **Applied AI Foundations** — OpenAI (October 2026, expires April 2027)  
-   *Credential:* [oaiacademy.credential.net/b56eb820-8cd6-4254-b325-d419d5fcfa82](https://oaiacademy.credential.net/b56eb820-8cd6-4254-b325-d419d5fcfa82)
-3. **DELF A2** — France Éducation international (June 2024)
-4. **Fundamentals of Cloud Computing** — IBM SkillsBuild *(In Progress)*
-
----
-
-## 3. Contact Me Section
+## 2. Contact Me Section
 
 ### Layout & Direct Email
 - **Prominent Clickable Email:** Display `paavan_randhawa@sfu.ca` as a prominent, styled `mailto:paavan_randhawa@sfu.ca` link directly above the form with a copy button or link arrow for quick reach-out.
@@ -75,7 +37,7 @@ A clean, compact badge/list displaying credentials with external verification li
 
 ---
 
-## 4. GitHub Image Assets & Filename Mapping
+## 3. GitHub Image Assets & Filename Mapping
 
 Original images are registered in `src/assets/interests/` as descriptive `.asset.json` pointers. The pointers sync to GitHub; full-resolution originals are served from Lovable Assets and are reusable through `src/lib/interests-assets.ts`. No Interests layout changes are included in this asset-registration step.
 
@@ -95,7 +57,7 @@ Original images are registered in `src/assets/interests/` as descriptive `.asset
 
 ---
 
-## 5. Interests Section: Curved Arc & Mobile Photo Stack
+## 4. Interests Section: Curved Arc & Mobile Photo Stack
 
 ### The 11 Curated Items & Micro-Descriptions
 1. **Lost Lake** (`lostlake.jpeg`) — *Biking in Whistler* (Bicycle badge)
@@ -122,20 +84,20 @@ Original images are registered in `src/assets/interests/` as descriptive `.asset
 
 ---
 
-## 6. Sun Run Telemetry & Map Registration
+## 5. Sun Run Telemetry & Map Registration
 - Lock OpenStreetMap tile grid and GPX route SVG into a shared, responsive viewport container so the route stays aligned over Vancouver streets on both mobile and desktop.
 - Pin the transparent Lululemon Split Shift shoe cutout along the map edge with no text tags.
 
 ---
 
-## 7. Origami Contact Form Animation
+## 6. Origami Contact Form Animation
 - On successful Web3Forms submission, fold the contact card into an SVG paper airplane that glides off-screen.
 - Show an in-place confirmation message.
 - Instant, non-motion fade when `prefers-reduced-motion` is enabled.
 
 ---
 
-## 8. Interactive Polish & Details
+## 7. Interactive Polish & Details
 - Draggable stickers with pointer lift physics, drop shadows, and soft release.
 - Strictly non-emoji SVG controls site-wide (including footer intro replay).
 - Preserved 85ms/character typewriter greeting ("Hi I'm Paavan Randhawa!") after the 8.5s intro completes.
