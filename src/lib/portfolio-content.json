@@ -2,23 +2,27 @@
   "bio": "Hi, I'm Paavan! I'm a third-year Mathematics and Computing Science student at Simon Fraser University. I love solving problems, whether that's building software, working with data, or figuring out what makes a product great for the people using it.",
   "projects": [
     {
-      "title": "Rubik's Cube Solver",
+      "title": "Rubik’s Cube Solver",
       "href": "https://github.com/paavanr19/rubikscubesolver",
+      "tech": ["Python"],
       "description": "A Rubik’s Cube solving program that takes a cube configuration as input and uses the two-phase Kociemba algorithm to calculate an efficient solution. It parses cube states from files, processes the cube configuration, and generates step-by-step instructions for solving the cube."
     },
     {
       "title": "Pocoloco",
       "href": "https://github.com/paavanr19/pocoloco",
-      "description": "A multiplayer dice game where players compete to be the first to lose all of their chips. The game features randomized turn order, custom scoring mechanics, and special dice combinations such as Poco, Loco, and three-of-a-kind rolls. It processes each player's dice rolls, applies the corresponding scoring rules, and updates chip counts throughout each round."
+      "tech": ["Java"],
+      "description": "A multiplayer dice game where players compete to be the first to lose all of their chips. The game features randomized turn order, custom scoring mechanics, and special dice combinations such as Poco, Loco, and three-of-a-kind rolls. It processes each player’s dice rolls, applies the corresponding scoring rules, and updates chip counts throughout each round."
     },
     {
       "title": "Mythos Seafarer",
       "href": "https://github.sfu.ca/saba/CMPT276S26_Group7",
+      "tech": ["Java", "Processing"],
       "description": "A Java-based arcade-style game built using Processing. Players navigate through multiple levels, avoid enemies, collect rewards, and progress through different maps. The game features interactive gameplay, level progression, and increasing challenges as players advance."
     },
     {
       "title": "Unix Shell",
       "href": "https://github.com/SFU-CMPT-201/a8-paavanr13",
+      "tech": ["C", "Linux", "CMake"],
       "description": "A Unix-style command-line shell in C with support for process creation and execution, foreground and background processes, built-in commands, signal handling, and command history. Process management uses fork(), exec(), and waitpid(), with Linux system calls and CMake for configuration and builds."
     }
   ],

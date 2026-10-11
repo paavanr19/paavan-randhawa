@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { CinematicIntro } from "@/components/cinematic-intro";
 import { EducationSection } from "@/components/education-section";
 import { InterestsArc } from "@/components/interests-arc";
@@ -36,6 +36,25 @@ function ResumeLink() {
 
 function Index() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const progressRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const onScroll = () => {
+      const el = document.documentElement;
+      if (progressRef.current) progressRef.current.style.width = `${el.scrollTop / (el.scrollHeight - el.clientHeight) * 100}%`;
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+  useEffect(() => {
+    const sectionEls = document.querySelectorAll("main section[id]");
+    const navLinks = document.querySelectorAll<HTMLAnchorElement>(".nav-links a[href^='#']");
+    const observer = new IntersectionObserver(
+      entries => entries.forEach(e => { if (e.isIntersecting) navLinks.forEach(a => a.classList.toggle("active", a.getAttribute("href") === `#${e.target.id}`)); }),
+      { rootMargin: "-80px 0px -55% 0px", threshold: 0 }
+    );
+    sectionEls.forEach(s => observer.observe(s));
+    return () => observer.disconnect();
+  }, []);
   const [formState, setFormState] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -94,6 +113,7 @@ function Index() {
     return () => window.clearInterval(timer);
   }, [api, paused, active]);
   return <div className="portfolio-shell">
+    <div ref={progressRef} className="scroll-progress" aria-hidden="true" />
     {intro === "pending" && <div className="intro" aria-hidden="true" />}
     {intro === "playing" && <CinematicIntro onDone={finishIntro} />}
     <header className="portfolio-nav">
@@ -108,6 +128,7 @@ function Index() {
           <p className="hello" aria-label={greeting}><span aria-hidden="true">{greeting.slice(0, typedCharacters)}<span className="typewriter-pending">{greeting.slice(typedCharacters)}</span></span></p>
           <h1 aria-label={name} data-typing={typedCharacters > greeting.length && typedCharacters < greetingLength}><span aria-hidden="true">{name.slice(0, Math.max(0, typedCharacters - greeting.length))}<span className="typewriter-pending">{name.slice(Math.max(0, typedCharacters - greeting.length))}</span></span></h1>
           <p className="lead">Student at Simon Fraser University</p>
+          <span className="status-badge"><span className="status-dot" aria-hidden="true" />Currently seeking summer 2027 co-op</span>
           <p className="bio">{content.bio}</p>
           <div className="btn-group"><ResumeLink /><Button asChild className="portfolio-button"><a href="#contact">Contact <ArrowUpRight size={16} /></a></Button></div>
           <div className="socials"><Button asChild variant="ghost" size="icon"><a href={github} target="_blank" rel="noopener noreferrer" aria-label="GitHub" title="GitHub"><Github /></a></Button><Button asChild variant="ghost" size="icon"><a href={linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" title="LinkedIn"><Linkedin /></a></Button></div>
@@ -117,7 +138,7 @@ function Index() {
       <section id="projects" className="original-projects">
         <div className="section-heading"><h2 className="section-title">Projects</h2><DraggableSticker><PixelSticker className="projects-star" /></DraggableSticker></div>
         <Carousel opts={{ loop: true }} setApi={setApi} className="original-carousel" aria-label="Projects" onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)} onFocusCapture={() => setPaused(true)} onBlurCapture={event => { if (!event.currentTarget.contains(event.relatedTarget)) setPaused(false); }}>
-          <CarouselContent>{content.projects.map((project, index) => <CarouselItem key={project.title} aria-hidden={active !== index}><article className="original-project"><h3>{project.title}</h3><Button asChild variant="outline" className="portfolio-button"><a href={project.href} target="_blank" rel="noopener noreferrer" tabIndex={active === index ? 0 : -1}>View project <ArrowUpRight size={16} /></a></Button><p>{project.description}</p></article></CarouselItem>)}</CarouselContent>
+          <CarouselContent>{content.projects.map((project, index) => <CarouselItem key={project.title} aria-hidden={active !== index}><article className="original-project"><h3>{project.title}</h3><div className="tech-chips">{project.tech.map(t => <span key={t} className="tech-chip">{t}</span>)}</div><Button asChild variant="outline" className="portfolio-button"><a href={project.href} target="_blank" rel="noopener noreferrer" tabIndex={active === index ? 0 : -1}>View project <ArrowUpRight size={16} /></a></Button><p>{project.description}</p></article></CarouselItem>)}</CarouselContent>
           <CarouselPrevious className="project-arrow" aria-label="Previous project" title="Previous project" /><CarouselNext className="project-arrow" aria-label="Next project" title="Next project" />
           <div className="carousel-dots">{content.projects.map((project, index) => <Button key={project.title} variant="ghost" size="icon" className="carousel-dot" data-active={active === index} aria-label={`Go to project ${index + 1}`} aria-pressed={active === index} onClick={() => api?.scrollTo(index)}><span /></Button>)}</div>
         </Carousel>
