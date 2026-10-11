@@ -109,9 +109,11 @@ export function DraggableSticker({
       onMouseDown={e => { e.preventDefault(); startDrag(e.clientX, e.clientY); }}
       onTouchStart={e => { const t = e.touches[0]; if (!t) return; startDrag(t.clientX, t.clientY); }}
       style={{
-        position: isFixed ? "fixed" : undefined,
+        // position:absolute + scroll-compensation via --scroll-y CSS var avoids
+        // position:fixed containing-block failures caused by ancestor transforms.
+        position: isFixed ? "absolute" : undefined,
         left: isFixed ? fx : undefined,
-        top: isFixed ? fy : undefined,
+        top: isFixed ? `calc(${fy}px + var(--scroll-y, 0px))` : undefined,
         transform: dragging ? "scale(1.28)" : undefined,
         transition: dragging ? "filter 0.08s" : "transform 0.55s cubic-bezier(0.34,1.56,0.64,1), filter 0.3s",
         filter: dragging ? "drop-shadow(4px 10px 18px rgba(0,0,0,0.42))" : undefined,
