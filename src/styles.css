@@ -253,13 +253,6 @@ html::-webkit-scrollbar,body::-webkit-scrollbar { display:none; }
 .contact-header { display:flex; flex-direction:column; align-items:center; text-align:center; max-width:580px; }
 .contact-header .section-heading { justify-content:center; }
 .original-contact p { font-size:15px; line-height:1.85; margin-bottom:20px; }
-.contact-email-block { display:flex; flex-direction:column; align-items:center; gap:6px; }
-.contact-email-label { font-size:11px; text-transform:uppercase; letter-spacing:0.12em; color:var(--muted-foreground); font-weight:600; }
-.contact-email-row { display:flex; align-items:center; gap:12px; flex-wrap:wrap; justify-content:center; }
-.contact-email-link { font-family:var(--font-display); font-size:18px; color:var(--primary); display:inline-flex; align-items:center; gap:4px; }
-.contact-email-link:hover { text-decoration:underline; text-underline-offset:4px; }
-.contact-copy-btn { font-size:12px; padding:5px 12px; border:1.5px solid var(--foreground); background:transparent; color:var(--foreground); font-family:var(--font-body); min-width:68px; }
-.contact-copy-btn:hover { background:var(--primary); color:var(--background); border-color:var(--primary); }
 .contact-form { width:100%; max-width:580px; display:flex; flex-direction:column; gap:18px; }
 .contact-form input,.contact-form textarea { border-radius:0; padding:14px; font-size:15px; min-height:48px; }
 .contact-form button { align-self:flex-start; min-width:125px; }

@@ -36,12 +36,6 @@ function ResumeLink() {
 
 function Index() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [copied, setCopied] = useState(false);
-  const copyEmail = () => {
-    navigator.clipboard.writeText("paavan_randhawa@sfu.ca");
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
   const [formState, setFormState] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -137,13 +131,6 @@ function Index() {
         <div className="contact-header">
           <div className="section-heading"><h2 className="section-title">Contact Me</h2><DraggableSticker><PixelSticker kind="envelope" className="contact-envelope" /></DraggableSticker></div>
           <p>{content.contact}</p>
-          <div className="contact-email-block">
-            <span className="contact-email-label">My email</span>
-            <div className="contact-email-row">
-              <a href="mailto:paavan_randhawa@sfu.ca" className="contact-email-link">paavan_randhawa@sfu.ca <ArrowUpRight size={15} /></a>
-              <button className="contact-copy-btn" onClick={copyEmail}>{copied ? "Copied!" : "Copy"}</button>
-            </div>
-          </div>
         </div>
         {formState === "success" ? (
           <div className="contact-success" aria-live="polite">

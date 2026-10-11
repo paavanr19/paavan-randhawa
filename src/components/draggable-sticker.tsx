@@ -11,7 +11,7 @@ export function DraggableSticker({ children, className = "" }: { children: React
       if (!dragStart.current) return;
       setOffset({ x: dragStart.current.ox + e.clientX - dragStart.current.mx, y: dragStart.current.oy + e.clientY - dragStart.current.my });
     };
-    const onUp = () => { dragStart.current = null; setDragging(false); setOffset({ x: 0, y: 0 }); };
+    const onUp = () => { dragStart.current = null; setDragging(false); };
     window.addEventListener("mousemove", onMove);
     window.addEventListener("mouseup", onUp);
     return () => { window.removeEventListener("mousemove", onMove); window.removeEventListener("mouseup", onUp); };
@@ -26,7 +26,7 @@ export function DraggableSticker({ children, className = "" }: { children: React
       e.preventDefault();
       setOffset({ x: dragStart.current.ox + t.clientX - dragStart.current.mx, y: dragStart.current.oy + t.clientY - dragStart.current.my });
     };
-    const onTouchEnd = () => { dragStart.current = null; setDragging(false); setOffset({ x: 0, y: 0 }); };
+    const onTouchEnd = () => { dragStart.current = null; setDragging(false); };
     window.addEventListener("touchmove", onTouchMove, { passive: false });
     window.addEventListener("touchend", onTouchEnd);
     return () => { window.removeEventListener("touchmove", onTouchMove); window.removeEventListener("touchend", onTouchEnd); };
