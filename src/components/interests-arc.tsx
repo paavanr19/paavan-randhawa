@@ -25,8 +25,6 @@ const REST: [string, string, string] = [
 const THRESHOLD = 8;
 const ANIM_MS = 260;
 
-
-
 export function InterestsArc() {
   const [active, setActive] = useState(0);
   const [dragX, setDragX] = useState(0);
@@ -37,19 +35,41 @@ export function InterestsArc() {
   const stackRef = useRef<HTMLDivElement>(null);
   const n = cards.length;
 
-  // Prevent scroll while dragging on touch
+  // Prevent scroll on touch while dragging
   useEffect(() => {
     const el = stackRef.current;
     if (!el) return;
-    const onTouchMove = (e: TouchEvent) => { if (dragRef.current !== null) e.preventDefault(); };
-    el.addEventListener("touchmove", onTouchMove, { passive: false });
-    return () => el.removeEventListener("touchmove", onTouchMove);
+    const handler = (e: TouchEvent) => { if (dragRef.current !== null) e.preventDefault(); };
+    el.addEventListener("touchmove", handler, { passive: false });
+    return () => el.removeEventListener("touchmove", handler);
   }, []);
+
+  // Global mouse tracking so drag doesn't cancel when cursor leaves the stack
+  useEffect(() => {
+    if (!grabbing) return;
+    const onMove = (e: MouseEvent) => {
+      if (dragRef.current !== null)
+        setDragX(Math.max(-90, Math.min(90, e.clientX - dragRef.current)));
+    };
+    const onUp = (e: MouseEvent) => {
+      if (dragRef.current === null) return;
+      const diff = dragRef.current - e.clientX;
+      if (Math.abs(diff) > THRESHOLD) triggerDepart(diff > 0 ? "left" : "right");
+      else setDragX(0);
+      dragRef.current = null;
+      setGrabbing(false);
+    };
+    window.addEventListener("mousemove", onMove);
+    window.addEventListener("mouseup", onUp);
+    return () => {
+      window.removeEventListener("mousemove", onMove);
+      window.removeEventListener("mouseup", onUp);
+    };
+  }, [grabbing]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => () => { if (animRef.current) clearTimeout(animRef.current); }, []);
 
-  const depart = (dir: "left" | "right") => {
-    if (departing) return;
+  const triggerDepart = (dir: "left" | "right") => {
     setDeparting(dir);
     animRef.current = setTimeout(() => {
       setActive(i => dir === "left" ? (i + 1) % n : (i - 1 + n) % n);
@@ -58,31 +78,37 @@ export function InterestsArc() {
     }, ANIM_MS);
   };
 
-  const startDrag = (x: number) => { if (!departing) { dragRef.current = x; setGrabbing(true); } };
-  const moveDrag = (x: number) => { if (dragRef.current !== null && !departing) setDragX(Math.max(-90, Math.min(90, x - dragRef.current))); };
-  const endDrag = (x: number) => {
+  const startDrag = (x: number) => {
+    if (departing) return;
+    dragRef.current = x;
+    setGrabbing(true);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (dragRef.current !== null && !departing)
+      setDragX(Math.max(-90, Math.min(90, e.touches[0].clientX - dragRef.current)));
+  };
+
+  const endTouchDrag = (e: React.TouchEvent) => {
     if (dragRef.current === null) return;
-    const diff = dragRef.current - x;
-    if (Math.abs(diff) > THRESHOLD) depart(diff > 0 ? "left" : "right");
+    const diff = dragRef.current - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > THRESHOLD) triggerDepart(diff > 0 ? "left" : "right");
     else setDragX(0);
     dragRef.current = null;
     setGrabbing(false);
   };
-  const cancelDrag = () => { dragRef.current = null; setDragX(0); setGrabbing(false); };
 
-  // Build render list: 4 items during departure, 3 otherwise
-  // Key by card index so React preserves identity across active changes
   type RItem = { cardIdx: number; transform: string; zIndex: number; transition: string };
   const isDragging = grabbing && !departing;
 
   const renderItems: RItem[] = departing ? [
-    { cardIdx: active % n,           transform: REST[2],           zIndex: 6,  transition: `transform ${ANIM_MS}ms ease` },
-    { cardIdx: (active + 1) % n,     transform: REST[0],           zIndex: 10, transition: `transform ${ANIM_MS}ms ease` },
-    { cardIdx: (active + 2) % n,     transform: REST[1],           zIndex: 9,  transition: `transform ${ANIM_MS}ms ease` },
+    { cardIdx: active % n,       transform: REST[2], zIndex: 6,  transition: `transform ${ANIM_MS}ms ease` },
+    { cardIdx: (active+1) % n,   transform: REST[0], zIndex: 10, transition: `transform ${ANIM_MS}ms ease` },
+    { cardIdx: (active+2) % n,   transform: REST[1], zIndex: 9,  transition: `transform ${ANIM_MS}ms ease` },
   ] : [
-    { cardIdx: active % n,           transform: dragX !== 0 ? `translateX(${dragX}px) rotate(${-2 + dragX * 0.04}deg)` : REST[0], zIndex: 10, transition: isDragging ? "none" : `transform ${ANIM_MS}ms ease` },
-    { cardIdx: (active + 1) % n,     transform: REST[1],           zIndex: 9,  transition: `transform ${ANIM_MS}ms ease` },
-    { cardIdx: (active + 2) % n,     transform: REST[2],           zIndex: 8,  transition: `transform ${ANIM_MS}ms ease` },
+    { cardIdx: active % n,       transform: dragX !== 0 ? `translateX(${dragX}px) rotate(${-2 + dragX * 0.04}deg)` : REST[0], zIndex: 10, transition: isDragging ? "none" : `transform ${ANIM_MS}ms ease` },
+    { cardIdx: (active+1) % n,   transform: REST[1], zIndex: 9,  transition: `transform ${ANIM_MS}ms ease` },
+    { cardIdx: (active+2) % n,   transform: REST[2], zIndex: 8,  transition: `transform ${ANIM_MS}ms ease` },
   ];
 
   return (
@@ -91,11 +117,9 @@ export function InterestsArc() {
         ref={stackRef}
         className="polaroid-stack"
         onTouchStart={e => startDrag(e.touches[0].clientX)}
-        onTouchEnd={e => endDrag(e.changedTouches[0].clientX)}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={endTouchDrag}
         onMouseDown={e => startDrag(e.clientX)}
-        onMouseMove={e => moveDrag(e.clientX)}
-        onMouseUp={e => endDrag(e.clientX)}
-        onMouseLeave={cancelDrag}
         style={{ cursor: grabbing ? "grabbing" : "grab" }}
       >
         {renderItems.map(({ cardIdx, transform, zIndex, transition }) => {
