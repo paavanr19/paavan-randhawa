@@ -1,11 +1,12 @@
 import { ArrowUpRight } from "lucide-react";
 import { PixelSticker } from "@/components/pixel-sticker";
+import { DraggableSticker } from "@/components/draggable-sticker";
 import { education } from "@/lib/education";
 import content from "@/lib/portfolio-content.json";
 
 export function EducationSection() {
   return <section id="education" className="original-education">
-    <div className="section-heading"><h2 className="section-title">Education</h2><PixelSticker kind="cursor" className="education-cursor" /></div>
+    <div className="section-heading"><h2 className="section-title">Education</h2><DraggableSticker><PixelSticker kind="cursor" className="education-cursor" /></DraggableSticker></div>
     <div className="education-grid">
       <div className="education-courses"><h3>Courses</h3><p className="education-note">Click on each course code to learn more</p>
         <ul>{education.courses.map(item => <li key={item.title}>{item.codes.map((code, index) => <span key={code.code}>{index > 0 && " / "}<a href={code.href} target="_blank" rel="noopener noreferrer">{code.code}{code.inProgress && "*"}<span className="sr-only"> (opens in a new tab)</span></a></span>)}<span> — {item.title}</span></li>)}</ul>

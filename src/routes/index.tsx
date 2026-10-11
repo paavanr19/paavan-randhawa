@@ -3,12 +3,13 @@ import { useCallback, useEffect, useState } from "react";
 import { CinematicIntro } from "@/components/cinematic-intro";
 import { EducationSection } from "@/components/education-section";
 import { InterestsArc } from "@/components/interests-arc";
-import { ArrowUpRight, Download, Github, Linkedin, Menu, X } from "lucide-react";
+import { ArrowUpRight, Download, Github, Linkedin, Menu, Play, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext, type CarouselApi } from "@/components/ui/carousel";
 import { PixelSticker } from "@/components/pixel-sticker";
+import { DraggableSticker } from "@/components/draggable-sticker";
 import content from "@/lib/portfolio-content.json";
 const portrait = { url: "/images/pfp.png" };
 const resume = { url: "/images/PaavanRandhawa-Resume.pdf" };
@@ -117,10 +118,10 @@ function Index() {
           <div className="btn-group"><ResumeLink /><Button asChild className="portfolio-button"><a href="#contact">Contact <ArrowUpRight size={16} /></a></Button></div>
           <div className="socials"><Button asChild variant="ghost" size="icon"><a href={github} target="_blank" rel="noopener noreferrer" aria-label="GitHub" title="GitHub"><Github /></a></Button><Button asChild variant="ghost" size="icon"><a href={linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" title="LinkedIn"><Linkedin /></a></Button></div>
         </div>
-        <figure className="original-portrait"><img src={portrait.url} alt="Paavan Randhawa" fetchPriority="high" /><PixelSticker className="portrait-star" /><PixelSticker kind="heart" className="portrait-heart" /></figure>
+        <figure className="original-portrait"><img src={portrait.url} alt="Paavan Randhawa" fetchPriority="high" /><DraggableSticker className="portrait-star-wrap"><PixelSticker className="portrait-star" /></DraggableSticker><DraggableSticker className="portrait-heart-wrap"><PixelSticker kind="heart" className="portrait-heart" /></DraggableSticker></figure>
       </section>
       <section id="projects" className="original-projects">
-        <div className="section-heading"><h2 className="section-title">Projects</h2><PixelSticker className="projects-star" /></div>
+        <div className="section-heading"><h2 className="section-title">Projects</h2><DraggableSticker><PixelSticker className="projects-star" /></DraggableSticker></div>
         <Carousel opts={{ loop: true }} setApi={setApi} className="original-carousel" aria-label="Projects" onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)} onFocusCapture={() => setPaused(true)} onBlurCapture={event => { if (!event.currentTarget.contains(event.relatedTarget)) setPaused(false); }}>
           <CarouselContent>{content.projects.map((project, index) => <CarouselItem key={project.title} aria-hidden={active !== index}><article className="original-project"><h3>{project.title}</h3><Button asChild variant="outline" className="portfolio-button"><a href={project.href} target="_blank" rel="noopener noreferrer" tabIndex={active === index ? 0 : -1}>View project <ArrowUpRight size={16} /></a></Button><p>{project.description}</p></article></CarouselItem>)}</CarouselContent>
           <CarouselPrevious className="project-arrow" aria-label="Previous project" title="Previous project" /><CarouselNext className="project-arrow" aria-label="Next project" title="Next project" />
@@ -129,16 +130,19 @@ function Index() {
       </section>
       <EducationSection />
       <section id="interests" className="original-interests">
-        <div><div className="section-heading"><h2 className="section-title">Interests</h2><PixelSticker kind="heart" className="interests-heart" /></div><p>{content.interests}</p></div>
+        <div><div className="section-heading"><h2 className="section-title">Interests</h2><DraggableSticker><PixelSticker kind="heart" className="interests-heart" /></DraggableSticker></div><p>{content.interests}</p></div>
         <InterestsArc />
       </section>
       <section id="contact" className="original-contact">
         <div className="contact-header">
-          <div className="section-heading"><h2 className="section-title">Contact Me</h2><PixelSticker kind="envelope" className="contact-envelope" /></div>
+          <div className="section-heading"><h2 className="section-title">Contact Me</h2><DraggableSticker><PixelSticker kind="envelope" className="contact-envelope" /></DraggableSticker></div>
           <p>{content.contact}</p>
           <div className="contact-email-block">
-            <a href="mailto:paavan_randhawa@sfu.ca" className="contact-email-link">paavan_randhawa@sfu.ca <ArrowUpRight size={18} /></a>
-            <button className="contact-copy-btn" onClick={copyEmail}>{copied ? "Copied!" : "Copy"}</button>
+            <span className="contact-email-label">My email</span>
+            <div className="contact-email-row">
+              <a href="mailto:paavan_randhawa@sfu.ca" className="contact-email-link">paavan_randhawa@sfu.ca <ArrowUpRight size={15} /></a>
+              <button className="contact-copy-btn" onClick={copyEmail}>{copied ? "Copied!" : "Copy"}</button>
+            </div>
           </div>
         </div>
         {formState === "success" ? (
@@ -166,6 +170,6 @@ function Index() {
         )}
       </section>
     </main>
-    <footer className="portfolio-footer"><nav aria-label="Footer navigation">{sections.map(section => <a key={section} href={`#${section.toLowerCase()}`}>{section}</a>)}</nav><Button variant="ghost" className="replay-intro" onClick={() => { window.scrollTo({ top: 0, behavior: "instant" }); setIntro("playing"); }}>▶ Replay Intro</Button><p>© All Rights Reserved | Paavan Randhawa</p></footer>
+    <footer className="portfolio-footer"><nav aria-label="Footer navigation">{sections.map(section => <a key={section} href={`#${section.toLowerCase()}`}>{section}</a>)}</nav><Button variant="ghost" className="replay-intro" onClick={() => { window.scrollTo({ top: 0, behavior: "instant" }); setIntro("playing"); }}><Play size={11} /> Replay Intro</Button><p>© All Rights Reserved | Paavan Randhawa</p></footer>
   </div>;
 }
