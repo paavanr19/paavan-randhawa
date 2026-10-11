@@ -42,7 +42,7 @@ export function DraggableSticker({ children, className = "" }: { children: React
         transition: dragging ? "filter 0.08s" : "transform 0.55s cubic-bezier(0.34,1.56,0.64,1), filter 0.3s",
         filter: dragging ? "drop-shadow(4px 10px 18px rgba(0,0,0,0.42))" : undefined,
         cursor: dragging ? "grabbing" : "grab",
-        zIndex: dragging ? 50 : undefined,
+        zIndex: dragging || offset.x !== 0 || offset.y !== 0 ? 50 : undefined,
       }}
     >
       {children}
