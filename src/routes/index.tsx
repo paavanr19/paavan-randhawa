@@ -93,6 +93,15 @@ function Index() {
     const timer = window.setInterval(() => api.scrollNext(), 5000);
     return () => window.clearInterval(timer);
   }, [api, paused, active]);
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const observer = new IntersectionObserver(
+      entries => entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add("revealed"); observer.unobserve(e.target); } }),
+      { threshold: 0.08, rootMargin: "0px 0px -40px 0px" }
+    );
+    document.querySelectorAll("[data-reveal]").forEach(el => observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
   return <div className="portfolio-shell">
     {intro === "pending" && <div className="intro" aria-hidden="true" />}
     {intro === "playing" && <CinematicIntro onDone={finishIntro} />}
@@ -114,7 +123,7 @@ function Index() {
         </div>
         <figure className="original-portrait"><img src={portrait.url} alt="Paavan Randhawa" fetchPriority="high" /><DraggableSticker className="portrait-star-wrap"><PixelSticker className="portrait-star" /></DraggableSticker><DraggableSticker className="portrait-heart-wrap"><PixelSticker kind="heart" className="portrait-heart" /></DraggableSticker></figure>
       </section>
-      <section id="projects" className="original-projects">
+      <section id="projects" className="original-projects" data-reveal>
         <div className="section-heading"><h2 className="section-title">Projects</h2><DraggableSticker><PixelSticker className="projects-star" /></DraggableSticker></div>
         <Carousel opts={{ loop: true }} setApi={setApi} className="original-carousel" aria-label="Projects" onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)} onFocusCapture={() => setPaused(true)} onBlurCapture={event => { if (!event.currentTarget.contains(event.relatedTarget)) setPaused(false); }}>
           <CarouselContent>{content.projects.map((project, index) => <CarouselItem key={project.title} aria-hidden={active !== index}><article className="original-project"><h3>{project.title}</h3><Button asChild variant="outline" className="portfolio-button"><a href={project.href} target="_blank" rel="noopener noreferrer" tabIndex={active === index ? 0 : -1}>View project <ArrowUpRight size={16} /></a></Button><p>{project.description}</p></article></CarouselItem>)}</CarouselContent>
@@ -123,11 +132,11 @@ function Index() {
         </Carousel>
       </section>
       <EducationSection />
-      <section id="interests" className="original-interests">
+      <section id="interests" className="original-interests" data-reveal>
         <div><div className="section-heading"><h2 className="section-title">Interests</h2><DraggableSticker><PixelSticker kind="heart" className="interests-heart" /></DraggableSticker></div><p>{content.interests}</p></div>
         <InterestsArc />
       </section>
-      <section id="contact" className="original-contact">
+      <section id="contact" className="original-contact" data-reveal>
         <div className="contact-header">
           <div className="section-heading"><h2 className="section-title">Contact Me</h2><DraggableSticker><PixelSticker kind="envelope" className="contact-envelope" /></DraggableSticker></div>
           <p>{content.contact}</p>
