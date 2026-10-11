@@ -36,6 +36,55 @@ function PumpkinDecoration({ size = 40 }: { size?: number }) {
     </svg>
   );
 }
+
+function GhostSticker({ size = 44 }: { size?: number }) {
+  return (
+    <svg width={size} height={Math.round(size * 1.2)} viewBox="0 0 40 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M6 22 Q6 4 20 4 Q34 4 34 22 L34 43 Q29.5 39 25 43 Q21 39 17 43 Q13 39 9 43 Q7 39 6 43 Z" fill="white" stroke="#b0a090" strokeWidth="1.8"/>
+      <ellipse cx="14" cy="21" rx="3.5" ry="4.5" fill="#3F2614"/>
+      <ellipse cx="26" cy="21" rx="3.5" ry="4.5" fill="#3F2614"/>
+      <circle cx="15.5" cy="19.5" r="1.2" fill="white"/>
+      <circle cx="27.5" cy="19.5" r="1.2" fill="white"/>
+      <path d="M15 30 Q20 34 25 30" stroke="#3F2614" strokeWidth="1.5" fill="none" strokeLinecap="round"/>
+    </svg>
+  );
+}
+
+function LeafSticker({ size = 36, red = false }: { size?: number; red?: boolean }) {
+  const fill = red ? "#B83000" : "#E86400";
+  const stroke = red ? "#7a1a00" : "#b04400";
+  return (
+    <svg width={size} height={Math.round(size * 1.2)} viewBox="0 0 36 44" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M18 42 Q17 37 18 30" stroke="#5a2a10" strokeWidth="2.2" strokeLinecap="round" fill="none"/>
+      <path d="M18 4 L21.5 10 L29 8 L25 15 L33 18 L25.5 21.5 L27.5 29 L18 25 L8.5 29 L10.5 21.5 L3 18 L11 15 L7 8 L14.5 10 Z" fill={fill} stroke={stroke} strokeWidth="0.8" strokeLinejoin="round"/>
+      <path d="M18 25 L18 10" stroke="white" strokeWidth="1" strokeLinecap="round" opacity="0.35" fill="none"/>
+      <path d="M18 20 L24 15" stroke="white" strokeWidth="0.8" strokeLinecap="round" opacity="0.25" fill="none"/>
+      <path d="M18 20 L12 15" stroke="white" strokeWidth="0.8" strokeLinecap="round" opacity="0.25" fill="none"/>
+    </svg>
+  );
+}
+
+function SpiderSticker({ size = 44 }: { size?: number }) {
+  return (
+    <svg width={size} height={Math.round(size * 1.15)} viewBox="0 0 44 50" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <line x1="22" y1="0" x2="22" y2="10" stroke="#8a8a8a" strokeWidth="1.2"/>
+      <path d="M17 20 Q9 13 2 15" stroke="#280800" strokeWidth="2" strokeLinecap="round" fill="none"/>
+      <path d="M16 24 Q7 22 1 25" stroke="#280800" strokeWidth="2" strokeLinecap="round" fill="none"/>
+      <path d="M16 28 Q8 32 4 38" stroke="#280800" strokeWidth="2" strokeLinecap="round" fill="none"/>
+      <path d="M18 32 Q13 38 11 44" stroke="#280800" strokeWidth="2" strokeLinecap="round" fill="none"/>
+      <path d="M27 20 Q35 13 42 15" stroke="#280800" strokeWidth="2" strokeLinecap="round" fill="none"/>
+      <path d="M28 24 Q37 22 43 25" stroke="#280800" strokeWidth="2" strokeLinecap="round" fill="none"/>
+      <path d="M28 28 Q36 32 40 38" stroke="#280800" strokeWidth="2" strokeLinecap="round" fill="none"/>
+      <path d="M26 32 Q31 38 33 44" stroke="#280800" strokeWidth="2" strokeLinecap="round" fill="none"/>
+      <ellipse cx="22" cy="38" rx="10" ry="11" fill="#280800"/>
+      <circle cx="22" cy="20" r="9" fill="#280800"/>
+      <circle cx="18.5" cy="18" r="2.2" fill="#E86400"/>
+      <circle cx="25.5" cy="18" r="2.2" fill="#E86400"/>
+      <circle cx="19.2" cy="17.2" r="0.8" fill="white"/>
+      <circle cx="26.2" cy="17.2" r="0.8" fill="white"/>
+    </svg>
+  );
+}
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -228,6 +277,11 @@ function Index() {
     {altTheme && <>
       <DraggableSticker className="pumpkin-sticker-1"><PumpkinDecoration size={38} /></DraggableSticker>
       <DraggableSticker className="pumpkin-sticker-2"><PumpkinDecoration size={32} /></DraggableSticker>
+      <DraggableSticker className="ghost-sticker-1"><GhostSticker size={48} /></DraggableSticker>
+      <DraggableSticker className="ghost-sticker-2"><GhostSticker size={36} /></DraggableSticker>
+      <DraggableSticker className="leaf-sticker-1"><LeafSticker size={38} /></DraggableSticker>
+      <DraggableSticker className="leaf-sticker-2"><LeafSticker size={32} red /></DraggableSticker>
+      <DraggableSticker className="spider-sticker"><SpiderSticker size={46} /></DraggableSticker>
     </>}
     {showToast && (
       <div className="halloween-toast" role="status" aria-live="polite">
