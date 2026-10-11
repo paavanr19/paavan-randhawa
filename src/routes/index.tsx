@@ -68,13 +68,12 @@ function ResumeLink() {
 
 function Index() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [altTheme, setAltTheme] = useState(() => typeof document !== "undefined" && document.documentElement.classList.contains("alt-theme"));
+  const [altTheme, setAltTheme] = useState(false);
   const [showToast, setShowToast] = useState(false);
   const toastTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const toggleTheme = () => {
     const next = !altTheme;
     document.documentElement.classList.toggle("alt-theme", next);
-    try { localStorage.setItem("portfolio-theme", next ? "alt" : "default"); } catch (_) {}
     setAltTheme(next);
     if (next) {
       if (toastTimer.current) clearTimeout(toastTimer.current);
