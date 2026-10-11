@@ -258,6 +258,14 @@ html::-webkit-scrollbar,body::-webkit-scrollbar { display:none; }
 .contact-form { width:100%; max-width:580px; display:flex; flex-direction:column; gap:18px; }
 .contact-form input,.contact-form textarea { border-radius:0; padding:14px; font-size:15px; min-height:48px; }
 .contact-form button { align-self:flex-start; min-width:125px; }
+.contact-error { font-size:13px; color:var(--destructive); }
+.contact-success { width:100%; max-width:580px; min-height:220px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:28px; }
+.contact-airplane { color:var(--primary); }
+.airplane-svg { width:72px; height:72px; animation:airplane-fly 1.1s cubic-bezier(.4,0,.6,1) forwards; }
+.contact-confirm-msg { font-family:var(--font-display); font-size:30px; line-height:1.25; color:var(--primary); text-align:center; opacity:0; animation:contact-confirm-in 0.45s ease forwards; animation-delay:0.9s; }
+@keyframes airplane-fly { 0%{transform:translate(0,0) rotate(0deg);opacity:1} 70%{opacity:1} 100%{transform:translate(220px,-160px) rotate(15deg);opacity:0} }
+@keyframes contact-confirm-in { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
+@media(prefers-reduced-motion:reduce) { .contact-airplane{display:none} .contact-confirm-msg{opacity:1;animation:none} }
 .portfolio-footer { padding:30px 8%; border-top:1px solid var(--border); font-size:12px; display:flex; justify-content:space-between; flex-wrap:wrap; gap:24px; background:var(--secondary); }
 .portfolio-footer nav { display:flex; flex-wrap:wrap; gap:20px; }
 @media(max-width:1100px) { .portfolio-nav {gap:18px;} .nav-links {gap:15px;font-size:12px;} .wordmark {font-size:28px;} .original-about h1 {font-size:72px;} }

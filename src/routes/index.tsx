@@ -41,6 +41,17 @@ function Index() {
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
+  const [formState, setFormState] = useState<"idle" | "submitting" | "success" | "error">("idle");
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setFormState("submitting");
+    try {
+      const res = await fetch("https://api.web3forms.com/submit", { method: "POST", body: new FormData(e.currentTarget) });
+      setFormState(res.ok ? "success" : "error");
+    } catch {
+      setFormState("error");
+    }
+  };
   const [api, setApi] = useState<CarouselApi>();
   const [active, setActive] = useState(0);
   const [paused, setPaused] = useState(false);
@@ -130,14 +141,29 @@ function Index() {
             <button className="contact-copy-btn" onClick={copyEmail}>{copied ? "Copied!" : "Copy"}</button>
           </div>
         </div>
-        <form action="https://api.web3forms.com/submit" method="POST" className="contact-form">
-          <input type="hidden" name="access_key" value="1725c347-0370-4255-8441-e8334e976b59" />
-          <input type="checkbox" name="botcheck" className="hidden" tabIndex={-1} />
-          <label><span className="sr-only">Your name</span><Input name="name" placeholder="Your name" required /></label>
-          <label><span className="sr-only">Your email</span><Input type="email" name="email" placeholder="Your email" required /></label>
-          <label><span className="sr-only">Your message</span><Textarea name="message" rows={5} placeholder="Your message" required /></label>
-          <Button type="submit" className="portfolio-button">Submit <ArrowUpRight size={16} /></Button>
-        </form>
+        {formState === "success" ? (
+          <div className="contact-success" aria-live="polite">
+            <div className="contact-airplane" aria-hidden="true">
+              <svg className="airplane-svg" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
+                <polygon points="2,62 62,2 62,62 34,46" />
+                <polygon points="34,46 62,62 62,2" opacity="0.45" />
+              </svg>
+            </div>
+            <p className="contact-confirm-msg">Message sent!<br />I'll get back to you soon.</p>
+          </div>
+        ) : (
+          <form action="https://api.web3forms.com/submit" method="POST" className="contact-form" onSubmit={handleSubmit}>
+            <input type="hidden" name="access_key" value="1725c347-0370-4255-8441-e8334e976b59" />
+            <input type="checkbox" name="botcheck" className="hidden" tabIndex={-1} />
+            <label><span className="sr-only">Your name</span><Input name="name" placeholder="Your name" required /></label>
+            <label><span className="sr-only">Your email</span><Input type="email" name="email" placeholder="Your email" required /></label>
+            <label><span className="sr-only">Your message</span><Textarea name="message" rows={5} placeholder="Your message" required /></label>
+            <Button type="submit" className="portfolio-button" disabled={formState === "submitting"}>
+              {formState === "submitting" ? "Sending…" : <><span>Submit</span> <ArrowUpRight size={16} /></>}
+            </Button>
+            {formState === "error" && <p className="contact-error">Something went wrong — please try again.</p>}
+          </form>
+        )}
       </section>
     </main>
     <footer className="portfolio-footer"><nav aria-label="Footer navigation">{sections.map(section => <a key={section} href={`#${section.toLowerCase()}`}>{section}</a>)}</nav><Button variant="ghost" className="replay-intro" onClick={() => { window.scrollTo({ top: 0, behavior: "instant" }); setIntro("playing"); }}>▶ Replay Intro</Button><p>© All Rights Reserved | Paavan Randhawa</p></footer>

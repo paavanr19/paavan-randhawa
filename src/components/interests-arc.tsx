@@ -58,7 +58,7 @@ const cards: Card[] = [
   {
     url: `${I}wicked-gershwin-theatre.jpg`, alt: "Wicked at the Gershwin Theatre", caption: "wicked on broadway",
     overlays: [
-      { kind: "badge", url: `${S}wicked-hat.png`,               style: { top: -28, left: -8, width: 72, ...R(-20) } },
+      { kind: "badge", url: `${S}wicked-hat.png`,               style: { top: -42, left: -18, width: 72, ...R(-20) } },
       { kind: "badge", url: `${I}wicked-playbill-sticker.jpeg`, style: { bottom: 22, right: 4, width: 68, ...R(20) } },
     ],
   },
