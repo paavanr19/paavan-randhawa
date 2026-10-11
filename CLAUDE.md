@@ -13,7 +13,7 @@ npm run test:watch   # Vitest watch mode
 npm run format       # Prettier
 ```
 
-Run a single test file: `npx vitest run src/test/routing.test.tsx`
+Run a single test file: `npx vitest run src/test/app-routing.test.tsx`
 
 ## Architecture
 
@@ -41,10 +41,14 @@ Single-page portfolio rendered via **TanStack Start** (SSR framework on top of T
 
 ## Key components
 
-- `DraggableSticker` — portals to `document.body` via `createPortal`. Uses `position:absolute` (not `position:fixed`) with `top: calc(${fy}px + var(--scroll-y, 0px))` to stay viewport-fixed. `--scroll-y` is set by the scroll listener in `index.tsx`. Viewport stickers take `defaultXVw`/`defaultYVh` props (percentages); their pixel positions are computed from `window.innerWidth/Height` on mount.
+- `DraggableSticker` — portals to `document.body` via `createPortal` once dragged. Two placement modes:
+  - `"doc"` (default): `position:absolute` with document-absolute coordinates (`rect + window.scrollX/Y`). Sticker scrolls with the page and stays where placed relative to content.
+  - `"fixed"`: `position:fixed` with viewport coordinates. Used when the sticker is dropped onto the sticky navbar (detected via cursor position against `.portfolio-nav` rect — use cursor, not sticker top-left, because the sticker top can be above the navbar rect while the cursor is clearly on it).
+  - All drag deltas are computed in document space so scrolling mid-drag doesn't shift the sticker.
+  - When portaled, inline `bottom:"auto"` and `right:"auto"` cancel any conflicting CSS class properties (e.g. `.portrait-heart-wrap { bottom:12px; right:-18px }` would otherwise stretch the element).
+  - CSS color rules for stickers must not require a parent selector (e.g. `.projects-star`, not `.section-heading .projects-star`) — the portaled element loses its original DOM ancestry.
 - `CinematicIntro` — self-contained animated intro with deterministic scene timers; total runtime is 8500ms. Skip via Escape or click. Calls `onDone` when complete.
 - `PixelSticker` — inline SVG pixel-art stickers using CSS custom property colors (`var(--foreground)`, `var(--secondary)`, etc.).
-- `TwemojiSticker` (local helper in `index.tsx`) — renders Twemoji SVGs from jsDelivr CDN (`https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/{code}.svg`).
 
 ## Important constraints
 

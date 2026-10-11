@@ -69,9 +69,7 @@ function Index() {
     const onScroll = () => {
       const el = document.documentElement;
       if (progressRef.current) progressRef.current.style.width = `${el.scrollTop / (el.scrollHeight - el.clientHeight) * 100}%`;
-      document.documentElement.style.setProperty('--scroll-y', `${el.scrollTop}px`);
     };
-    document.documentElement.style.setProperty('--scroll-y', `${document.documentElement.scrollTop}px`);
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);

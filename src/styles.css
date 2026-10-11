@@ -224,7 +224,7 @@ html::-webkit-scrollbar,body::-webkit-scrollbar { display:none; }
 .section-heading { display:flex; align-items:center; gap:20px; margin-bottom:36px; }
 .section-heading .section-title { margin-bottom:0; }
 .section-heading .pixel-sticker { flex-shrink:0; width:38px; height:38px; }
-.section-heading .projects-star { color:var(--secondary); transform:rotate(12deg); }
+.projects-star { color:var(--secondary); transform:rotate(12deg); }
 .education-cursor { transform:rotate(-8deg); }
 .interests-heart { transform:rotate(10deg); }
 .contact-envelope { transform:rotate(-8deg); }
