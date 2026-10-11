@@ -178,7 +178,7 @@ html::-webkit-scrollbar,body::-webkit-scrollbar { display:none; }
 .menu-toggle { display:none; }
 .original-about { display:grid; grid-template-columns:1.1fr 1fr; gap:4%; align-items:center; padding:65px 8% 75px; }
 .hello { font-family:var(--font-display); font-size:35px; color:var(--primary); }
-.original-about h1 { font-family:var(--font-script); font-size:86px; line-height:1.1; color:var(--primary); margin:8px 0 24px; min-height:2.2em; max-width:470px; }
+.original-about h1 { font-family:var(--font-script); font-size:86px; line-height:1.1; color:var(--primary); margin:8px 0 12px; min-height:1.15em; max-width:470px; }
 .typewriter-pending { visibility:hidden; }
 .lead { font-size:17px; color:var(--soil); margin-bottom:18px; }
 .bio { font-size:16px; line-height:1.85; max-width:470px; }
@@ -257,7 +257,7 @@ html::-webkit-scrollbar,body::-webkit-scrollbar { display:none; }
 @media(max-width:800px) {
  .portfolio-nav {padding:16px 6%;flex-wrap:wrap;gap:12px;} .wordmark {margin-right:auto;font-size:29px;} .menu-toggle {display:inline-flex;} .nav-cta {font-size:11px;min-height:36px;height:36px;padding:8px 12px;}
  .nav-links {display:none;order:4;width:100%;padding:12px 0 4px;flex-wrap:wrap;gap:18px;} .nav-links[data-open=true] {display:flex;}
- .original-about {grid-template-columns:1fr;padding:40px 7% 45px;gap:20px;} .original-about h1 {font-size:62px;margin-bottom:18px;} .hello {font-size:28px;} .bio {font-size:14px;} .lead {font-size:15px;} .original-portrait {max-width:310px;justify-self:center;} .original-portrait img {aspect-ratio:4/4.5;border-radius:75px 0 75px 0;}
+ .original-about {grid-template-columns:1fr;padding:40px 7% 45px;gap:20px;} .original-about h1 {font-size:62px;margin-bottom:8px;} .hello {font-size:28px;} .bio {font-size:14px;} .lead {font-size:15px;} .original-portrait {max-width:310px;justify-self:center;} .original-portrait img {aspect-ratio:4/4.5;border-radius:75px 0 75px 0;}
  .section-title {font-size:38px;margin-bottom:25px;} .original-projects,.original-education,.original-interests,.original-contact {padding:45px 7%;}
  .section-heading {gap:12px;margin-bottom:25px;} .section-heading .pixel-sticker {width:30px;height:30px;}
  .original-carousel {margin:0 22px;} .original-carousel > button {width:30px;height:30px;} .original-carousel > button:first-of-type {left:-32px;} .original-carousel > button:last-of-type {right:-32px;}
