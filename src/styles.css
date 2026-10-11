@@ -117,15 +117,17 @@ html.alt-theme {
   --soil: oklch(0.190 0.0581 41.4);
 }
 
-/* Halloween stickers */
-.pumpkin-sticker-1 { position:fixed; bottom:110px; left:18px; transform:rotate(-10deg); }
-.pumpkin-sticker-2 { position:fixed; bottom:210px; right:18px; transform:rotate(14deg); }
-.pumpkin-portrait  { position:absolute; top:-28px; right:-54px; transform:rotate(16deg); }
-.ghost-sticker-1   { position:fixed; top:85px; left:14px; transform:rotate(-6deg); }
-.ghost-sticker-2   { position:fixed; top:44%; right:12px; transform:rotate(9deg); }
-.leaf-sticker-1    { position:fixed; bottom:46px; left:80px; transform:rotate(-22deg); }
-.leaf-sticker-2    { position:fixed; top:100px; right:14px; transform:rotate(20deg); }
-.spider-sticker    { position:fixed; top:0; right:58px; }
+/* Halloween stickers — rotations on img children, not the span; all top-only to stay above footer */
+.pumpkin-sticker-1   { position:fixed; top:14vh; left:2vw;   z-index:30; }
+.pumpkin-sticker-2   { position:fixed; top:52vh; right:3vw;  z-index:30; }
+.pumpkin-portrait    { position:absolute; top:-28px; right:-54px; }
+.ghost-sticker-1     { position:fixed; top:10vh; left:26vw;  z-index:30; }
+.ghost-sticker-2     { position:fixed; top:68vh; left:4vw;   z-index:30; }
+.leaf-sticker-1      { position:fixed; top:36vh; left:18vw;  z-index:30; }
+.leaf-sticker-2      { position:fixed; top:74vh; right:16vw; z-index:30; }
+.spider-sticker      { position:fixed; top:26vh; right:12vw; z-index:30; }
+.spiderweb-sticker-1 { position:fixed; top:2vh;  left:0;     z-index:28; }
+.spiderweb-sticker-2 { position:fixed; top:54vh; right:0;    z-index:28; }
 
 /* Halloween toast */
 .halloween-toast { position:fixed; bottom:32px; left:50%; transform:translateX(-50%); background:oklch(0.538 0.1347 48.8); color:oklch(0.886 0.0500 57.2); padding:14px 28px; font-size:13px; font-weight:500; letter-spacing:0.04em; z-index:1000; display:flex; align-items:center; gap:10px; white-space:nowrap; animation:toast-in 0.35s ease forwards, toast-out 0.35s ease 3s forwards; }

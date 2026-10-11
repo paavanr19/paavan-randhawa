@@ -19,70 +19,17 @@ function PumpkinToggle() {
   );
 }
 
-function PumpkinDecoration({ size = 40 }: { size?: number }) {
+function TwemojiSticker({ code, size = 44, rotate = 0 }: { code: string; size?: number; rotate?: number }) {
   return (
-    <svg width={size} height={Math.round(size * 1.1)} viewBox="0 0 44 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <path d="M22 7 C22 3 25 1 28 4" stroke="#4a7520" strokeWidth="2.5" strokeLinecap="round"/>
-      <path d="M24 6 C29 2 35 5 31 10 C29 9 27 7 24 6Z" fill="#5a8a28"/>
-      <ellipse cx="8" cy="30" rx="8" ry="11" fill="#CC5500"/>
-      <ellipse cx="36" cy="30" rx="8" ry="11" fill="#CC5500"/>
-      <ellipse cx="22" cy="30" rx="15" ry="15" fill="#E86400"/>
-      <path d="M22 15 C28 22 28 38 22 45" stroke="#CC5500" strokeWidth="2" fill="none"/>
-      <path d="M22 15 C16 22 16 38 22 45" stroke="#CC5500" strokeWidth="2" fill="none"/>
-      <polygon points="13,27 16,23 19,27" fill="#280800"/>
-      <polygon points="25,27 28,23 31,27" fill="#280800"/>
-      <polygon points="21,32 22,30 23,32" fill="#280800"/>
-      <path d="M11 36 L14 39 L17 36 L22 39 L27 36 L30 39 L33 36" stroke="#280800" strokeWidth="1.8" fill="none" strokeLinecap="round" strokeLinejoin="round"/>
-    </svg>
-  );
-}
-
-function GhostSticker({ size = 44 }: { size?: number }) {
-  return (
-    <svg width={size} height={Math.round(size * 1.2)} viewBox="0 0 40 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <path d="M6 22 Q6 4 20 4 Q34 4 34 22 L34 43 Q29.5 39 25 43 Q21 39 17 43 Q13 39 9 43 Q7 39 6 43 Z" fill="white" stroke="#b0a090" strokeWidth="1.8"/>
-      <ellipse cx="14" cy="21" rx="3.5" ry="4.5" fill="#3F2614"/>
-      <ellipse cx="26" cy="21" rx="3.5" ry="4.5" fill="#3F2614"/>
-      <circle cx="15.5" cy="19.5" r="1.2" fill="white"/>
-      <circle cx="27.5" cy="19.5" r="1.2" fill="white"/>
-      <path d="M15 30 Q20 34 25 30" stroke="#3F2614" strokeWidth="1.5" fill="none" strokeLinecap="round"/>
-    </svg>
-  );
-}
-
-function LeafSticker({ size = 36, red = false }: { size?: number; red?: boolean }) {
-  const fill = red ? "#B83000" : "#E86400";
-  const stroke = red ? "#7a1a00" : "#b04400";
-  return (
-    <svg width={size} height={Math.round(size * 1.2)} viewBox="0 0 36 44" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <path d="M18 42 Q17 37 18 30" stroke="#5a2a10" strokeWidth="2.2" strokeLinecap="round" fill="none"/>
-      <path d="M18 4 L21.5 10 L29 8 L25 15 L33 18 L25.5 21.5 L27.5 29 L18 25 L8.5 29 L10.5 21.5 L3 18 L11 15 L7 8 L14.5 10 Z" fill={fill} stroke={stroke} strokeWidth="0.8" strokeLinejoin="round"/>
-      <path d="M18 25 L18 10" stroke="white" strokeWidth="1" strokeLinecap="round" opacity="0.35" fill="none"/>
-      <path d="M18 20 L24 15" stroke="white" strokeWidth="0.8" strokeLinecap="round" opacity="0.25" fill="none"/>
-      <path d="M18 20 L12 15" stroke="white" strokeWidth="0.8" strokeLinecap="round" opacity="0.25" fill="none"/>
-    </svg>
-  );
-}
-
-function SpiderSticker({ size = 44 }: { size?: number }) {
-  return (
-    <svg width={size} height={Math.round(size * 1.15)} viewBox="0 0 44 50" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <line x1="22" y1="0" x2="22" y2="10" stroke="#8a8a8a" strokeWidth="1.2"/>
-      <path d="M17 20 Q9 13 2 15" stroke="#280800" strokeWidth="2" strokeLinecap="round" fill="none"/>
-      <path d="M16 24 Q7 22 1 25" stroke="#280800" strokeWidth="2" strokeLinecap="round" fill="none"/>
-      <path d="M16 28 Q8 32 4 38" stroke="#280800" strokeWidth="2" strokeLinecap="round" fill="none"/>
-      <path d="M18 32 Q13 38 11 44" stroke="#280800" strokeWidth="2" strokeLinecap="round" fill="none"/>
-      <path d="M27 20 Q35 13 42 15" stroke="#280800" strokeWidth="2" strokeLinecap="round" fill="none"/>
-      <path d="M28 24 Q37 22 43 25" stroke="#280800" strokeWidth="2" strokeLinecap="round" fill="none"/>
-      <path d="M28 28 Q36 32 40 38" stroke="#280800" strokeWidth="2" strokeLinecap="round" fill="none"/>
-      <path d="M26 32 Q31 38 33 44" stroke="#280800" strokeWidth="2" strokeLinecap="round" fill="none"/>
-      <ellipse cx="22" cy="38" rx="10" ry="11" fill="#280800"/>
-      <circle cx="22" cy="20" r="9" fill="#280800"/>
-      <circle cx="18.5" cy="18" r="2.2" fill="#E86400"/>
-      <circle cx="25.5" cy="18" r="2.2" fill="#E86400"/>
-      <circle cx="19.2" cy="17.2" r="0.8" fill="white"/>
-      <circle cx="26.2" cy="17.2" r="0.8" fill="white"/>
-    </svg>
+    <img
+      src={`https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/${code}.svg`}
+      width={size}
+      height={size}
+      alt=""
+      aria-hidden="true"
+      draggable={false}
+      style={{ display: "block", ...(rotate ? { transform: `rotate(${rotate}deg)` } : {}) }}
+    />
   );
 }
 import { Button } from "@/components/ui/button";
@@ -228,7 +175,7 @@ function Index() {
           <div className="btn-group"><ResumeLink /><Button asChild className="portfolio-button"><a href="#contact">Contact <ArrowUpRight size={16} /></a></Button></div>
           <div className="socials"><Button asChild variant="ghost" size="icon"><a href={github} target="_blank" rel="noopener noreferrer" aria-label="GitHub" title="GitHub"><Github /></a></Button><Button asChild variant="ghost" size="icon"><a href={linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" title="LinkedIn"><Linkedin /></a></Button></div>
         </div>
-        <figure className="original-portrait"><img src={portrait.url} alt="Paavan Randhawa" fetchPriority="high" /><DraggableSticker className="portrait-star-wrap"><PixelSticker className="portrait-star" /></DraggableSticker><DraggableSticker className="portrait-heart-wrap"><PixelSticker kind="heart" className="portrait-heart" /></DraggableSticker>{altTheme && <DraggableSticker className="pumpkin-portrait"><PumpkinDecoration size={44} /></DraggableSticker>}</figure>
+        <figure className="original-portrait"><img src={portrait.url} alt="Paavan Randhawa" fetchPriority="high" /><DraggableSticker className="portrait-star-wrap"><PixelSticker className="portrait-star" /></DraggableSticker><DraggableSticker className="portrait-heart-wrap"><PixelSticker kind="heart" className="portrait-heart" /></DraggableSticker>{altTheme && <DraggableSticker className="pumpkin-portrait"><TwemojiSticker code="1f383" size={48} rotate={16} /></DraggableSticker>}</figure>
       </section>
       <section id="projects" className="original-projects">
         <div className="section-heading"><h2 className="section-title">Projects</h2><DraggableSticker><PixelSticker className="projects-star" /></DraggableSticker></div>
@@ -275,13 +222,15 @@ function Index() {
     </main>
     <footer className="portfolio-footer"><nav aria-label="Footer navigation">{sections.map(section => <a key={section} href={`#${section.toLowerCase()}`}>{section}</a>)}</nav><Button variant="ghost" className="replay-intro" onClick={() => { window.scrollTo({ top: 0, behavior: "instant" }); setIntro("playing"); }}><Play size={11} /> Replay Intro</Button><p>© All Rights Reserved | Paavan Randhawa</p></footer>
     {altTheme && <>
-      <DraggableSticker className="pumpkin-sticker-1"><PumpkinDecoration size={38} /></DraggableSticker>
-      <DraggableSticker className="pumpkin-sticker-2"><PumpkinDecoration size={32} /></DraggableSticker>
-      <DraggableSticker className="ghost-sticker-1"><GhostSticker size={48} /></DraggableSticker>
-      <DraggableSticker className="ghost-sticker-2"><GhostSticker size={36} /></DraggableSticker>
-      <DraggableSticker className="leaf-sticker-1"><LeafSticker size={38} /></DraggableSticker>
-      <DraggableSticker className="leaf-sticker-2"><LeafSticker size={32} red /></DraggableSticker>
-      <DraggableSticker className="spider-sticker"><SpiderSticker size={46} /></DraggableSticker>
+      <DraggableSticker portal className="pumpkin-sticker-1"><TwemojiSticker code="1f383" size={46} rotate={-10} /></DraggableSticker>
+      <DraggableSticker portal className="pumpkin-sticker-2"><TwemojiSticker code="1f383" size={38} rotate={14} /></DraggableSticker>
+      <DraggableSticker portal className="ghost-sticker-1"><TwemojiSticker code="1f47b" size={52} rotate={-6} /></DraggableSticker>
+      <DraggableSticker portal className="ghost-sticker-2"><TwemojiSticker code="1f47b" size={40} rotate={9} /></DraggableSticker>
+      <DraggableSticker portal className="leaf-sticker-1"><TwemojiSticker code="1f342" size={44} rotate={-22} /></DraggableSticker>
+      <DraggableSticker portal className="leaf-sticker-2"><TwemojiSticker code="1f341" size={38} rotate={20} /></DraggableSticker>
+      <DraggableSticker portal className="spider-sticker"><TwemojiSticker code="1f577" size={50} rotate={-8} /></DraggableSticker>
+      <DraggableSticker portal className="spiderweb-sticker-1"><TwemojiSticker code="1f578" size={72} /></DraggableSticker>
+      <DraggableSticker portal className="spiderweb-sticker-2"><TwemojiSticker code="1f578" size={72} rotate={90} /></DraggableSticker>
     </>}
     {showToast && (
       <div className="halloween-toast" role="status" aria-live="polite">

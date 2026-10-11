@@ -1,15 +1,28 @@
 import { useState, useRef, useEffect } from "react";
+import { createPortal } from "react-dom";
 
-export function DraggableSticker({ children, className = "" }: { children: React.ReactNode; className?: string }) {
+export function DraggableSticker({
+  children,
+  className = "",
+  portal: alwaysPortal = false,
+}: {
+  children: React.ReactNode;
+  className?: string;
+  // Set true for fixed-positioned stickers so they portal to body from mount,
+  // guaranteeing position:fixed is viewport-relative regardless of ancestors.
+  portal?: boolean;
+}) {
   const elemRef = useRef<HTMLSpanElement>(null);
   const [fixedPos, setFixedPos] = useState<{ x: number; y: number } | null>(null);
   const [delta, setDelta] = useState({ x: 0, y: 0 });
   const [dragging, setDragging] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
-  // Refs so event handler closures always see the latest values
   const fixedPosRef = useRef<{ x: number; y: number } | null>(null);
   const deltaRef = useRef({ x: 0, y: 0 });
   const dragStartRef = useRef<{ mx: number; my: number } | null>(null);
+
+  useEffect(() => { setMounted(true); }, []);
 
   function startDrag(mx: number, my: number) {
     if (fixedPosRef.current === null && elemRef.current) {
@@ -71,7 +84,7 @@ export function DraggableSticker({ children, className = "" }: { children: React
   const fx = (fixedPos?.x ?? 0) + delta.x;
   const fy = (fixedPos?.y ?? 0) + delta.y;
 
-  return (
+  const span = (
     <span
       ref={elemRef}
       className={`draggable-sticker${className ? ` ${className}` : ""}`}
@@ -91,4 +104,12 @@ export function DraggableSticker({ children, className = "" }: { children: React
       {children}
     </span>
   );
+
+  if (alwaysPortal) {
+    // Render into body from first mount so position:fixed is always viewport-relative.
+    // Fall back to inline during SSR (mounted=false) to avoid hydration mismatch.
+    return mounted ? createPortal(span, document.body) : span;
+  }
+  // For absolute-positioned stickers: portal only after first drag.
+  return isFixed ? createPortal(span, document.body) : span;
 }
