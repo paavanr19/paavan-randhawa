@@ -31,9 +31,9 @@ const resume = { url: "/images/PaavanRandhawa-Resume.pdf" };
 
 export const Route = createFileRoute("/")({
   head: () => ({ meta: [
-    { title: "Paavan Randhawa — Computing Science Portfolio" },
+    { title: "Paavan Randhawa" },
     { name: "description", content: "Paavan Randhawa, computing science student at Simon Fraser University in Vancouver. Projects, education, interests, and contact." },
-    { property: "og:title", content: "Paavan Randhawa — Computing Science Portfolio" },
+    { property: "og:title", content: "Paavan Randhawa" },
     { property: "og:description", content: "Explore Paavan's software projects, education at Simon Fraser University, and life beyond the screen." },
     { property: "og:type", content: "website" },
     { name: "twitter:card", content: "summary_large_image" },
