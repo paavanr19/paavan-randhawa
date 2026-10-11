@@ -24,14 +24,14 @@ const cards: Card[] = [
     url: `${I}canada-switzerland.png`,  alt: "FIFA World Cup Canada vs Switzerland", caption: "canada vs. switzerland @ the world cup",
     overlays: [
       { kind: "badge", url: `${S}canadasoccer.png`, style: { top: 10,   left: 8,  width: 54, ...R(-20) } },
-      { kind: "badge", url: `${S}trionda.png`,      style: { bottom: 66, right: 8, width: 54, ...R(20)  } },
+      { kind: "badge", url: `${S}trionda.png`,      style: { bottom: 8, right: 8, width: 54, ...R(20)  } },
     ],
   },
   {
     url: `${I}paavan-matchday.png`,     alt: "Matchday on the pitch",           caption: "matchday",
     overlays: [
-      { kind: "badge", url: `${S}barcelona.png`, style: { bottom: 8, right: 8, width: 58, ...R(20) } },
-      { kind: "text",  text: "my favorite team is FC Barcelona!", style: { bottom: 18, right: 62 } },
+      { kind: "badge", url: `${S}barcelona.png`, style: { bottom: -10, right: 8, width: 58, ...R(20) } },
+      { kind: "text",  text: "my favorite team is FC Barcelona!", style: { bottom: 2, right: 62 } },
     ],
   },
   {
@@ -50,7 +50,6 @@ const cards: Card[] = [
     url: `${I}degas-ballerina.png`,     alt: "Degas' Little Dancer at The Met", caption: "degas @ the met",
     overlays: [
       { kind: "badge", url: `${S}themet.png`,   style: { bottom: 66, left: 8,  width: 52, ...R(-20) } },
-      { kind: "badge", url: `${S}metdegas.png`, style: { top: 10,   right: 6,  width: 104, ...R(20)  } },
     ],
   },
   { url: `${I}monet.png`, alt: "Monet Water Lilies at The Met", caption: "monet @ the met" },
@@ -59,7 +58,7 @@ const cards: Card[] = [
   {
     url: `${I}wicked-gershwin-theatre.jpg`, alt: "Wicked at the Gershwin Theatre", caption: "wicked on broadway",
     overlays: [
-      { kind: "badge", url: `${S}wicked-hat.png`,               style: { top: 4, left: -8, width: 72, ...R(-20) } },
+      { kind: "badge", url: `${S}wicked-hat.png`,               style: { top: -10, left: -8, width: 72, ...R(-20) } },
       { kind: "badge", url: `${I}wicked-playbill-sticker.jpeg`, style: { bottom: 22, right: 4, width: 68, ...R(20) } },
     ],
   },
