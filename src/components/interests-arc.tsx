@@ -3,18 +3,18 @@ import { useState, useRef, useEffect } from "react";
 type Card = { url: string; alt: string; caption: string; sticker?: string };
 
 const cards: Card[] = [
-  { url: "/images/whistler.jpeg", alt: "Whistler, BC", caption: "whistler, bc" },
+  { url: "/images/whistler.jpeg", alt: "Whistler, BC", caption: "whistler" },
   { url: "/images/whistler_lost_lake.jpeg", alt: "Biking in Whistler", caption: "biking in whistler" },
   { url: "/images/interests/canucks.png", alt: "Canucks at Rogers Arena", caption: "canucks at rogers arena" },
-  { url: "/images/interests/canada-switzerland.png", alt: "FIFA World Cup Canada vs Switzerland", caption: "canada vs. switzerland" },
+  { url: "/images/interests/canada-switzerland.png", alt: "FIFA World Cup Canada vs Switzerland", caption: "canada vs. switzerland @ the world cup" },
   { url: "/images/interests/paavan-matchday.png", alt: "Matchday on the pitch", caption: "matchday" },
-  { url: "/images/interests/whitecaps.png", alt: "Vancouver Whitecaps at BC Place", caption: "whitecaps at bc place" },
+  { url: "/images/interests/whitecaps.png", alt: "Vancouver Whitecaps at BC Place", caption: "whitecaps @ BC place" },
   { url: "/images/tunnelbluffs.png", alt: "Hiking Tunnel Bluffs", caption: "tunnel bluffs hike" },
   { url: "/images/interests/degas-ballerina.png", alt: "Degas' Little Dancer at The Met", caption: "degas @ the met" },
   { url: "/images/interests/monet.png", alt: "Monet Water Lilies at The Met", caption: "monet @ the met" },
-  { url: "/images/interests/milo.png", alt: "Milo the dog", caption: "milo!" },
-  { url: "/images/interests/positano.png", alt: "Sunny days in Positano", caption: "positano" },
-  { url: "/images/interests/wicked-gershwin-theatre.jpg", alt: "Wicked at the Gershwin Theatre", caption: "wicked @ gershwin", sticker: "/images/interests/wicked-playbill-sticker.jpeg" },
+  { url: "/images/interests/milo.png", alt: "Milo the dog", caption: "my dog, milo!" },
+  { url: "/images/interests/positano.png", alt: "Sunny days in Positano", caption: "positano italy" },
+  { url: "/images/interests/wicked-gershwin-theatre.jpg", alt: "Wicked at the Gershwin Theatre", caption: "wicked on broadway", sticker: "/images/interests/wicked-playbill-sticker.jpeg" },
 ];
 
 const REST: [string, string, string] = [
@@ -22,7 +22,7 @@ const REST: [string, string, string] = [
   "translate(10px, 8px) rotate(5deg)",
   "translate(-8px, 14px) rotate(-3deg)",
 ];
-const THRESHOLD = 18;
+const THRESHOLD = 8;
 const ANIM_MS = 260;
 
 

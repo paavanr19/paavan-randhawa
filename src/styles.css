@@ -240,9 +240,10 @@ html::-webkit-scrollbar,body::-webkit-scrollbar { display:none; }
 .polaroid-stack-wrap { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:20px; justify-self:center; }
 .polaroid-stack { position:relative; width:340px; height:440px; }
 .polaroid-stack .polaroid-card { position:absolute; top:0; left:0; }
-.polaroid-card { position:relative; background:#f5f0e4; padding:12px 12px 56px; box-shadow:2px 4px 16px rgba(60,40,10,.2), 0 1px 3px rgba(0,0,0,.1); width:340px; border:1px solid #e2d8c6; }
-.polaroid-card > img:not(.polaroid-sticker) { width:100%; aspect-ratio:1; object-fit:cover; display:block; filter:sepia(10%) contrast(95%) brightness(0.97); }
-.polaroid-sticker { position:absolute; width:54px; height:auto; bottom:44px; right:14px; transform:rotate(11deg); filter:drop-shadow(1px 2px 3px rgba(0,0,0,.28)); }
+.polaroid-card { position:relative; background:#ebe5d2; padding:12px 12px 56px; box-shadow:2px 4px 18px rgba(60,40,10,.25), 0 1px 3px rgba(0,0,0,.12), inset 0 0 24px rgba(100,70,20,.07); width:340px; border:1px solid #d4c9b0; }
+.polaroid-card::after { content:''; position:absolute; inset:0; background:radial-gradient(ellipse at 15% 15%, rgba(160,110,40,.06) 0%, transparent 55%), radial-gradient(ellipse at 85% 85%, rgba(120,80,30,.07) 0%, transparent 50%); pointer-events:none; z-index:1; }
+.polaroid-card > img:not(.polaroid-sticker) { width:100%; aspect-ratio:1; object-fit:cover; display:block; filter:sepia(18%) contrast(92%) brightness(0.94) saturate(0.82); }
+.polaroid-sticker { position:absolute; width:68px; height:auto; bottom:44px; right:14px; transform:rotate(11deg); filter:drop-shadow(1px 2px 3px rgba(0,0,0,.28)); }
 .polaroid-caption { display:block; font-family:"Reenie Beanie", cursive; font-size:22px; text-align:center; color:#5a4a36; padding-top:10px; line-height:1; }
 .polaroid-map-wrap { position:relative; width:100%; aspect-ratio:1; overflow:hidden; }
 .original-contact { padding:65px 8%; display:grid; grid-template-columns:1fr 1fr; gap:9%; }
