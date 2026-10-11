@@ -237,9 +237,12 @@ html::-webkit-scrollbar,body::-webkit-scrollbar { display:none; }
 .skill-group p { font-size:14px; line-height:1.8; }
 .original-interests { padding:65px 8%; background:var(--secondary); display:grid; grid-template-columns:1fr 1.05fr; gap:8%; align-items:center; }
 .original-interests p { font-size:15px; line-height:1.95; }
-.interest-photos { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
-.interest-photos img { width:100%; aspect-ratio:4/5; object-fit:cover; border-radius:4px; }
-.interest-photos img:first-child { grid-column:1/-1; aspect-ratio:2; }
+.polaroid-stack-wrap { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:20px; justify-self:center; }
+.polaroid-stack { position:relative; width:340px; height:420px; }
+.polaroid-stack .polaroid-card { position:absolute; top:0; left:0; transition:transform 0.3s ease; }
+.polaroid-card { background:#fff; padding:12px 12px 52px; box-shadow:0 4px 16px rgba(0,0,0,.18); width:340px; }
+.polaroid-card img { width:100%; aspect-ratio:1; object-fit:cover; display:block; }
+.polaroid-controls { display:flex; gap:8px; }
 .original-contact { padding:65px 8%; display:grid; grid-template-columns:1fr 1fr; gap:9%; }
 .original-contact p { font-size:15px; line-height:1.85; margin-bottom:24px; }
 .contact-form { display:flex; flex-direction:column; gap:18px; padding-top:10px; }
@@ -256,7 +259,7 @@ html::-webkit-scrollbar,body::-webkit-scrollbar { display:none; }
  .section-heading {gap:12px;margin-bottom:25px;} .section-heading .pixel-sticker {width:30px;height:30px;}
  .original-carousel {margin:0 22px;} .original-carousel > button {width:30px;height:30px;} .original-carousel > button:first-of-type {left:-32px;} .original-carousel > button:last-of-type {right:-32px;}
  .original-project {padding:22px;min-height:470px;} .original-project h3 {font-size:29px;} .original-project p {font-size:14px;line-height:1.85;}
- .education-grid,.original-interests,.original-contact {grid-template-columns:1fr;gap:20px;} .education-grid h3,.certifications h3 {font-size:22px;} .original-interests p {font-size:14px;} .portfolio-footer {font-size:11px;} .portfolio-footer nav {gap:15px;}
+ .education-grid,.original-contact,.original-interests {grid-template-columns:1fr;gap:20px;} .education-grid h3,.certifications h3 {font-size:22px;} .original-interests p {font-size:14px;} .polaroid-stack-wrap {align-self:center;} .portfolio-footer {font-size:11px;} .portfolio-footer nav {gap:15px;}
 }
 @media(prefers-reduced-motion:reduce) { html {scroll-behavior:auto;} *,*::before,*::after {transition:none!important;animation:none!important;} }
 
