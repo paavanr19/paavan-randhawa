@@ -1,19 +1,19 @@
 import { useState, useRef, useEffect } from "react";
 
-type Card = { url: string; alt: string; caption: string; sticker?: string };
+type Card = { url: string; alt: string; caption: string; sticker?: string; badge?: { url: string; style: React.CSSProperties } };
 
 const cards: Card[] = [
   { url: "/images/whistler.jpeg", alt: "Whistler, BC", caption: "whistler" },
   { url: "/images/whistler_lost_lake.jpeg", alt: "Biking in Whistler", caption: "biking in whistler" },
-  { url: "/images/interests/canucks.png", alt: "Canucks at Rogers Arena", caption: "canucks at rogers arena" },
+  { url: "/images/interests/canucks.png", alt: "Canucks at Rogers Arena", caption: "canucks at rogers arena", badge: { url: "/images/logos/canucks-logo.png", style: { bottom: 14, left: 10 } } },
   { url: "/images/interests/canada-switzerland.png", alt: "FIFA World Cup Canada vs Switzerland", caption: "canada vs. switzerland @ the world cup" },
   { url: "/images/interests/paavan-matchday.png", alt: "Matchday on the pitch", caption: "matchday" },
-  { url: "/images/interests/whitecaps.png", alt: "Vancouver Whitecaps at BC Place", caption: "whitecaps @ BC place" },
+  { url: "/images/interests/whitecaps.png", alt: "Vancouver Whitecaps at BC Place", caption: "whitecaps @ BC place", badge: { url: "/images/logos/whitecaps-logo.png", style: { top: 14, left: 10 } } },
   { url: "/images/tunnelbluffs.png", alt: "Hiking Tunnel Bluffs", caption: "tunnel bluffs hike" },
   { url: "/images/interests/degas-ballerina.png", alt: "Degas' Little Dancer at The Met", caption: "degas @ the met" },
   { url: "/images/interests/monet.png", alt: "Monet Water Lilies at The Met", caption: "monet @ the met" },
   { url: "/images/interests/milo.png", alt: "Milo the dog", caption: "my dog, milo!" },
-  { url: "/images/interests/positano.png", alt: "Sunny days in Positano", caption: "positano italy" },
+  { url: "/images/interests/positano.png", alt: "Sunny days in Positano", caption: "positano, italy" },
   { url: "/images/interests/wicked-gershwin-theatre.jpg", alt: "Wicked at the Gershwin Theatre", caption: "wicked on broadway", sticker: "/images/interests/wicked-playbill-sticker.jpeg" },
 ];
 
@@ -127,6 +127,7 @@ export function InterestsArc() {
           return (
             <div key={cardIdx} className="polaroid-card" style={{ transform, zIndex, transition }}>
               <img src={card.url} alt={card.alt} loading="lazy" draggable={false} />
+              {card.badge && <img src={card.badge.url} alt="" aria-hidden="true" className="polaroid-badge" style={card.badge.style} draggable={false} />}
               {card.sticker && <img src={card.sticker} alt="" aria-hidden="true" className="polaroid-sticker" draggable={false} />}
               <span className="polaroid-caption">{card.caption}</span>
             </div>
