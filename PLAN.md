@@ -77,21 +77,21 @@ A clean, compact badge/list displaying credentials with external verification li
 
 ## 4. GitHub Image Assets & Filename Mapping
 
-When assets are committed to `public/images/interests/`, they will use these descriptive filenames:
+Original images are registered in `src/assets/interests/` as descriptive `.asset.json` pointers. The pointers sync to GitHub; full-resolution originals are served from Lovable Assets and are reusable through `src/lib/interests-assets.ts`. No Interests layout changes are included in this asset-registration step.
 
 | Feature / Subject | Source Upload | Semantic Repository Filename |
 | :--- | :--- | :--- |
 | **Milo the Dog** | `IMG_3584.jpeg` | `paavan-milo-dog.jpg` |
 | **Positano Coastline** | `IMG_1247.jpeg` | `paavan-positano-coast.jpg` |
 | **Wicked at Gershwin** | `IMG_4078.jpeg` | `paavan-wicked-gershwin-theatre.jpg` |
-| **Wicked Playbill Badge** | `IMG_4080.jpeg` | `badge-wicked-playbill.jpg` |
+| **Wicked Playbill Badge** | `wicked-playbill.jpg` (replacement upload) | `badge-wicked-playbill.jpg` |
 | **Canucks Faceoff** | `IMG_9425.jpeg` | `paavan-canucks-rogers-arena.jpg` |
 | **Vancouver Whitecaps** | `IMG_8859.jpeg` | `paavan-whitecaps-bc-place.jpg` |
 | **FIFA World Cup** | `Screenshot_...8.37.50.png` | `paavan-world-cup-canada-switzerland.png` |
 | **Soccer Matchday Solo** | `Screenshot_...8.15.27.png` | `paavan-soccer-matchday-solo-13.png` |
 | **Degas' Little Dancer** | `Screenshot_...8.38.03.png` | `art-degas-little-dancer.png` |
 | **Monet's Water Lilies** | `Screenshot_...8.38.27.webp` | `art-monet-water-lilies.webp` |
-| **Sun Run Split Shifts** | `Screenshot_...8.04.33.png` | `gear-lululemon-split-shift-cutout.png` |
+| **Sun Run Split Shifts source** | `Screenshot_...8.04.33.png` | `lululemon-split-shift-shoes-reference.png` (cutout still pending) |
 
 ---
 

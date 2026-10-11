@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useCallback, useEffect, useState } from "react";
 import { CinematicIntro } from "@/components/cinematic-intro";
+import { EducationSection } from "@/components/education-section";
 import { ArrowUpRight, Download, Github, Linkedin, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -112,10 +113,7 @@ function Index() {
           <div className="carousel-dots">{content.projects.map((project, index) => <Button key={project.title} variant="ghost" size="icon" className="carousel-dot" data-active={active === index} aria-label={`Go to project ${index + 1}`} aria-pressed={active === index} onClick={() => api?.scrollTo(index)}><span /></Button>)}</div>
         </Carousel>
       </section>
-      <section id="education" className="original-education">
-        <div className="section-heading"><h2 className="section-title">Education</h2><PixelSticker kind="cursor" className="education-cursor" /></div>
-        <div className="education-grid"><div><h3>Courses</h3><ul>{content.courses.map(course => <li key={course}>{course}</li>)}</ul></div><div><h3>Skills</h3>{content.skills.map(skill => <div key={skill.title} className="skill-group"><h4>{skill.title}</h4><p>{skill.description}</p></div>)}</div></div>
-      </section>
+      <EducationSection />
       <section id="interests" className="original-interests">
         <div><div className="section-heading"><h2 className="section-title">Interests</h2><PixelSticker kind="heart" className="interests-heart" /></div><p>{content.interests}</p>
           <figure className="run-card" aria-label="Vancouver Sun Run 10K route">
