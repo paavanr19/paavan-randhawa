@@ -1,48 +1,91 @@
 import { useState, useRef, useEffect } from "react";
 
 export function DraggableSticker({ children, className = "" }: { children: React.ReactNode; className?: string }) {
-  const [offset, setOffset] = useState({ x: 0, y: 0 });
+  const elemRef = useRef<HTMLSpanElement>(null);
+  const [fixedPos, setFixedPos] = useState<{ x: number; y: number } | null>(null);
+  const [delta, setDelta] = useState({ x: 0, y: 0 });
   const [dragging, setDragging] = useState(false);
-  const dragStart = useRef<{ mx: number; my: number; ox: number; oy: number } | null>(null);
+
+  // Refs so event handler closures always see the latest values
+  const fixedPosRef = useRef<{ x: number; y: number } | null>(null);
+  const deltaRef = useRef({ x: 0, y: 0 });
+  const dragStartRef = useRef<{ mx: number; my: number } | null>(null);
+
+  function startDrag(mx: number, my: number) {
+    if (fixedPosRef.current === null && elemRef.current) {
+      const rect = elemRef.current.getBoundingClientRect();
+      const pos = { x: rect.left, y: rect.top };
+      fixedPosRef.current = pos;
+      setFixedPos(pos);
+    }
+    deltaRef.current = { x: 0, y: 0 };
+    dragStartRef.current = { mx, my };
+    setDelta({ x: 0, y: 0 });
+    setDragging(true);
+  }
+
+  function commitDrag() {
+    const fp = fixedPosRef.current;
+    const d = deltaRef.current;
+    if (fp !== null) {
+      const newPos = { x: fp.x + d.x, y: fp.y + d.y };
+      fixedPosRef.current = newPos;
+      setFixedPos(newPos);
+    }
+    deltaRef.current = { x: 0, y: 0 };
+    setDelta({ x: 0, y: 0 });
+    dragStartRef.current = null;
+    setDragging(false);
+  }
 
   useEffect(() => {
     if (!dragging) return;
     const onMove = (e: MouseEvent) => {
-      if (!dragStart.current) return;
-      setOffset({ x: dragStart.current.ox + e.clientX - dragStart.current.mx, y: dragStart.current.oy + e.clientY - dragStart.current.my });
+      if (!dragStartRef.current) return;
+      const d = { x: e.clientX - dragStartRef.current.mx, y: e.clientY - dragStartRef.current.my };
+      deltaRef.current = d;
+      setDelta(d);
     };
-    const onUp = () => { dragStart.current = null; setDragging(false); };
     window.addEventListener("mousemove", onMove);
-    window.addEventListener("mouseup", onUp);
-    return () => { window.removeEventListener("mousemove", onMove); window.removeEventListener("mouseup", onUp); };
+    window.addEventListener("mouseup", commitDrag);
+    return () => { window.removeEventListener("mousemove", onMove); window.removeEventListener("mouseup", commitDrag); };
   }, [dragging]);
 
   useEffect(() => {
     if (!dragging) return;
     const onTouchMove = (e: TouchEvent) => {
-      if (!dragStart.current) return;
+      if (!dragStartRef.current) return;
       const t = e.touches[0];
       if (!t) return;
       e.preventDefault();
-      setOffset({ x: dragStart.current.ox + t.clientX - dragStart.current.mx, y: dragStart.current.oy + t.clientY - dragStart.current.my });
+      const d = { x: t.clientX - dragStartRef.current.mx, y: t.clientY - dragStartRef.current.my };
+      deltaRef.current = d;
+      setDelta(d);
     };
-    const onTouchEnd = () => { dragStart.current = null; setDragging(false); };
     window.addEventListener("touchmove", onTouchMove, { passive: false });
-    window.addEventListener("touchend", onTouchEnd);
-    return () => { window.removeEventListener("touchmove", onTouchMove); window.removeEventListener("touchend", onTouchEnd); };
+    window.addEventListener("touchend", commitDrag);
+    return () => { window.removeEventListener("touchmove", onTouchMove); window.removeEventListener("touchend", commitDrag); };
   }, [dragging]);
+
+  const isFixed = fixedPos !== null;
+  const fx = (fixedPos?.x ?? 0) + delta.x;
+  const fy = (fixedPos?.y ?? 0) + delta.y;
 
   return (
     <span
+      ref={elemRef}
       className={`draggable-sticker${className ? ` ${className}` : ""}`}
-      onMouseDown={e => { e.preventDefault(); dragStart.current = { mx: e.clientX, my: e.clientY, ox: offset.x, oy: offset.y }; setDragging(true); }}
-      onTouchStart={e => { const t = e.touches[0]; if (!t) return; dragStart.current = { mx: t.clientX, my: t.clientY, ox: offset.x, oy: offset.y }; setDragging(true); }}
+      onMouseDown={e => { e.preventDefault(); startDrag(e.clientX, e.clientY); }}
+      onTouchStart={e => { const t = e.touches[0]; if (!t) return; startDrag(t.clientX, t.clientY); }}
       style={{
-        transform: `translate(${offset.x}px, ${offset.y}px)${dragging ? " scale(1.28)" : ""}`,
+        position: isFixed ? "fixed" : undefined,
+        left: isFixed ? fx : undefined,
+        top: isFixed ? fy : undefined,
+        transform: dragging ? "scale(1.28)" : undefined,
         transition: dragging ? "filter 0.08s" : "transform 0.55s cubic-bezier(0.34,1.56,0.64,1), filter 0.3s",
         filter: dragging ? "drop-shadow(4px 10px 18px rgba(0,0,0,0.42))" : undefined,
         cursor: dragging ? "grabbing" : "grab",
-        zIndex: dragging || offset.x !== 0 || offset.y !== 0 ? 50 : undefined,
+        zIndex: isFixed || dragging ? 50 : undefined,
       }}
     >
       {children}
