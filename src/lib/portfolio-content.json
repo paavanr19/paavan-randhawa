@@ -16,7 +16,7 @@
     {
       "title": "Mythos Seafarer",
       "href": "https://github.sfu.ca/saba/CMPT276S26_Group7",
-      "tech": ["Java", "JUnit", "JaCoCo", "Javadoc"],
+      "tech": ["Java", "Maven", "JUnit", "JaCoCo", "Javadoc"],
       "description": "A Java-based arcade-style game built using Processing. Players navigate through multiple levels, avoid enemies, collect rewards, and progress through different maps. The game features interactive gameplay, level progression, and increasing challenges as players advance."
     },
     {
