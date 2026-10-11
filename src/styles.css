@@ -214,17 +214,16 @@ html::-webkit-scrollbar,body::-webkit-scrollbar { display:none; }
 .carousel-dot[data-active=true] span { opacity:1; width:20px; border-radius:3px; }
 .carousel-dot:hover { background:var(--soil); color:var(--background); }
 .original-education { padding:65px 8%; }
-.academic-summary { margin-bottom:36px; padding-bottom:26px; border-bottom:1px solid var(--border); }
-.academic-institution { color:var(--soil); font-size:14px; margin-bottom:8px; }
-.academic-summary h3 { font-family:var(--font-display); font-size:30px; line-height:1.3; color:var(--primary); max-width:750px; }
-.academic-standing { display:flex; flex-wrap:wrap; justify-content:space-between; gap:12px 24px; margin-top:16px; font-size:14px; }
-.academic-standing span,.education-note { color:var(--muted-foreground); }
+.education-note { color:var(--muted-foreground); }
 .education-note { font-size:12px; line-height:1.7; }
 .course-footnote { margin-top:14px; }
-.education-grid li a { color:var(--primary); text-decoration:underline; text-underline-offset:3px; }
-.education-grid li a:hover { text-decoration-thickness:2px; }
+.education-grid li a { color:var(--primary); }
+.education-grid li a:hover { color:var(--soil); }
 .education-grid li a:focus-visible { outline:2px solid var(--ring); outline-offset:4px; }
-.certifications { margin-top:32px; }
+.certifications { margin-top:36px; }
+.certifications h3 { font-family:var(--font-display); font-size:32px; color:var(--primary); padding-bottom:15px; border-bottom:1px solid var(--border); margin-bottom:20px; }
+.certifications ul { display:grid; grid-template-columns:repeat(4,1fr); gap:24px; }
+.certifications li { font-size:13px; line-height:1.7; padding-top:12px; border-top:1px solid var(--border); }
 .certification-link { display:inline-flex; align-items:center; gap:6px; font-weight:600; }
 .certifications li strong { font-weight:600; color:var(--soil); }
 .certifications li p { font-size:13px; }
@@ -247,7 +246,7 @@ html::-webkit-scrollbar,body::-webkit-scrollbar { display:none; }
 .contact-form button { align-self:flex-start; min-width:125px; }
 .portfolio-footer { padding:30px 8%; border-top:1px solid var(--border); font-size:12px; display:flex; justify-content:space-between; flex-wrap:wrap; gap:24px; background:var(--secondary); }
 .portfolio-footer nav { display:flex; flex-wrap:wrap; gap:20px; }
-@media(max-width:1100px) { .portfolio-nav {gap:18px;} .nav-links {gap:15px;font-size:12px;} .wordmark {font-size:28px;} .original-about h1 {font-size:72px;} }
+@media(max-width:1100px) { .portfolio-nav {gap:18px;} .nav-links {gap:15px;font-size:12px;} .wordmark {font-size:28px;} .original-about h1 {font-size:72px;} .certifications ul {grid-template-columns:repeat(2,1fr);} }
 @media(max-width:800px) {
  .portfolio-nav {padding:16px 6%;flex-wrap:wrap;gap:12px;} .wordmark {margin-right:auto;font-size:29px;} .menu-toggle {display:inline-flex;} .nav-cta {font-size:11px;min-height:36px;height:36px;padding:8px 12px;}
  .nav-links {display:none;order:4;width:100%;padding:12px 0 4px;flex-wrap:wrap;gap:18px;} .nav-links[data-open=true] {display:flex;}
@@ -256,7 +255,7 @@ html::-webkit-scrollbar,body::-webkit-scrollbar { display:none; }
  .section-heading {gap:12px;margin-bottom:25px;} .section-heading .pixel-sticker {width:30px;height:30px;}
  .original-carousel {margin:0 22px;} .original-carousel > button {width:30px;height:30px;} .original-carousel > button:first-of-type {left:-32px;} .original-carousel > button:last-of-type {right:-32px;}
  .original-project {padding:22px;min-height:470px;} .original-project h3 {font-size:29px;} .original-project p {font-size:14px;line-height:1.85;}
- .education-grid,.original-interests,.original-contact {grid-template-columns:1fr;gap:35px;} .education-grid h3 {font-size:28px;} .original-interests p {font-size:14px;} .portfolio-footer {font-size:11px;} .portfolio-footer nav {gap:15px;}
+ .education-grid,.original-interests,.original-contact {grid-template-columns:1fr;gap:35px;} .education-grid h3,.certifications h3 {font-size:28px;} .certifications ul {grid-template-columns:1fr;gap:18px;} .original-interests p {font-size:14px;} .portfolio-footer {font-size:11px;} .portfolio-footer nav {gap:15px;}
 }
 @media(prefers-reduced-motion:reduce) { html {scroll-behavior:auto;} *,*::before,*::after {transition:none!important;animation:none!important;} }
 
