@@ -1,20 +1,71 @@
 import { useState, useRef, useEffect } from "react";
 
-type Card = { url: string; alt: string; caption: string; sticker?: string; badge?: { url: string; style: React.CSSProperties } };
+type BadgeOverlay = { kind: "badge"; url: string; style: React.CSSProperties };
+type TextOverlay  = { kind: "text";  text: string; style: React.CSSProperties };
+type Overlay = BadgeOverlay | TextOverlay;
+type Card = { url: string; alt: string; caption: string; overlays?: Overlay[] };
+
+const S = "/stickers/";
+const I = "/images/interests/";
 
 const cards: Card[] = [
-  { url: "/images/whistler.jpeg", alt: "Whistler, BC", caption: "whistler" },
-  { url: "/images/whistler_lost_lake.jpeg", alt: "Biking in Whistler", caption: "biking in whistler" },
-  { url: "/images/interests/canucks.png", alt: "Canucks at Rogers Arena", caption: "canucks at rogers arena", badge: { url: "/images/logos/canucks-logo.png", style: { bottom: 14, left: 10 } } },
-  { url: "/images/interests/canada-switzerland.png", alt: "FIFA World Cup Canada vs Switzerland", caption: "canada vs. switzerland @ the world cup" },
-  { url: "/images/interests/paavan-matchday.png", alt: "Matchday on the pitch", caption: "matchday" },
-  { url: "/images/interests/whitecaps.png", alt: "Vancouver Whitecaps at BC Place", caption: "whitecaps @ BC place", badge: { url: "/images/logos/whitecaps-logo.png", style: { top: 14, left: 10 } } },
-  { url: "/images/tunnelbluffs.png", alt: "Hiking Tunnel Bluffs", caption: "tunnel bluffs hike" },
-  { url: "/images/interests/degas-ballerina.png", alt: "Degas' Little Dancer at The Met", caption: "degas @ the met" },
-  { url: "/images/interests/monet.png", alt: "Monet Water Lilies at The Met", caption: "monet @ the met" },
-  { url: "/images/interests/milo.png", alt: "Milo the dog", caption: "my dog, milo!" },
-  { url: "/images/interests/positano.png", alt: "Sunny days in Positano", caption: "positano, italy" },
-  { url: "/images/interests/wicked-gershwin-theatre.jpg", alt: "Wicked at the Gershwin Theatre", caption: "wicked on broadway", sticker: "/images/interests/wicked-playbill-sticker.jpeg" },
+  { url: "/images/whistler.jpeg",       alt: "Whistler, BC",                   caption: "whistler" },
+  { url: "/images/whistler_lost_lake.jpeg", alt: "Biking in Whistler",         caption: "biking in whistler" },
+  {
+    url: `${I}canucks.png`,             alt: "Canucks at Rogers Arena",         caption: "canucks at rogers arena",
+    overlays: [
+      { kind: "badge", url: `${S}canucks.png`,        style: { bottom: 58, left: 8,  width: 54 } },
+      { kind: "badge", url: `${S}canucks-jersey.png`, style: { top: 14,   right: 6,  width: 58 } },
+    ],
+  },
+  {
+    url: `${I}canada-switzerland.png`,  alt: "FIFA World Cup Canada vs Switzerland", caption: "canada vs. switzerland @ the world cup",
+    overlays: [
+      { kind: "badge", url: `${S}canadasoccer.png`, style: { bottom: 58, left: 8,  width: 54 } },
+      { kind: "badge", url: `${S}trionda.png`,      style: { bottom: 58, right: 8, width: 54 } },
+    ],
+  },
+  {
+    url: `${I}paavan-matchday.png`,     alt: "Matchday on the pitch",           caption: "matchday",
+    overlays: [
+      { kind: "badge", url: `${S}barcelona.png`, style: { bottom: 58, right: 8, width: 58 } },
+      { kind: "text",  text: "my favorite team is FC Barcelona!", style: { bottom: 80, right: 60 } },
+    ],
+  },
+  {
+    url: `${I}whitecaps.png`,           alt: "Vancouver Whitecaps at BC Place", caption: "whitecaps @ BC place",
+    overlays: [
+      { kind: "badge", url: `${S}whitecaps.png`, style: { top: 14, left: 8, width: 58 } },
+    ],
+  },
+  {
+    url: "/images/tunnelbluffs.png",    alt: "Hiking Tunnel Bluffs",            caption: "tunnel bluffs hike",
+    overlays: [
+      { kind: "badge", url: `${S}hike.png`, style: { bottom: 58, right: 8, width: 58 } },
+    ],
+  },
+  {
+    url: `${I}degas-ballerina.png`,     alt: "Degas' Little Dancer at The Met", caption: "degas @ the met",
+    overlays: [
+      { kind: "badge", url: `${S}themet.png`,   style: { bottom: 58, left: 8,  width: 52 } },
+      { kind: "badge", url: `${S}metdegas.png`, style: { top: 14,   right: 6,  width: 58 } },
+    ],
+  },
+  {
+    url: `${I}monet.png`,               alt: "Monet Water Lilies at The Met",   caption: "monet @ the met",
+    overlays: [
+      { kind: "badge", url: `${S}claudemonet.jpg`, style: { bottom: 58, right: 8, width: 58 } },
+    ],
+  },
+  { url: `${I}milo.png`,               alt: "Milo the dog",                    caption: "my dog, milo!" },
+  { url: `${I}positano.png`,           alt: "Sunny days in Positano",          caption: "positano, italy" },
+  {
+    url: `${I}wicked-gershwin-theatre.jpg`, alt: "Wicked at the Gershwin Theatre", caption: "wicked on broadway",
+    overlays: [
+      { kind: "badge", url: `${S}wicked-hat.png`,               style: { top: 14, left: 8,  width: 60 } },
+      { kind: "badge", url: `${I}wicked-playbill-sticker.jpeg`, style: { bottom: 22, right: 4, width: 68, transform: "rotate(11deg)" } as React.CSSProperties },
+    ],
+  },
 ];
 
 const REST: [string, string, string] = [
@@ -35,7 +86,6 @@ export function InterestsArc() {
   const stackRef = useRef<HTMLDivElement>(null);
   const n = cards.length;
 
-  // Prevent scroll on touch while dragging
   useEffect(() => {
     const el = stackRef.current;
     if (!el) return;
@@ -44,7 +94,6 @@ export function InterestsArc() {
     return () => el.removeEventListener("touchmove", handler);
   }, []);
 
-  // Global mouse tracking so drag doesn't cancel when cursor leaves the stack
   useEffect(() => {
     if (!grabbing) return;
     const onMove = (e: MouseEvent) => {
@@ -78,17 +127,12 @@ export function InterestsArc() {
     }, ANIM_MS);
   };
 
-  const startDrag = (x: number) => {
-    if (departing) return;
-    dragRef.current = x;
-    setGrabbing(true);
-  };
+  const startDrag = (x: number) => { if (!departing) { dragRef.current = x; setGrabbing(true); } };
 
   const handleTouchMove = (e: React.TouchEvent) => {
     if (dragRef.current !== null && !departing)
       setDragX(Math.max(-90, Math.min(90, e.touches[0].clientX - dragRef.current)));
   };
-
   const endTouchDrag = (e: React.TouchEvent) => {
     if (dragRef.current === null) return;
     const diff = dragRef.current - e.changedTouches[0].clientX;
@@ -102,13 +146,13 @@ export function InterestsArc() {
   const isDragging = grabbing && !departing;
 
   const renderItems: RItem[] = departing ? [
-    { cardIdx: active % n,       transform: REST[2], zIndex: 6,  transition: `transform ${ANIM_MS}ms ease` },
-    { cardIdx: (active+1) % n,   transform: REST[0], zIndex: 10, transition: `transform ${ANIM_MS}ms ease` },
-    { cardIdx: (active+2) % n,   transform: REST[1], zIndex: 9,  transition: `transform ${ANIM_MS}ms ease` },
+    { cardIdx: active % n,     transform: REST[2], zIndex: 6,  transition: `transform ${ANIM_MS}ms ease` },
+    { cardIdx: (active+1) % n, transform: REST[0], zIndex: 10, transition: `transform ${ANIM_MS}ms ease` },
+    { cardIdx: (active+2) % n, transform: REST[1], zIndex: 9,  transition: `transform ${ANIM_MS}ms ease` },
   ] : [
-    { cardIdx: active % n,       transform: dragX !== 0 ? `translateX(${dragX}px) rotate(${-2 + dragX * 0.04}deg)` : REST[0], zIndex: 10, transition: isDragging ? "none" : `transform ${ANIM_MS}ms ease` },
-    { cardIdx: (active+1) % n,   transform: REST[1], zIndex: 9,  transition: `transform ${ANIM_MS}ms ease` },
-    { cardIdx: (active+2) % n,   transform: REST[2], zIndex: 8,  transition: `transform ${ANIM_MS}ms ease` },
+    { cardIdx: active % n,     transform: dragX !== 0 ? `translateX(${dragX}px) rotate(${-2 + dragX * 0.04}deg)` : REST[0], zIndex: 10, transition: isDragging ? "none" : `transform ${ANIM_MS}ms ease` },
+    { cardIdx: (active+1) % n, transform: REST[1], zIndex: 9,  transition: `transform ${ANIM_MS}ms ease` },
+    { cardIdx: (active+2) % n, transform: REST[2], zIndex: 8,  transition: `transform ${ANIM_MS}ms ease` },
   ];
 
   return (
@@ -127,8 +171,11 @@ export function InterestsArc() {
           return (
             <div key={cardIdx} className="polaroid-card" style={{ transform, zIndex, transition }}>
               <img src={card.url} alt={card.alt} loading="lazy" draggable={false} />
-              {card.badge && <img src={card.badge.url} alt="" aria-hidden="true" className="polaroid-badge" style={card.badge.style} draggable={false} />}
-              {card.sticker && <img src={card.sticker} alt="" aria-hidden="true" className="polaroid-sticker" draggable={false} />}
+              {card.overlays?.map((o, i) =>
+                o.kind === "badge"
+                  ? <img key={i} src={o.url} alt="" aria-hidden="true" className="polaroid-badge" style={o.style} draggable={false} />
+                  : <div key={i} className="polaroid-text-badge" style={o.style}>{o.text}</div>
+              )}
               <span className="polaroid-caption">{card.caption}</span>
             </div>
           );
