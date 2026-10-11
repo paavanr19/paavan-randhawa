@@ -3,7 +3,39 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { CinematicIntro } from "@/components/cinematic-intro";
 import { EducationSection } from "@/components/education-section";
 import { InterestsArc } from "@/components/interests-arc";
-import { ArrowUpRight, Download, Github, Linkedin, Menu, Palette, Play, X } from "lucide-react";
+import { ArrowUpRight, Download, Github, Linkedin, Menu, Play, X } from "lucide-react";
+
+function PumpkinToggle() {
+  return (
+    <svg width="20" height="22" viewBox="0 0 40 44" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M20 8 C20 4 23 1 26 4" stroke="#4a7520" strokeWidth="2.5" strokeLinecap="round"/>
+      <ellipse cx="7" cy="28" rx="7" ry="10" fill="#CC5500"/>
+      <ellipse cx="33" cy="28" rx="7" ry="10" fill="#CC5500"/>
+      <ellipse cx="20" cy="28" rx="14" ry="14" fill="#E86400"/>
+      <polygon points="12,25 15,21 18,25" fill="#1a0500"/>
+      <polygon points="22,25 25,21 28,25" fill="#1a0500"/>
+      <path d="M11 33 L14 36 L17 33 L20 36 L23 33 L26 36 L29 33" stroke="#1a0500" strokeWidth="1.8" fill="none" strokeLinecap="round" strokeLinejoin="round"/>
+    </svg>
+  );
+}
+
+function PumpkinDecoration({ size = 40 }: { size?: number }) {
+  return (
+    <svg width={size} height={Math.round(size * 1.1)} viewBox="0 0 44 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M22 7 C22 3 25 1 28 4" stroke="#4a7520" strokeWidth="2.5" strokeLinecap="round"/>
+      <path d="M24 6 C29 2 35 5 31 10 C29 9 27 7 24 6Z" fill="#5a8a28"/>
+      <ellipse cx="8" cy="30" rx="8" ry="11" fill="#CC5500"/>
+      <ellipse cx="36" cy="30" rx="8" ry="11" fill="#CC5500"/>
+      <ellipse cx="22" cy="30" rx="15" ry="15" fill="#E86400"/>
+      <path d="M22 15 C28 22 28 38 22 45" stroke="#CC5500" strokeWidth="2" fill="none"/>
+      <path d="M22 15 C16 22 16 38 22 45" stroke="#CC5500" strokeWidth="2" fill="none"/>
+      <polygon points="13,27 16,23 19,27" fill="#280800"/>
+      <polygon points="25,27 28,23 31,27" fill="#280800"/>
+      <polygon points="21,32 22,30 23,32" fill="#280800"/>
+      <path d="M11 36 L14 39 L17 36 L22 39 L27 36 L30 39 L33 36" stroke="#280800" strokeWidth="1.8" fill="none" strokeLinecap="round" strokeLinejoin="round"/>
+    </svg>
+  );
+}
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -37,11 +69,18 @@ function ResumeLink() {
 function Index() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [altTheme, setAltTheme] = useState(() => typeof document !== "undefined" && document.documentElement.classList.contains("alt-theme"));
+  const [showToast, setShowToast] = useState(false);
+  const toastTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const toggleTheme = () => {
     const next = !altTheme;
     document.documentElement.classList.toggle("alt-theme", next);
     try { localStorage.setItem("portfolio-theme", next ? "alt" : "default"); } catch (_) {}
     setAltTheme(next);
+    if (next) {
+      if (toastTimer.current) clearTimeout(toastTimer.current);
+      setShowToast(true);
+      toastTimer.current = setTimeout(() => setShowToast(false), 3500);
+    }
   };
   const progressRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
@@ -127,7 +166,7 @@ function Index() {
       <a href="#about" className="wordmark">Paavan Randhawa</a>
       <Button variant="ghost" size="icon" className="menu-toggle" aria-label={menuOpen ? "Close menu" : "Open menu"} aria-expanded={menuOpen} aria-controls="main-navigation" onClick={() => setMenuOpen(!menuOpen)}>{menuOpen ? <X /> : <Menu />}</Button>
       <nav id="main-navigation" className="nav-links" data-open={menuOpen} aria-label="Main navigation">{sections.map(section => <a key={section} href={`#${section.toLowerCase()}`} onClick={() => setMenuOpen(false)}>{section}</a>)}</nav>
-      <Button variant="ghost" size="icon" onClick={toggleTheme} aria-label="Switch color scheme" title="Switch color scheme"><Palette size={16} /></Button>
+      <Button variant="ghost" size="icon" onClick={toggleTheme} aria-label="Toggle Halloween theme" title="Toggle Halloween theme"><PumpkinToggle /></Button>
       <Button asChild className="nav-cta"><a href={github} target="_blank" rel="noopener noreferrer">Visit GitHub <ArrowUpRight size={15} /></a></Button>
     </header>
     <main>
@@ -141,7 +180,7 @@ function Index() {
           <div className="btn-group"><ResumeLink /><Button asChild className="portfolio-button"><a href="#contact">Contact <ArrowUpRight size={16} /></a></Button></div>
           <div className="socials"><Button asChild variant="ghost" size="icon"><a href={github} target="_blank" rel="noopener noreferrer" aria-label="GitHub" title="GitHub"><Github /></a></Button><Button asChild variant="ghost" size="icon"><a href={linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" title="LinkedIn"><Linkedin /></a></Button></div>
         </div>
-        <figure className="original-portrait"><img src={portrait.url} alt="Paavan Randhawa" fetchPriority="high" /><DraggableSticker className="portrait-star-wrap"><PixelSticker className="portrait-star" /></DraggableSticker><DraggableSticker className="portrait-heart-wrap"><PixelSticker kind="heart" className="portrait-heart" /></DraggableSticker></figure>
+        <figure className="original-portrait"><img src={portrait.url} alt="Paavan Randhawa" fetchPriority="high" /><DraggableSticker className="portrait-star-wrap"><PixelSticker className="portrait-star" /></DraggableSticker><DraggableSticker className="portrait-heart-wrap"><PixelSticker kind="heart" className="portrait-heart" /></DraggableSticker>{altTheme && <DraggableSticker className="pumpkin-portrait"><PumpkinDecoration size={44} /></DraggableSticker>}</figure>
       </section>
       <section id="projects" className="original-projects">
         <div className="section-heading"><h2 className="section-title">Projects</h2><DraggableSticker><PixelSticker className="projects-star" /></DraggableSticker></div>
@@ -187,5 +226,14 @@ function Index() {
       </section>
     </main>
     <footer className="portfolio-footer"><nav aria-label="Footer navigation">{sections.map(section => <a key={section} href={`#${section.toLowerCase()}`}>{section}</a>)}</nav><Button variant="ghost" className="replay-intro" onClick={() => { window.scrollTo({ top: 0, behavior: "instant" }); setIntro("playing"); }}><Play size={11} /> Replay Intro</Button><p>© All Rights Reserved | Paavan Randhawa</p></footer>
+    {altTheme && <>
+      <DraggableSticker className="pumpkin-sticker-1"><PumpkinDecoration size={38} /></DraggableSticker>
+      <DraggableSticker className="pumpkin-sticker-2"><PumpkinDecoration size={32} /></DraggableSticker>
+    </>}
+    {showToast && (
+      <div className="halloween-toast" role="status" aria-live="polite">
+        <PumpkinToggle /> You've switched to the Special Halloween Edition
+      </div>
+    )}
   </div>;
 }

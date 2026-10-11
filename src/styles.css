@@ -103,19 +103,29 @@
 }
 
 html.alt-theme {
-  --background: oklch(0.879 0.0396 74.8);
-  --foreground: oklch(0.275 0.0177 102.7);
-  --card: oklch(0.900 0.033 74.8);
-  --card-foreground: oklch(0.275 0.0177 102.7);
-  --popover: oklch(0.900 0.033 74.8);
-  --popover-foreground: oklch(0.275 0.0177 102.7);
-  --primary: oklch(0.314 0.0544 2.4);
-  --secondary: oklch(0.578 0.0373 81.8);
-  --muted: oklch(0.916 0.030 74.8);
-  --muted-foreground: oklch(0.578 0.0373 81.8);
-  --border: oklch(0.275 0.0177 102.7 / 20%);
-  --soil: oklch(0.180 0.0038 164.6);
+  --background: oklch(0.886 0.0500 57.2);
+  --foreground: oklch(0.296 0.0478 55.4);
+  --card: oklch(0.906 0.042 57.2);
+  --card-foreground: oklch(0.296 0.0478 55.4);
+  --popover: oklch(0.906 0.042 57.2);
+  --popover-foreground: oklch(0.296 0.0478 55.4);
+  --primary: oklch(0.538 0.1347 48.8);
+  --secondary: oklch(0.772 0.1073 54.7);
+  --muted: oklch(0.920 0.038 57.2);
+  --muted-foreground: oklch(0.450 0.060 52.0);
+  --border: oklch(0.296 0.0478 55.4 / 20%);
+  --soil: oklch(0.190 0.0581 41.4);
 }
+
+/* Halloween pumpkin stickers */
+.pumpkin-sticker-1 { position:fixed; bottom:110px; left:18px; transform:rotate(-10deg); }
+.pumpkin-sticker-2 { position:fixed; bottom:210px; right:18px; transform:rotate(14deg); }
+.pumpkin-portrait  { position:absolute; top:-28px; right:-54px; transform:rotate(16deg); }
+
+/* Halloween toast */
+.halloween-toast { position:fixed; bottom:32px; left:50%; transform:translateX(-50%); background:oklch(0.538 0.1347 48.8); color:oklch(0.886 0.0500 57.2); padding:14px 28px; font-size:13px; font-weight:500; letter-spacing:0.04em; z-index:1000; display:flex; align-items:center; gap:10px; white-space:nowrap; animation:toast-in 0.35s ease forwards, toast-out 0.35s ease 3s forwards; }
+@keyframes toast-in  { from{opacity:0;transform:translateX(-50%) translateY(20px)} to{opacity:1;transform:translateX(-50%) translateY(0)} }
+@keyframes toast-out { from{opacity:1;transform:translateX(-50%) translateY(0)} to{opacity:0;transform:translateX(-50%) translateY(20px)} }
 
 .dark {
   --background: oklch(0.129 0.042 264.695);
