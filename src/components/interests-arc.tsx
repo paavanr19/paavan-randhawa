@@ -16,47 +16,47 @@ const cards: Card[] = [
   {
     url: `${I}canucks.png`,             alt: "Canucks at Rogers Arena",         caption: "canucks at rogers arena",
     overlays: [
-      { kind: "badge", url: `${S}canucks.png`,        style: { bottom: 66, left: 8,  width: 54, ...R(-43) } },
-      { kind: "badge", url: `${S}canucks-jersey.png`, style: { top: 10,   right: 6,  width: 84, ...R(43)  } },
+      { kind: "badge", url: `${S}canucks.png`,        style: { bottom: 66, left: 8,  width: 54, ...R(-20) } },
+      { kind: "badge", url: `${S}canucks-jersey.png`, style: { top: 10,   right: 6,  width: 84, ...R(20)  } },
     ],
   },
   {
     url: `${I}canada-switzerland.png`,  alt: "FIFA World Cup Canada vs Switzerland", caption: "canada vs. switzerland @ the world cup",
     overlays: [
-      { kind: "badge", url: `${S}canadasoccer.png`, style: { top: 10,   left: 8,  width: 54, ...R(-43) } },
-      { kind: "badge", url: `${S}trionda.png`,      style: { bottom: 66, right: 8, width: 54, ...R(43)  } },
+      { kind: "badge", url: `${S}canadasoccer.png`, style: { top: 10,   left: 8,  width: 54, ...R(-20) } },
+      { kind: "badge", url: `${S}trionda.png`,      style: { bottom: 66, right: 8, width: 54, ...R(20)  } },
     ],
   },
   {
     url: `${I}paavan-matchday.png`,     alt: "Matchday on the pitch",           caption: "matchday",
     overlays: [
-      { kind: "badge", url: `${S}barcelona.png`, style: { bottom: 66, right: 8, width: 58, ...R(43) } },
+      { kind: "badge", url: `${S}barcelona.png`, style: { bottom: 66, right: 8, width: 58, ...R(20) } },
       { kind: "text",  text: "my favorite team is FC Barcelona!", style: { bottom: 76, right: 62 } },
     ],
   },
   {
     url: `${I}whitecaps.png`,           alt: "Vancouver Whitecaps at BC Place", caption: "whitecaps @ BC place",
     overlays: [
-      { kind: "badge", url: `${S}whitecaps.png`, style: { bottom: 66, right: 8, width: 60, ...R(43) } },
+      { kind: "badge", url: `${S}whitecaps.png`, style: { bottom: 66, right: 8, width: 60, ...R(20) } },
     ],
   },
   {
     url: "/images/tunnelbluffs.png",    alt: "Hiking Tunnel Bluffs",            caption: "tunnel bluffs hike",
     overlays: [
-      { kind: "badge", url: `${S}hike.png`, style: { bottom: 66, right: 8, width: 58, ...R(43) } },
+      { kind: "badge", url: `${S}hike.png`, style: { bottom: 66, right: 8, width: 58, ...R(20) } },
     ],
   },
   {
     url: `${I}degas-ballerina.png`,     alt: "Degas' Little Dancer at The Met", caption: "degas @ the met",
     overlays: [
-      { kind: "badge", url: `${S}themet.png`,   style: { bottom: 66, left: 8,  width: 52, ...R(-43) } },
-      { kind: "badge", url: `${S}metdegas.png`, style: { top: 10,   right: 6,  width: 84, ...R(43)  } },
+      { kind: "badge", url: `${S}themet.png`,   style: { bottom: 66, left: 8,  width: 52, ...R(-20) } },
+      { kind: "badge", url: `${S}metdegas.png`, style: { top: 10,   right: 6,  width: 84, ...R(20)  } },
     ],
   },
   {
     url: `${I}monet.png`,               alt: "Monet Water Lilies at The Met",   caption: "monet @ the met",
     overlays: [
-      { kind: "badge", url: `${S}claudemonet.jpg`, style: { bottom: 66, right: 8, width: 58, ...R(43) } },
+      { kind: "badge", url: `${S}claudemonet.jpg`, style: { bottom: 66, right: 8, width: 58, ...R(20) } },
     ],
   },
   { url: `${I}milo.png`,               alt: "Milo the dog",                    caption: "my dog, milo!" },
@@ -64,8 +64,8 @@ const cards: Card[] = [
   {
     url: `${I}wicked-gershwin-theatre.jpg`, alt: "Wicked at the Gershwin Theatre", caption: "wicked on broadway",
     overlays: [
-      { kind: "badge", url: `${S}wicked-hat.png`,               style: { top: 4, left: -8, width: 72, ...R(-43) } },
-      { kind: "badge", url: `${I}wicked-playbill-sticker.jpeg`, style: { bottom: 22, right: 4, width: 68, ...R(43) } },
+      { kind: "badge", url: `${S}wicked-hat.png`,               style: { top: 4, left: -8, width: 72, ...R(-20) } },
+      { kind: "badge", url: `${I}wicked-playbill-sticker.jpeg`, style: { bottom: 22, right: 4, width: 68, ...R(20) } },
     ],
   },
 ];
