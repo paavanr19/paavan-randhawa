@@ -175,7 +175,7 @@ function Index() {
           <div className="btn-group"><ResumeLink /><Button asChild className="portfolio-button"><a href="#contact">Contact <ArrowUpRight size={16} /></a></Button></div>
           <div className="socials"><Button asChild variant="ghost" size="icon"><a href={github} target="_blank" rel="noopener noreferrer" aria-label="GitHub" title="GitHub"><Github /></a></Button><Button asChild variant="ghost" size="icon"><a href={linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" title="LinkedIn"><Linkedin /></a></Button></div>
         </div>
-        <figure className="original-portrait"><img src={portrait.url} alt="Paavan Randhawa" fetchPriority="high" /><DraggableSticker className="portrait-star-wrap"><PixelSticker className="portrait-star" /></DraggableSticker><DraggableSticker className="portrait-heart-wrap"><PixelSticker kind="heart" className="portrait-heart" /></DraggableSticker>{altTheme && <DraggableSticker className="pumpkin-portrait"><TwemojiSticker code="1f383" size={48} rotate={16} /></DraggableSticker>}</figure>
+        <figure className="original-portrait"><img src={portrait.url} alt="Paavan Randhawa" fetchPriority="high" /><DraggableSticker className="portrait-star-wrap"><PixelSticker className="portrait-star" /></DraggableSticker><DraggableSticker className="portrait-heart-wrap"><PixelSticker kind="heart" className="portrait-heart" /></DraggableSticker>{altTheme && <DraggableSticker className="pumpkin-portrait"><TwemojiSticker code="1f383" size={28} rotate={16} /></DraggableSticker>}</figure>
       </section>
       <section id="projects" className="original-projects">
         <div className="section-heading"><h2 className="section-title">Projects</h2><DraggableSticker><PixelSticker className="projects-star" /></DraggableSticker></div>
@@ -222,15 +222,15 @@ function Index() {
     </main>
     <footer className="portfolio-footer"><nav aria-label="Footer navigation">{sections.map(section => <a key={section} href={`#${section.toLowerCase()}`}>{section}</a>)}</nav><Button variant="ghost" className="replay-intro" onClick={() => { window.scrollTo({ top: 0, behavior: "instant" }); setIntro("playing"); }}><Play size={11} /> Replay Intro</Button><p>© All Rights Reserved | Paavan Randhawa</p></footer>
     {altTheme && <>
-      <DraggableSticker portal className="pumpkin-sticker-1"><TwemojiSticker code="1f383" size={46} rotate={-10} /></DraggableSticker>
-      <DraggableSticker portal className="pumpkin-sticker-2"><TwemojiSticker code="1f383" size={38} rotate={14} /></DraggableSticker>
-      <DraggableSticker portal className="ghost-sticker-1"><TwemojiSticker code="1f47b" size={52} rotate={-6} /></DraggableSticker>
-      <DraggableSticker portal className="ghost-sticker-2"><TwemojiSticker code="1f47b" size={40} rotate={9} /></DraggableSticker>
-      <DraggableSticker portal className="leaf-sticker-1"><TwemojiSticker code="1f342" size={44} rotate={-22} /></DraggableSticker>
-      <DraggableSticker portal className="leaf-sticker-2"><TwemojiSticker code="1f341" size={38} rotate={20} /></DraggableSticker>
-      <DraggableSticker portal className="spider-sticker"><TwemojiSticker code="1f577" size={50} rotate={-8} /></DraggableSticker>
-      <DraggableSticker portal className="spiderweb-sticker-1"><TwemojiSticker code="1f578" size={72} /></DraggableSticker>
-      <DraggableSticker portal className="spiderweb-sticker-2"><TwemojiSticker code="1f578" size={72} rotate={90} /></DraggableSticker>
+      <DraggableSticker defaultXVw={2}  defaultYVh={14}><TwemojiSticker code="1f383" size={46} rotate={-10} /></DraggableSticker>
+      <DraggableSticker defaultXVw={87} defaultYVh={52}><TwemojiSticker code="1f383" size={38} rotate={14} /></DraggableSticker>
+      <DraggableSticker defaultXVw={26} defaultYVh={10}><TwemojiSticker code="1f47b" size={52} rotate={-6} /></DraggableSticker>
+      <DraggableSticker defaultXVw={4}  defaultYVh={68}><TwemojiSticker code="1f47b" size={40} rotate={9} /></DraggableSticker>
+      <DraggableSticker defaultXVw={18} defaultYVh={36}><TwemojiSticker code="1f342" size={44} rotate={-22} /></DraggableSticker>
+      <DraggableSticker defaultXVw={74} defaultYVh={74}><TwemojiSticker code="1f341" size={38} rotate={20} /></DraggableSticker>
+      <DraggableSticker defaultXVw={75} defaultYVh={26}><TwemojiSticker code="1f577" size={50} rotate={-8} /></DraggableSticker>
+      <DraggableSticker defaultXVw={0}  defaultYVh={0}><TwemojiSticker code="1f578" size={72} /></DraggableSticker>
+      <DraggableSticker defaultXVw={79} defaultYVh={54}><TwemojiSticker code="1f578" size={72} rotate={90} /></DraggableSticker>
     </>}
     {showToast && (
       <div className="halloween-toast" role="status" aria-live="polite">

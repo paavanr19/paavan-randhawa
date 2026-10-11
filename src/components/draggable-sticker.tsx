@@ -4,25 +4,39 @@ import { createPortal } from "react-dom";
 export function DraggableSticker({
   children,
   className = "",
-  portal: alwaysPortal = false,
+  defaultXVw,
+  defaultYVh,
 }: {
   children: React.ReactNode;
   className?: string;
-  // Set true for fixed-positioned stickers so they portal to body from mount,
-  // guaranteeing position:fixed is viewport-relative regardless of ancestors.
-  portal?: boolean;
+  // Viewport-relative initial position (vw/vh percentages 0-100).
+  // When provided, the sticker portals to document.body and uses JS-computed
+  // position:fixed so no CSS containing-block ancestor can interfere.
+  defaultXVw?: number;
+  defaultYVh?: number;
 }) {
   const elemRef = useRef<HTMLSpanElement>(null);
   const [fixedPos, setFixedPos] = useState<{ x: number; y: number } | null>(null);
   const [delta, setDelta] = useState({ x: 0, y: 0 });
   const [dragging, setDragging] = useState(false);
-  const [mounted, setMounted] = useState(false);
 
   const fixedPosRef = useRef<{ x: number; y: number } | null>(null);
   const deltaRef = useRef({ x: 0, y: 0 });
   const dragStartRef = useRef<{ mx: number; my: number } | null>(null);
 
-  useEffect(() => { setMounted(true); }, []);
+  // For viewport-stickers: compute initial position from vw/vh on mount.
+  // These only render after user interaction (altTheme toggle), so document is
+  // always available — no SSR guard needed.
+  useEffect(() => {
+    if (defaultXVw !== undefined && defaultYVh !== undefined && fixedPosRef.current === null) {
+      const pos = {
+        x: window.innerWidth * defaultXVw / 100,
+        y: window.innerHeight * defaultYVh / 100,
+      };
+      fixedPosRef.current = pos;
+      setFixedPos(pos);
+    }
+  }, []);
 
   function startDrag(mx: number, my: number) {
     if (fixedPosRef.current === null && elemRef.current) {
@@ -83,6 +97,10 @@ export function DraggableSticker({
   const isFixed = fixedPos !== null;
   const fx = (fixedPos?.x ?? 0) + delta.x;
   const fy = (fixedPos?.y ?? 0) + delta.y;
+  const isViewportSticker = defaultXVw !== undefined;
+
+  // Don't render viewport-stickers until their JS position is ready.
+  if (isViewportSticker && !isFixed) return null;
 
   const span = (
     <span
@@ -105,11 +123,8 @@ export function DraggableSticker({
     </span>
   );
 
-  if (alwaysPortal) {
-    // Render into body from first mount so position:fixed is always viewport-relative.
-    // Fall back to inline during SSR (mounted=false) to avoid hydration mismatch.
-    return mounted ? createPortal(span, document.body) : span;
-  }
-  // For absolute-positioned stickers: portal only after first drag.
-  return isFixed ? createPortal(span, document.body) : span;
+  // Viewport-stickers always portal to body so position:fixed is unconditionally
+  // viewport-relative, regardless of any ancestor containing-block.
+  if (isViewportSticker || isFixed) return createPortal(span, document.body);
+  return span;
 }
