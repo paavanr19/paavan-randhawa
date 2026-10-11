@@ -169,15 +169,13 @@ summary,
 html { scroll-behavior:smooth; scroll-padding-top:105px; scrollbar-width:none; }
 html::-webkit-scrollbar,body::-webkit-scrollbar { display:none; }
 ::selection { background:var(--secondary); color:var(--primary); }
-.portfolio-shell { max-width:1600px; margin:auto; transition:background-color 0.25s; }
-.portfolio-nav, .original-about, .original-projects, .original-education, .original-interests, .original-contact, .portfolio-footer, .polaroid-card, .original-project, .education-courses, .education-skills, .certifications { transition:background-color 0.25s, border-color 0.25s, color 0.25s; }
+.portfolio-shell { max-width:1600px; margin:auto; }
 .portfolio-nav { position:sticky; top:0; z-index:20; background:var(--background); border-bottom:1px solid var(--border); padding:22px 6%; display:flex; align-items:center; justify-content:space-between; gap:24px; }
 .wordmark { font-family:var(--font-script); font-size:32px; color:var(--primary); white-space:nowrap; }
 .nav-links { display:flex; align-items:center; gap:24px; font-size:13px; }
 .nav-links a:hover,.portfolio-footer a:hover { text-decoration:underline; text-underline-offset:5px; }
 .nav-cta,.portfolio-button { border-radius:0; min-height:42px; }
 .menu-toggle { display:none; }
-.theme-toggle { color:var(--primary); }
 .original-about { display:grid; grid-template-columns:1.1fr 1fr; gap:4%; align-items:center; padding:65px 8% 75px; }
 .hello { font-family:var(--font-display); font-size:35px; color:var(--primary); }
 .original-about h1 { font-family:var(--font-script); font-size:86px; line-height:1.1; color:var(--primary); margin:8px 0 12px; min-height:1.15em; max-width:470px; }
