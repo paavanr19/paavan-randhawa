@@ -25,9 +25,6 @@ const REST: [string, string, string] = [
 const THRESHOLD = 18;
 const ANIM_MS = 260;
 
-function flyOff(dir: "left" | "right") {
-  return dir === "left" ? "translateX(-460px) rotate(-26deg)" : "translateX(460px) rotate(26deg)";
-}
 
 
 export function InterestsArc() {
@@ -62,7 +59,7 @@ export function InterestsArc() {
   };
 
   const startDrag = (x: number) => { if (!departing) { dragRef.current = x; setGrabbing(true); } };
-  const moveDrag = (x: number) => { if (dragRef.current !== null && !departing) setDragX(x - dragRef.current); };
+  const moveDrag = (x: number) => { if (dragRef.current !== null && !departing) setDragX(Math.max(-90, Math.min(90, x - dragRef.current))); };
   const endDrag = (x: number) => {
     if (dragRef.current === null) return;
     const diff = dragRef.current - x;
@@ -79,10 +76,9 @@ export function InterestsArc() {
   const isDragging = grabbing && !departing;
 
   const renderItems: RItem[] = departing ? [
-    { cardIdx: active % n,           transform: flyOff(departing), zIndex: 15, transition: `transform ${ANIM_MS}ms ease-in` },
+    { cardIdx: active % n,           transform: REST[2],           zIndex: 6,  transition: `transform ${ANIM_MS}ms ease` },
     { cardIdx: (active + 1) % n,     transform: REST[0],           zIndex: 10, transition: `transform ${ANIM_MS}ms ease` },
     { cardIdx: (active + 2) % n,     transform: REST[1],           zIndex: 9,  transition: `transform ${ANIM_MS}ms ease` },
-    { cardIdx: (active + 3) % n,     transform: REST[2],           zIndex: 8,  transition: "none" },
   ] : [
     { cardIdx: active % n,           transform: dragX !== 0 ? `translateX(${dragX}px) rotate(${-2 + dragX * 0.04}deg)` : REST[0], zIndex: 10, transition: isDragging ? "none" : `transform ${ANIM_MS}ms ease` },
     { cardIdx: (active + 1) % n,     transform: REST[1],           zIndex: 9,  transition: `transform ${ANIM_MS}ms ease` },
