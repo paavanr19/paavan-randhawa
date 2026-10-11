@@ -220,9 +220,10 @@ html::-webkit-scrollbar,body::-webkit-scrollbar { display:none; }
 .education-grid li a { color:var(--primary); }
 .education-grid li a:hover { color:var(--soil); }
 .education-grid li a:focus-visible { outline:2px solid var(--ring); outline-offset:4px; }
-.certifications { margin-top:36px; }
+.certifications { margin-top:34px; }
 .certifications h3 { font-family:var(--font-display); font-size:32px; color:var(--primary); padding-bottom:15px; border-bottom:1px solid var(--border); margin-bottom:20px; }
-.certifications ul { display:grid; grid-template-columns:repeat(4,1fr); gap:24px; }
+.certifications ul { display:grid; grid-template-columns:repeat(2,1fr); gap:20px 26px; }
+
 .certifications li { font-size:13px; line-height:1.7; padding-top:12px; border-top:1px solid var(--border); }
 .certification-link { display:inline-flex; align-items:center; gap:6px; font-weight:600; }
 .certifications li strong { font-weight:600; color:var(--soil); }
