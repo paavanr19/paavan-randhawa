@@ -30,8 +30,8 @@ const cards: Card[] = [
   {
     url: `${I}paavan-matchday.png`,     alt: "Matchday on the pitch",           caption: "matchday",
     overlays: [
-      { kind: "badge", url: `${S}barcelona.png`, style: { bottom: 66, right: 8, width: 58, ...R(20) } },
-      { kind: "text",  text: "my favorite team is FC Barcelona!", style: { bottom: 76, right: 62 } },
+      { kind: "badge", url: `${S}barcelona.png`, style: { bottom: 8, right: 8, width: 58, ...R(20) } },
+      { kind: "text",  text: "my favorite team is FC Barcelona!", style: { bottom: 18, right: 62 } },
     ],
   },
   {
@@ -43,22 +43,17 @@ const cards: Card[] = [
   {
     url: "/images/tunnelbluffs.png",    alt: "Hiking Tunnel Bluffs",            caption: "tunnel bluffs hike",
     overlays: [
-      { kind: "badge", url: `${S}hike.png`, style: { bottom: 66, right: 8, width: 58, ...R(20) } },
+      { kind: "badge", url: `${S}hike.png`, style: { bottom: 66, left: 8, width: 58, ...R(-20) } },
     ],
   },
   {
     url: `${I}degas-ballerina.png`,     alt: "Degas' Little Dancer at The Met", caption: "degas @ the met",
     overlays: [
       { kind: "badge", url: `${S}themet.png`,   style: { bottom: 66, left: 8,  width: 52, ...R(-20) } },
-      { kind: "badge", url: `${S}metdegas.png`, style: { top: 10,   right: 6,  width: 84, ...R(20)  } },
+      { kind: "badge", url: `${S}metdegas.png`, style: { top: 10,   right: 6,  width: 104, ...R(20)  } },
     ],
   },
-  {
-    url: `${I}monet.png`,               alt: "Monet Water Lilies at The Met",   caption: "monet @ the met",
-    overlays: [
-      { kind: "badge", url: `${S}claudemonet.jpg`, style: { bottom: 66, right: 8, width: 58, ...R(20) } },
-    ],
-  },
+  { url: `${I}monet.png`, alt: "Monet Water Lilies at The Met", caption: "monet @ the met" },
   { url: `${I}milo.png`,               alt: "Milo the dog",                    caption: "my dog, milo!" },
   { url: `${I}positano.png`,           alt: "Sunny days in Positano",          caption: "positano, italy" },
   {
