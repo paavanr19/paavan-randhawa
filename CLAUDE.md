@@ -27,13 +27,12 @@ Single-page portfolio rendered via **TanStack Start** (SSR framework on top of T
 **`src/routes/index.tsx`** is the heart of the site. It owns:
 - The `altTheme` (Halloween) toggle state — session-only, never persisted
 - The cinematic intro lifecycle (`intro` state: `"playing" | "done"`)
-- Scroll progress bar (via `progressRef` + `--scroll-y` CSS variable updated in the scroll listener)
+- Scroll progress bar (via `progressRef` updated in the scroll listener)
 - The typewriter greeting, project carousel, and contact form
 
 **Content and data** live outside the route component:
 - `src/lib/portfolio-content.json` — bio, projects, skills, interests text
 - `src/lib/education.ts` — structured course list with SFU calendar links; edit here for course changes
-- `src/lib/interests-assets.ts` — imports all interest photo `.asset.json` pointers; add new photos here
 
 **Styling** is entirely in `src/styles.css` — Tailwind 4 with CSS custom properties. Theme tokens (`--background`, `--primary`, `--secondary`, etc.) are defined on `:root`; the Halloween alt-theme overrides them on `html.alt-theme`. No Tailwind utility classes for layout/typography — everything is hand-authored CSS classes (`.portfolio-nav`, `.portfolio-shell`, etc.).
 
@@ -47,6 +46,7 @@ Single-page portfolio rendered via **TanStack Start** (SSR framework on top of T
   - All drag deltas are computed in document space so scrolling mid-drag doesn't shift the sticker.
   - When portaled, inline `bottom:"auto"` and `right:"auto"` cancel any conflicting CSS class properties (e.g. `.portrait-heart-wrap { bottom:12px; right:-18px }` would otherwise stretch the element).
   - CSS color rules for stickers must not require a parent selector (e.g. `.projects-star`, not `.section-heading .projects-star`) — the portaled element loses its original DOM ancestry.
+- `InterestsArc` — polaroid stack carousel. The `cards` array at the top of the file controls photo order and badge overlays; edit there to add/reorder photos. Images are served from `/images/interests/` and `/stickers/` (public folder), not imported as assets.
 - `CinematicIntro` — self-contained animated intro with deterministic scene timers; total runtime is 8500ms. Skip via Escape or click. Calls `onDone` when complete.
 - `PixelSticker` — inline SVG pixel-art stickers using CSS custom property colors (`var(--foreground)`, `var(--secondary)`, etc.).
 

@@ -11,6 +11,13 @@ const I = "/images/interests/";
 const R = (deg: number): React.CSSProperties => ({ transform: `rotate(${deg}deg)` });
 
 const cards: Card[] = [
+  {
+    url: `${I}paavan-matchday.png`,     alt: "Matchday on the pitch",           caption: "matchday",
+    overlays: [
+      { kind: "badge", url: `${S}barcelona.png`, style: { bottom: -10, right: 8, width: 58, ...R(20) } },
+      { kind: "text",  text: "my favorite team is FC Barcelona!", style: { bottom: 2, right: 62 } },
+    ],
+  },
   { url: "/images/whistler.jpeg",       alt: "Whistler, BC",                   caption: "whistler" },
   { url: "/images/whistler_lost_lake.jpeg", alt: "Biking in Whistler",         caption: "biking in whistler" },
   {
@@ -25,13 +32,6 @@ const cards: Card[] = [
     overlays: [
       { kind: "badge", url: `${S}canadasoccer.png`, style: { top: 10,   left: 8,  width: 54, ...R(-20) } },
       { kind: "badge", url: `${S}trionda.png`,      style: { bottom: 8, right: 8, width: 54, ...R(20)  } },
-    ],
-  },
-  {
-    url: `${I}paavan-matchday.png`,     alt: "Matchday on the pitch",           caption: "matchday",
-    overlays: [
-      { kind: "badge", url: `${S}barcelona.png`, style: { bottom: -10, right: 8, width: 58, ...R(20) } },
-      { kind: "text",  text: "my favorite team is FC Barcelona!", style: { bottom: 2, right: 62 } },
     ],
   },
   {
