@@ -176,7 +176,7 @@ html::-webkit-scrollbar,body::-webkit-scrollbar { display:none; }
 .nav-links a:hover,.portfolio-footer a:hover { text-decoration:underline; text-underline-offset:5px; }
 .nav-cta,.portfolio-button { border-radius:0; min-height:42px; }
 .menu-toggle { display:none; }
-.scroll-progress { position:fixed; top:0; left:0; height:2px; width:0%; background:var(--primary); z-index:100; pointer-events:none; }
+.scroll-progress { position:fixed; top:0; left:0; height:3px; width:0%; background:var(--primary); z-index:100; pointer-events:none; box-shadow:0 0 6px var(--primary); }
 .nav-links a.active { font-weight:600; text-decoration:underline; text-underline-offset:5px; }
 .status-badge { display:inline-flex; align-items:center; gap:7px; font-size:11px; font-weight:500; padding:5px 12px; border:1.5px solid var(--primary); color:var(--primary); letter-spacing:0.03em; margin-bottom:18px; }
 .status-dot { width:6px; height:6px; border-radius:50%; background:currentColor; flex-shrink:0; animation:status-pulse 2.5s ease-in-out infinite; }
