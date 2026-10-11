@@ -35,6 +35,12 @@ function ResumeLink() {
 
 function Index() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [copied, setCopied] = useState(false);
+  const copyEmail = () => {
+    navigator.clipboard.writeText("paavan_randhawa@sfu.ca");
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
   const [api, setApi] = useState<CarouselApi>();
   const [active, setActive] = useState(0);
   const [paused, setPaused] = useState(false);
@@ -116,9 +122,15 @@ function Index() {
         <InterestsArc />
       </section>
       <section id="contact" className="original-contact">
-        <div><div className="section-heading"><h2 className="section-title">Contact Me</h2><PixelSticker kind="envelope" className="contact-envelope" /></div><p>{content.contact}</p></div>
+        <div className="contact-header">
+          <div className="section-heading"><h2 className="section-title">Contact Me</h2><PixelSticker kind="envelope" className="contact-envelope" /></div>
+          <p>{content.contact}</p>
+          <div className="contact-email-block">
+            <a href="mailto:paavan_randhawa@sfu.ca" className="contact-email-link">paavan_randhawa@sfu.ca <ArrowUpRight size={18} /></a>
+            <button className="contact-copy-btn" onClick={copyEmail}>{copied ? "Copied!" : "Copy"}</button>
+          </div>
+        </div>
         <form action="https://api.web3forms.com/submit" method="POST" className="contact-form">
-          {/* Web3Forms public form identifier, preserved from the owner's original HTML. */}
           <input type="hidden" name="access_key" value="1725c347-0370-4255-8441-e8334e976b59" />
           <input type="checkbox" name="botcheck" className="hidden" tabIndex={-1} />
           <label><span className="sr-only">Your name</span><Input name="name" placeholder="Your name" required /></label>

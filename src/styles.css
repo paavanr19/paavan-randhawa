@@ -246,9 +246,16 @@ html::-webkit-scrollbar,body::-webkit-scrollbar { display:none; }
 .polaroid-text-badge { position:absolute; background:var(--background); border:1.5px solid var(--foreground); box-shadow:2px 2px 0 var(--primary); color:var(--foreground); font-size:10px; font-weight:500; padding:5px 8px; line-height:1.4; max-width:128px; z-index:3; }
 .polaroid-caption { display:block; font-family:"Reenie Beanie", cursive; font-size:22px; text-align:center; color:var(--primary); padding-top:10px; line-height:1; }
 .polaroid-map-wrap { position:relative; width:100%; aspect-ratio:1; overflow:hidden; }
-.original-contact { padding:65px 8%; display:grid; grid-template-columns:1fr 1fr; gap:9%; }
-.original-contact p { font-size:15px; line-height:1.85; margin-bottom:24px; }
-.contact-form { display:flex; flex-direction:column; gap:18px; padding-top:10px; }
+.original-contact { padding:65px 8%; display:flex; flex-direction:column; align-items:center; gap:36px; }
+.contact-header { display:flex; flex-direction:column; align-items:center; text-align:center; max-width:580px; }
+.contact-header .section-heading { justify-content:center; }
+.original-contact p { font-size:15px; line-height:1.85; margin-bottom:20px; }
+.contact-email-block { display:flex; align-items:center; gap:12px; flex-wrap:wrap; justify-content:center; }
+.contact-email-link { font-family:var(--font-display); font-size:24px; color:var(--primary); display:inline-flex; align-items:center; gap:5px; }
+.contact-email-link:hover { text-decoration:underline; text-underline-offset:4px; }
+.contact-copy-btn { font-size:12px; padding:5px 12px; border:1.5px solid var(--foreground); background:transparent; color:var(--foreground); font-family:var(--font-body); min-width:68px; }
+.contact-copy-btn:hover { background:var(--primary); color:var(--background); border-color:var(--primary); }
+.contact-form { width:100%; max-width:580px; display:flex; flex-direction:column; gap:18px; }
 .contact-form input,.contact-form textarea { border-radius:0; padding:14px; font-size:15px; min-height:48px; }
 .contact-form button { align-self:flex-start; min-width:125px; }
 .portfolio-footer { padding:30px 8%; border-top:1px solid var(--border); font-size:12px; display:flex; justify-content:space-between; flex-wrap:wrap; gap:24px; background:var(--secondary); }
@@ -262,7 +269,7 @@ html::-webkit-scrollbar,body::-webkit-scrollbar { display:none; }
  .section-heading {gap:12px;margin-bottom:25px;} .section-heading .pixel-sticker {width:30px;height:30px;}
  .original-carousel {margin:0 22px;} .original-carousel > button {width:30px;height:30px;} .original-carousel > button:first-of-type {left:-32px;} .original-carousel > button:last-of-type {right:-32px;}
  .original-project {padding:22px;min-height:470px;} .original-project h3 {font-size:29px;} .original-project p {font-size:14px;line-height:1.85;}
- .education-grid,.original-contact,.original-interests {grid-template-columns:1fr;gap:20px;} .education-grid h3,.certifications h3 {font-size:22px;} .original-interests p {font-size:14px;} .polaroid-stack-wrap {align-self:center;} .portfolio-footer {font-size:11px;} .portfolio-footer nav {gap:15px;}
+ .education-grid,.original-interests {grid-template-columns:1fr;gap:20px;} .education-grid h3,.certifications h3 {font-size:22px;} .original-interests p {font-size:14px;} .polaroid-stack-wrap {align-self:center;} .portfolio-footer {font-size:11px;} .portfolio-footer nav {gap:15px;}
 }
 @media(prefers-reduced-motion:reduce) { html {scroll-behavior:auto;} *,*::before,*::after {transition:none!important;animation:none!important;} }
 
