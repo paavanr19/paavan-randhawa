@@ -1,16 +1,13 @@
 import { useState, useRef, useEffect } from "react";
-import { sunRun } from "@/lib/sun-run";
 
-type PhotoCard = { type?: "photo"; url: string; alt: string; caption: string };
-type MapCard = { type: "map"; caption: string };
-type Card = PhotoCard | MapCard;
+type Card = { url: string; alt: string; caption: string };
 
 const cards: Card[] = [
   { url: "/images/whistler_lost_lake.jpeg", alt: "Biking in Whistler", caption: "biking in whistler" },
   { url: "/images/interests/canucks.png", alt: "Canucks at Rogers Arena", caption: "canucks at rogers arena" },
   { url: "/images/interests/canada-switzerland.png", alt: "FIFA World Cup Canada vs Switzerland", caption: "canada vs. switzerland" },
   { url: "/images/interests/paavan-matchday.png", alt: "Matchday on the pitch", caption: "matchday" },
-  { type: "map", caption: "vancouver sun run" },
+  { url: "/images/interests/whitecaps.png", alt: "Vancouver Whitecaps at BC Place", caption: "whitecaps at bc place" },
   { url: "/images/tunnelbluffs.png", alt: "Hiking Tunnel Bluffs", caption: "tunnel bluffs hike" },
   { url: "/images/interests/degas-ballerina.png", alt: "Degas' Little Dancer at The Met", caption: "degas @ the met" },
   { url: "/images/interests/monet.png", alt: "Monet Water Lilies at The Met", caption: "monet @ the met" },
@@ -31,24 +28,6 @@ function flyOff(dir: "left" | "right") {
   return dir === "left" ? "translateX(-460px) rotate(-26deg)" : "translateX(460px) rotate(26deg)";
 }
 
-function SunRunMap() {
-  const scale = 316 / sunRun.w;
-  return (
-    <div className="polaroid-map-wrap">
-      <div style={{ transform: `scale(${scale})`, transformOrigin: "top left", width: sunRun.w, height: sunRun.h, position: "relative" }}>
-        <div style={{ position: "absolute", inset: 0 }}>
-          {sunRun.tiles.map(t => (
-            <img key={`${t.x}-${t.y}`} src={`https://tile.openstreetmap.org/${sunRun.zoom}/${t.x}/${t.y}.png`} alt="" loading="lazy" style={{ position: "absolute", left: t.left, top: t.top, width: 256, height: 256 }} />
-          ))}
-        </div>
-        <svg viewBox={`0 0 ${sunRun.w} ${sunRun.h}`} className="run-route" aria-label="Sun Run route" style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }}>
-          <path d={sunRun.route} />
-        </svg>
-      </div>
-      <small style={{ position: "absolute", bottom: 2, right: 4, fontSize: 9, color: "#888" }}>© OpenStreetMap</small>
-    </div>
-  );
-}
 
 export function InterestsArc() {
   const [active, setActive] = useState(0);
@@ -126,10 +105,7 @@ export function InterestsArc() {
           const card = cards[cardIdx];
           return (
             <div key={cardIdx} className="polaroid-card" style={{ transform, zIndex, transition }}>
-              {card.type === "map"
-                ? <SunRunMap />
-                : <img src={(card as PhotoCard).url} alt={(card as PhotoCard).alt} loading="lazy" draggable={false} />
-              }
+              <img src={card.url} alt={card.alt} loading="lazy" draggable={false} />
               <span className="polaroid-caption">{card.caption}</span>
             </div>
           );
