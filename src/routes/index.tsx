@@ -19,19 +19,6 @@ function PumpkinToggle() {
   );
 }
 
-function TwemojiSticker({ code, size = 44, rotate = 0 }: { code: string; size?: number; rotate?: number }) {
-  return (
-    <img
-      src={`https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/${code}.svg`}
-      width={size}
-      height={size}
-      alt=""
-      aria-hidden="true"
-      draggable={false}
-      style={{ display: "block", ...(rotate ? { transform: `rotate(${rotate}deg)` } : {}) }}
-    />
-  );
-}
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -223,17 +210,6 @@ function Index() {
       </section>
     </main>
     <footer className="portfolio-footer"><nav aria-label="Footer navigation">{sections.map(section => <a key={section} href={`#${section.toLowerCase()}`}>{section}</a>)}</nav><Button variant="ghost" className="replay-intro" onClick={() => { window.scrollTo({ top: 0, behavior: "instant" }); setIntro("playing"); }}><Play size={11} /> Replay Intro</Button><p>© All Rights Reserved | Paavan Randhawa</p></footer>
-    {altTheme && <>
-      <DraggableSticker defaultXVw={2}  defaultYVh={14}><TwemojiSticker code="1f383" size={46} rotate={-10} /></DraggableSticker>
-      <DraggableSticker defaultXVw={87} defaultYVh={52}><TwemojiSticker code="1f383" size={38} rotate={14} /></DraggableSticker>
-      <DraggableSticker defaultXVw={26} defaultYVh={10}><TwemojiSticker code="1f47b" size={52} rotate={-6} /></DraggableSticker>
-      <DraggableSticker defaultXVw={4}  defaultYVh={68}><TwemojiSticker code="1f47b" size={40} rotate={9} /></DraggableSticker>
-      <DraggableSticker defaultXVw={18} defaultYVh={36}><TwemojiSticker code="1f342" size={44} rotate={-22} /></DraggableSticker>
-      <DraggableSticker defaultXVw={74} defaultYVh={74}><TwemojiSticker code="1f341" size={38} rotate={20} /></DraggableSticker>
-      <DraggableSticker defaultXVw={75} defaultYVh={26}><TwemojiSticker code="1f577" size={50} rotate={-8} /></DraggableSticker>
-      <DraggableSticker defaultXVw={0}  defaultYVh={0}><TwemojiSticker code="1f578" size={72} /></DraggableSticker>
-      <DraggableSticker defaultXVw={79} defaultYVh={54}><TwemojiSticker code="1f578" size={72} rotate={90} /></DraggableSticker>
-    </>}
     {showToast && (
       <div className="halloween-toast" role="status" aria-live="polite">
         <PumpkinToggle /> You've switched to the Special Halloween Edition
