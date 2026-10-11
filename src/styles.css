@@ -102,6 +102,21 @@
   --sidebar-ring: oklch(0.704 0.04 256.788);
 }
 
+html.alt-theme {
+  --background: oklch(0.879 0.0396 74.8);
+  --foreground: oklch(0.275 0.0177 102.7);
+  --card: oklch(0.900 0.033 74.8);
+  --card-foreground: oklch(0.275 0.0177 102.7);
+  --popover: oklch(0.900 0.033 74.8);
+  --popover-foreground: oklch(0.275 0.0177 102.7);
+  --primary: oklch(0.314 0.0544 2.4);
+  --secondary: oklch(0.578 0.0373 81.8);
+  --muted: oklch(0.916 0.030 74.8);
+  --muted-foreground: oklch(0.578 0.0373 81.8);
+  --border: oklch(0.275 0.0177 102.7 / 20%);
+  --soil: oklch(0.180 0.0038 164.6);
+}
+
 .dark {
   --background: oklch(0.129 0.042 264.695);
   --foreground: oklch(0.984 0.003 247.858);

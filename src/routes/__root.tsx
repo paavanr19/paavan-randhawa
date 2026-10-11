@@ -109,6 +109,7 @@ function RootShell({ children }: { children: ReactNode }) {
     <html lang="en">
       <head>
         <HeadContent />
+        <script dangerouslySetInnerHTML={{ __html: `try{if(localStorage.getItem('portfolio-theme')==='alt')document.documentElement.classList.add('alt-theme')}catch(e){}` }} />
       </head>
       
 <body>

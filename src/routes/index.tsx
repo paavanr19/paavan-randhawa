@@ -3,7 +3,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { CinematicIntro } from "@/components/cinematic-intro";
 import { EducationSection } from "@/components/education-section";
 import { InterestsArc } from "@/components/interests-arc";
-import { ArrowUpRight, Download, Github, Linkedin, Menu, Play, X } from "lucide-react";
+import { ArrowUpRight, Download, Github, Linkedin, Menu, Palette, Play, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -36,6 +36,13 @@ function ResumeLink() {
 
 function Index() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [altTheme, setAltTheme] = useState(() => typeof document !== "undefined" && document.documentElement.classList.contains("alt-theme"));
+  const toggleTheme = () => {
+    const next = !altTheme;
+    document.documentElement.classList.toggle("alt-theme", next);
+    try { localStorage.setItem("portfolio-theme", next ? "alt" : "default"); } catch (_) {}
+    setAltTheme(next);
+  };
   const progressRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const onScroll = () => {
@@ -120,6 +127,7 @@ function Index() {
       <a href="#about" className="wordmark">Paavan Randhawa</a>
       <Button variant="ghost" size="icon" className="menu-toggle" aria-label={menuOpen ? "Close menu" : "Open menu"} aria-expanded={menuOpen} aria-controls="main-navigation" onClick={() => setMenuOpen(!menuOpen)}>{menuOpen ? <X /> : <Menu />}</Button>
       <nav id="main-navigation" className="nav-links" data-open={menuOpen} aria-label="Main navigation">{sections.map(section => <a key={section} href={`#${section.toLowerCase()}`} onClick={() => setMenuOpen(false)}>{section}</a>)}</nav>
+      <Button variant="ghost" size="icon" onClick={toggleTheme} aria-label="Switch color scheme" title="Switch color scheme"><Palette size={16} /></Button>
       <Button asChild className="nav-cta"><a href={github} target="_blank" rel="noopener noreferrer">Visit GitHub <ArrowUpRight size={15} /></a></Button>
     </header>
     <main>
