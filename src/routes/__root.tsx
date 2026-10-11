@@ -14,40 +14,6 @@ import { Analytics } from "@vercel/analytics/react";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 
-function LostSnoopy() {
-  return (
-    <svg viewBox="0 0 180 210" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" className="lost-snoopy-svg">
-      {/* Left ear — behind head */}
-      <path d="M55,62 C35,70 26,118 32,142 C37,160 58,153 60,126 C63,100 60,74 55,62Z" fill="#1a1a1a" />
-      {/* Right ear — behind head */}
-      <path d="M125,62 C145,70 154,118 148,142 C143,160 122,153 120,126 C117,100 120,74 125,62Z" fill="#1a1a1a" />
-      {/* Head */}
-      <circle cx="90" cy="88" r="52" fill="white" stroke="#1a1a1a" strokeWidth="2.5" />
-      {/* Snout */}
-      <ellipse cx="108" cy="104" rx="26" ry="20" fill="white" stroke="#1a1a1a" strokeWidth="2" />
-      {/* Nose */}
-      <ellipse cx="120" cy="96" rx="11" ry="8" fill="#1a1a1a" />
-      {/* Eyes — looking sideways, lost */}
-      <circle cx="72" cy="80" r="5" fill="#1a1a1a" />
-      <circle cx="92" cy="77" r="5" fill="#1a1a1a" />
-      {/* Pupils shifted to one side — looking around */}
-      <circle cx="74" cy="80" r="2.5" fill="white" />
-      <circle cx="94" cy="77" r="2.5" fill="white" />
-      {/* Worried brows */}
-      <path d="M67,70 Q75,65 82,67" stroke="#1a1a1a" strokeWidth="2.5" fill="none" strokeLinecap="round" />
-      <path d="M88,67 Q96,62 103,64" stroke="#1a1a1a" strokeWidth="2.5" fill="none" strokeLinecap="round" />
-      {/* Sad/worried mouth */}
-      <path d="M86,118 Q96,113 106,118" stroke="#1a1a1a" strokeWidth="2" fill="none" strokeLinecap="round" />
-      {/* Body */}
-      <ellipse cx="90" cy="178" rx="42" ry="44" fill="white" stroke="#1a1a1a" strokeWidth="2.5" />
-      {/* Collar */}
-      <path d="M55,148 Q90,158 125,148" stroke="#1a1a1a" strokeWidth="2" fill="none" />
-      {/* Question mark — floating above */}
-      <text x="138" y="44" fontSize="30" fill="#1a1a1a" fontFamily="serif" fontWeight="bold" opacity="0.7">?</text>
-    </svg>
-  );
-}
-
 function NotFoundComponent() {
   return (
     <div className="not-found-page">
@@ -55,15 +21,15 @@ function NotFoundComponent() {
         <a href="/" className="wordmark">Paavan Randhawa</a>
       </header>
       <div className="not-found-content">
-        <p className="not-found-missing">MISSING</p>
-        <div className="not-found-polaroid">
-          <div className="not-found-photo">
-            <LostSnoopy />
+        <div className="nf-scene" role="img" aria-label="A polaroid fell off the stack">
+          <div className="nf-card nf-back" aria-hidden="true" />
+          <div className="nf-card nf-mid" aria-hidden="true" />
+          <div className="nf-card nf-fallen" aria-hidden="true">
+            <div className="nf-photo"><span className="nf-stamp">404</span></div>
+            <div className="nf-label"><span className="nf-caption">oops.</span></div>
           </div>
-          <p className="not-found-caption">last seen on this page</p>
         </div>
-        <p className="not-found-case">Case No. <strong>404</strong></p>
-        <p className="not-found-desc">This page wandered off and hasn't come home.<br />If you find it, let us know.</p>
+        <p className="nf-tagline">This page fell off the stack.</p>
         <Link to="/" className="not-found-home">← Back Home</Link>
       </div>
     </div>

@@ -419,13 +419,28 @@ html::-webkit-scrollbar,body::-webkit-scrollbar { display:none; }
 
 /* 404 Not Found */
 .not-found-page { min-height:100vh; display:flex; flex-direction:column; background:var(--background); }
-.not-found-content { flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:18px; padding:48px 24px; text-align:center; }
-.not-found-missing { font-family:var(--font-display); font-size:clamp(52px,12vw,100px); color:var(--primary); letter-spacing:0.1em; margin:0; line-height:1; }
-.not-found-polaroid { background:white; padding:12px 12px 44px; box-shadow:3px 6px 22px rgba(0,0,0,0.18); transform:rotate(-4deg); width:200px; }
-.not-found-photo { background:oklch(0.93 0.03 101); display:flex; align-items:center; justify-content:center; aspect-ratio:1; overflow:hidden; }
-.lost-snoopy-svg { width:90%; height:90%; }
-.not-found-caption { font-family:'Reenie Beanie',cursive; font-size:16px; color:var(--muted-foreground); margin-top:10px; }
-.not-found-case { font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:var(--muted-foreground); margin:0; }
-.not-found-desc { max-width:340px; font-size:14px; color:var(--muted-foreground); margin:0; line-height:1.65; }
-.not-found-home { display:inline-flex; align-items:center; gap:8px; padding:11px 28px; border:1.5px solid var(--primary); color:var(--primary); background:transparent; font-size:13px; letter-spacing:0.04em; cursor:pointer; text-decoration:none; margin-top:4px; transition:background 0.15s,color 0.15s; }
+.not-found-content { flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:20px; padding:48px 24px; text-align:center; }
+
+.nf-scene { position:relative; width:260px; height:380px; }
+.nf-card { position:absolute; width:180px; background:white; box-shadow:2px 4px 16px rgba(0,0,0,0.13); }
+.nf-card::before { content:''; display:block; margin:10px 10px 0; aspect-ratio:1; background:oklch(0.92 0.04 101); }
+.nf-card::after { content:''; display:block; height:44px; }
+.nf-back  { top:10px; left:40px; transform:rotate(9deg); opacity:0.35; }
+.nf-mid   { top:10px; left:40px; transform:rotate(-6deg); opacity:0.6; }
+.nf-fallen { top:150px; left:6px; z-index:10; box-shadow:5px 10px 34px rgba(0,0,0,0.22); transform:rotate(-34deg); animation:card-fall 0.9s cubic-bezier(.34,1.2,.64,1) 0.15s both; }
+.nf-fallen::before,.nf-fallen::after { display:none; }
+@media(prefers-reduced-motion:reduce) { .nf-fallen { animation:none; } }
+@keyframes card-fall {
+  0%   { transform:rotate(-5deg) translate(38px,-70px); opacity:0; }
+  35%  { opacity:1; }
+  68%  { transform:rotate(-38deg) translate(-4px,8px); }
+  84%  { transform:rotate(-31deg) translate(2px,-2px); }
+  100% { transform:rotate(-34deg) translate(0,0); }
+}
+.nf-photo { margin:10px 10px 0; aspect-ratio:1; background:oklch(0.92 0.04 101); display:flex; align-items:center; justify-content:center; }
+.nf-label { height:44px; display:flex; align-items:center; justify-content:center; }
+.nf-stamp { font-family:ui-monospace,monospace; font-size:24px; font-weight:700; color:var(--primary); opacity:0.4; letter-spacing:0.08em; }
+.nf-caption { font-family:'Reenie Beanie',cursive; font-size:18px; color:var(--muted-foreground); }
+.nf-tagline { font-size:15px; color:var(--muted-foreground); margin:0; }
+.not-found-home { display:inline-flex; align-items:center; gap:8px; padding:11px 28px; border:1.5px solid var(--primary); color:var(--primary); background:transparent; font-size:13px; letter-spacing:0.04em; cursor:pointer; text-decoration:none; transition:background 0.15s,color 0.15s; }
 .not-found-home:hover { background:var(--primary); color:var(--background); }
