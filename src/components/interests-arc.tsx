@@ -1,8 +1,9 @@
 import { useState, useRef, useEffect } from "react";
 
-type Card = { url: string; alt: string; caption: string };
+type Card = { url: string; alt: string; caption: string; sticker?: string };
 
 const cards: Card[] = [
+  { url: "/images/whistler.jpeg", alt: "Whistler, BC", caption: "whistler, bc" },
   { url: "/images/whistler_lost_lake.jpeg", alt: "Biking in Whistler", caption: "biking in whistler" },
   { url: "/images/interests/canucks.png", alt: "Canucks at Rogers Arena", caption: "canucks at rogers arena" },
   { url: "/images/interests/canada-switzerland.png", alt: "FIFA World Cup Canada vs Switzerland", caption: "canada vs. switzerland" },
@@ -13,7 +14,7 @@ const cards: Card[] = [
   { url: "/images/interests/monet.png", alt: "Monet Water Lilies at The Met", caption: "monet @ the met" },
   { url: "/images/interests/milo.png", alt: "Milo the dog", caption: "milo!" },
   { url: "/images/interests/positano.png", alt: "Sunny days in Positano", caption: "positano" },
-  { url: "/images/interests/wicked-gershwin-theatre.jpg", alt: "Wicked at the Gershwin Theatre", caption: "wicked @ gershwin" },
+  { url: "/images/interests/wicked-gershwin-theatre.jpg", alt: "Wicked at the Gershwin Theatre", caption: "wicked @ gershwin", sticker: "/images/interests/wicked-playbill-sticker.jpeg" },
 ];
 
 const REST: [string, string, string] = [
@@ -106,6 +107,7 @@ export function InterestsArc() {
           return (
             <div key={cardIdx} className="polaroid-card" style={{ transform, zIndex, transition }}>
               <img src={card.url} alt={card.alt} loading="lazy" draggable={false} />
+              {card.sticker && <img src={card.sticker} alt="" aria-hidden="true" className="polaroid-sticker" draggable={false} />}
               <span className="polaroid-caption">{card.caption}</span>
             </div>
           );

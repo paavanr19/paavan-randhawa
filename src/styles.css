@@ -240,8 +240,9 @@ html::-webkit-scrollbar,body::-webkit-scrollbar { display:none; }
 .polaroid-stack-wrap { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:20px; justify-self:center; }
 .polaroid-stack { position:relative; width:340px; height:440px; }
 .polaroid-stack .polaroid-card { position:absolute; top:0; left:0; }
-.polaroid-card { background:#f5f0e4; padding:12px 12px 56px; box-shadow:2px 4px 16px rgba(60,40,10,.2), 0 1px 3px rgba(0,0,0,.1); width:340px; border:1px solid #e2d8c6; }
+.polaroid-card { position:relative; background:#f5f0e4; padding:12px 12px 56px; box-shadow:2px 4px 16px rgba(60,40,10,.2), 0 1px 3px rgba(0,0,0,.1); width:340px; border:1px solid #e2d8c6; }
 .polaroid-card img { width:100%; aspect-ratio:1; object-fit:cover; display:block; filter:sepia(10%) contrast(95%) brightness(0.97); }
+.polaroid-sticker { position:absolute; width:78px; aspect-ratio:auto; bottom:30px; right:-14px; transform:rotate(18deg); filter:drop-shadow(1px 2px 4px rgba(0,0,0,.25)) !important; }
 .polaroid-caption { display:block; font-family:"Reenie Beanie", cursive; font-size:22px; text-align:center; color:#5a4a36; padding-top:10px; line-height:1; }
 .polaroid-map-wrap { position:relative; width:100%; aspect-ratio:1; overflow:hidden; }
 .original-contact { padding:65px 8%; display:grid; grid-template-columns:1fr 1fr; gap:9%; }
