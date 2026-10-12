@@ -464,3 +464,44 @@ html::-webkit-scrollbar,body::-webkit-scrollbar { display:none; }
 .nf-tagline { font-size:15px; color:var(--muted-foreground); margin:0; }
 .not-found-home { display:inline-flex; align-items:center; gap:8px; padding:11px 28px; border:1.5px solid var(--primary); color:var(--primary); background:transparent; font-size:13px; letter-spacing:0.04em; cursor:pointer; text-decoration:none; transition:background 0.15s,color 0.15s; }
 .not-found-home:hover { background:var(--primary); color:var(--background); }
+
+/* Spider-Verse glitch intro */
+.sv-stage { position:absolute; inset:0; z-index:10; display:grid; place-items:center; }
+.sv-halftone { position:absolute; inset:0; z-index:3; opacity:0; pointer-events:none; background:radial-gradient(circle,var(--primary) 1.4px,transparent 1.8px) 0 0/9px 9px; mix-blend-mode:screen; }
+.sv-flash { position:absolute; inset:0; z-index:15; opacity:0; pointer-events:none; background:var(--intro-paper); mix-blend-mode:difference; }
+.sv-boot { position:absolute; left:8%; top:22%; display:flex; flex-direction:column; gap:10px; font:13px ui-monospace,monospace; letter-spacing:.12em; color:var(--intro-paper); }
+.sv-bar { display:flex; gap:4px; margin-top:10px; }
+.sv-bar i { width:18px; height:14px; border:1px solid var(--intro-paper); }
+.sv-bar i[data-on=true] { background:var(--secondary); }
+.sv-slices,.sv-name { position:absolute; inset:0; display:none; }
+.sv-slice { position:absolute; inset:0; clip-path:inset(calc(var(--i) * 16.667%) 0 calc(100% - (var(--i) + 1) * 16.667%) 0); animation:sv-shear .5s steps(2) infinite; animation-delay:calc(var(--i) * -.13s); }
+.sv-words,.sv-name { display:flex; flex-direction:column; align-items:center; justify-content:center; height:100%; gap:4px; }
+.sv-layered { position:relative; display:grid; font-family:var(--font-display); font-weight:700; line-height:.9; letter-spacing:-.02em; }
+.sv-big { font-size:clamp(52px,11vw,150px); }
+.sv-small { font-size:clamp(24px,4vw,52px); font-style:italic; }
+.sv-ch { grid-area:1/1; }
+.sv-ch-c { color:var(--secondary); mix-blend-mode:screen; animation:sv-rgb-c .25s steps(2) infinite; }
+.sv-ch-m { color:var(--primary); mix-blend-mode:screen; animation:sv-rgb-m .33s steps(2) infinite; }
+.sv-ch-k { color:var(--intro-paper); }
+.sv[data-scene=boot] .sv-boot { display:flex; }
+.sv:is([data-scene=glitch],[data-scene=storm],[data-scene=collapse]) .sv-slices { display:block; }
+.sv[data-scene=glitch] .sv-flash { animation:sv-flash 1.3s steps(1) both; }
+.sv[data-scene=storm] .sv-halftone { opacity:.35; animation:sv-dots .4s steps(2) infinite; }
+.sv[data-scene=storm] .sv-slice { animation-duration:.24s; }
+.sv[data-scene=storm] .sv-flash { animation:sv-flash 2.1s steps(1) infinite; }
+.sv[data-scene=storm] .sv-layered { animation:sv-hop .66s steps(1) infinite; }
+.sv[data-scene=collapse] .sv-slices { animation:sv-collapse .6s steps(4) forwards; }
+.sv:is([data-scene=name],[data-scene=exit]) .sv-name { display:flex; }
+.sv[data-scene=name] .sv-ch-c,.sv[data-scene=name] .sv-ch-m { animation:sv-settle .7s steps(5) forwards; }
+.sv[data-scene=exit] { animation:sv-out .6s ease forwards; }
+.sv[data-scene=exit] .sv-ch-c,.sv[data-scene=exit] .sv-ch-m { opacity:0; }
+@keyframes sv-shear { 0%{transform:translateX(0)} 25%{transform:translateX(-6%)} 50%{transform:translateX(4%)} 75%{transform:translateX(-2%) skewX(-8deg)} 100%{transform:translateX(0)} }
+@keyframes sv-rgb-c { 0%{transform:translate(-8px,3px)} 100%{transform:translate(6px,-2px)} }
+@keyframes sv-rgb-m { 0%{transform:translate(7px,-4px)} 100%{transform:translate(-5px,3px)} }
+@keyframes sv-flash { 0%,100%{opacity:0} 10%{opacity:1} 14%{opacity:0} 52%{opacity:1} 55%{opacity:0} }
+@keyframes sv-dots { 0%{background-size:9px 9px} 100%{background-size:14px 14px} }
+@keyframes sv-hop { 0%{transform:none} 25%{transform:scale(1.12) rotate(-2deg)} 50%{transform:translate(3%,-4%) scaleX(.9)} 75%{transform:scale(.94) skewX(10deg)} }
+@keyframes sv-collapse { to{transform:scaleY(.02); opacity:0} }
+@keyframes sv-settle { 0%{opacity:1} 100%{transform:none; opacity:0} }
+@keyframes sv-out { to{opacity:0} }
+@media(max-width:600px) { .sv-boot{font-size:10px;left:6%} }
