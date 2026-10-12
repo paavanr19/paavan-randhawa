@@ -38,12 +38,6 @@ Single-page portfolio rendered via **TanStack Start** (SSR framework on top of T
 
 ## Key components
 
-- `DraggableSticker` — portals to `document.body` via `createPortal` once dragged. Two placement modes:
-  - `"doc"` (default): `position:absolute` with document-absolute coordinates (`rect + window.scrollX/Y`). Sticker scrolls with the page and stays where placed relative to content.
-  - `"fixed"`: `position:fixed` with viewport coordinates. Used when the sticker is dropped onto the sticky navbar (detected via cursor position against `.portfolio-nav` rect — use cursor, not sticker top-left, because the sticker top can be above the navbar rect while the cursor is clearly on it).
-  - All drag deltas are computed in document space so scrolling mid-drag doesn't shift the sticker.
-  - When portaled, inline `bottom:"auto"` and `right:"auto"` cancel any conflicting CSS class properties (e.g. `.portrait-heart-wrap { bottom:12px; right:-18px }` would otherwise stretch the element).
-  - CSS color rules for stickers must not require a parent selector (e.g. `.projects-star`, not `.section-heading .projects-star`) — the portaled element loses its original DOM ancestry.
 - `InterestsArc` — polaroid stack carousel. The `cards` array at the top of the file controls photo order and badge overlays; edit there to add/reorder photos. Images are served from `/images/interests/` and `/stickers/` (public folder), not imported as assets.
 - Cinematic intro is archived in `src/archive/intro/` (see its README to restore). Halloween mode was removed permanently.
 - `PixelSticker` — inline SVG pixel-art stickers using CSS custom property colors (`var(--foreground)`, `var(--secondary)`, etc.).

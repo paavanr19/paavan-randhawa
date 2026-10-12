@@ -98,6 +98,6 @@ Original images are registered in `src/assets/interests/` as descriptive `.asset
 ---
 
 ## 7. Interactive Polish & Details
-- Draggable stickers with pointer lift physics, drop shadows, and soft release.
+- Draggable stickers (since removed; stickers are now static decorations).
 - Strictly non-emoji SVG controls site-wide.
 - Preserved 85ms/character typewriter greeting ("Hi I'm Paavan Randhawa!") after the 8.5s intro completes.

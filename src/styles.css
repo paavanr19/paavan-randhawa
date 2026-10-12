@@ -196,7 +196,6 @@ html::-webkit-scrollbar,body::-webkit-scrollbar { display:none; }
 .original-portrait { position:relative; width:100%; max-width:380px; justify-self:start; }
 .original-portrait img { width:100%; aspect-ratio:4/5; object-fit:cover; border-radius:100px 0 100px 0; }
 .pixel-sticker { width:60px; height:60px; shape-rendering:crispEdges; color:var(--primary); }
-.draggable-sticker { display:inline-block; position:relative; touch-action:none; user-select:none; }
 .portrait-star-wrap { position:absolute; top:20px; left:-28px; }
 .portrait-heart-wrap { position:absolute; bottom:12px; right:-18px; }
 .portrait-star { transform:rotate(-10deg); }
