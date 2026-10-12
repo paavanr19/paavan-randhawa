@@ -465,43 +465,42 @@ html::-webkit-scrollbar,body::-webkit-scrollbar { display:none; }
 .not-found-home { display:inline-flex; align-items:center; gap:8px; padding:11px 28px; border:1.5px solid var(--primary); color:var(--primary); background:transparent; font-size:13px; letter-spacing:0.04em; cursor:pointer; text-decoration:none; transition:background 0.15s,color 0.15s; }
 .not-found-home:hover { background:var(--primary); color:var(--background); }
 
-/* Spider-Verse glitch intro */
+/* Spider-Verse glitch intro: one word per beat, flash + palette + font change between */
 .sv-stage { position:absolute; inset:0; z-index:10; display:grid; place-items:center; }
-.sv-halftone { position:absolute; inset:0; z-index:3; opacity:0; pointer-events:none; background:radial-gradient(circle,var(--primary) 1.4px,transparent 1.8px) 0 0/9px 9px; mix-blend-mode:screen; }
-.sv-flash { position:absolute; inset:0; z-index:15; opacity:0; pointer-events:none; background:var(--intro-paper); mix-blend-mode:difference; }
-.sv-boot { position:absolute; left:8%; top:22%; display:flex; flex-direction:column; gap:10px; font:13px ui-monospace,monospace; letter-spacing:.12em; color:var(--intro-paper); }
+.sv-halftone { position:absolute; inset:0; z-index:3; opacity:.18; pointer-events:none; background:radial-gradient(circle,var(--sv-dot,var(--primary)) 1.4px,transparent 1.8px) 0 0/9px 9px; }
+.sv-flash { position:absolute; inset:0; z-index:15; opacity:0; pointer-events:none; background:var(--intro-paper); }
+.sv-boot { position:absolute; left:8%; top:22%; display:none; flex-direction:column; gap:10px; font:13px ui-monospace,monospace; letter-spacing:.12em; color:var(--intro-paper); }
 .sv-bar { display:flex; gap:4px; margin-top:10px; }
 .sv-bar i { width:18px; height:14px; border:1px solid var(--intro-paper); }
 .sv-bar i[data-on=true] { background:var(--secondary); }
-.sv-slices,.sv-name { position:absolute; inset:0; display:none; }
-.sv-slice { position:absolute; inset:0; clip-path:inset(calc(var(--i) * 16.667%) 0 calc(100% - (var(--i) + 1) * 16.667%) 0); animation:sv-shear .5s steps(2) infinite; animation-delay:calc(var(--i) * -.13s); }
-.sv-words,.sv-name { display:flex; flex-direction:column; align-items:center; justify-content:center; height:100%; gap:4px; }
-.sv-layered { position:relative; display:grid; font-family:var(--font-display); font-weight:700; line-height:.9; letter-spacing:-.02em; }
-.sv-big { font-size:clamp(52px,11vw,150px); }
-.sv-small { font-size:clamp(24px,4vw,52px); font-style:italic; }
+.sv-word { position:absolute; display:none; text-align:center; line-height:1; }
+.sv-layered { position:relative; display:grid; }
 .sv-ch { grid-area:1/1; }
-.sv-ch-c { color:var(--secondary); mix-blend-mode:screen; animation:sv-rgb-c .25s steps(2) infinite; }
-.sv-ch-m { color:var(--primary); mix-blend-mode:screen; animation:sv-rgb-m .33s steps(2) infinite; }
-.sv-ch-k { color:var(--intro-paper); }
+.sv-ch-c { color:var(--secondary); opacity:.85; transform:translate(-5px,2px); }
+.sv-ch-m { color:var(--primary); opacity:.85; transform:translate(5px,-2px); }
+.sv-ch-k { color:var(--sv-text,var(--intro-paper)); }
+.sv-w1 { font-family:var(--font-display); font-weight:700; font-size:clamp(60px,13vw,170px); }
+.sv-w2 { font-family:var(--font-script); font-size:clamp(70px,14vw,190px); }
+.sv-w3 { font-family:"Press Start 2P",monospace; font-size:clamp(26px,6.5vw,86px); }
+.sv-stickers svg { position:absolute; width:64px; height:64px; filter:drop-shadow(3px 3px 0 var(--primary)); }
+.sv-stickers svg:nth-child(1){top:12%;left:8%;rotate:-12deg}.sv-stickers svg:nth-child(2){top:16%;right:10%;rotate:9deg}.sv-stickers svg:nth-child(3){bottom:14%;left:14%;rotate:6deg}.sv-stickers svg:nth-child(4){bottom:20%;right:16%;rotate:-8deg}
+.sv-stickers { display:none; }
+.sv:not([data-scene=boot]) .sv-stickers { display:block; }
 .sv[data-scene=boot] .sv-boot { display:flex; }
-.sv:is([data-scene=glitch],[data-scene=storm],[data-scene=collapse]) .sv-slices { display:block; }
-.sv[data-scene=glitch] .sv-flash { animation:sv-flash 1.3s steps(1) both; }
-.sv[data-scene=storm] .sv-halftone { opacity:.35; animation:sv-dots .4s steps(2) infinite; }
-.sv[data-scene=storm] .sv-slice { animation-duration:.24s; }
-.sv[data-scene=storm] .sv-flash { animation:sv-flash 2.1s steps(1) infinite; }
-.sv[data-scene=storm] .sv-layered { animation:sv-hop .66s steps(1) infinite; }
-.sv[data-scene=collapse] .sv-slice { animation-duration:.9s; }
-.sv:is([data-scene=name],[data-scene=exit]) .sv-name { display:flex; }
-.sv[data-scene=name] .sv-ch-c,.sv[data-scene=name] .sv-ch-m { animation:sv-settle .7s steps(5) forwards; }
+.sv:is([data-scene=w1],[data-scene=g1]) .sv-w1,.sv:is([data-scene=w2],[data-scene=g2]) .sv-w2,.sv:is([data-scene=w3],[data-scene=exit]) .sv-w3 { display:block; }
+.sv:is([data-scene=w1],[data-scene=w2],[data-scene=w3]) .sv-ch-c,.sv:is([data-scene=w1],[data-scene=w2],[data-scene=w3]) .sv-ch-m { animation:sv-settle .5s steps(4) forwards; }
+.sv:is([data-scene=g1],[data-scene=g2]) .sv-word { animation:sv-jolt .12s steps(2) infinite; }
+.sv:is([data-scene=g1],[data-scene=g2]) .sv-ch-c { transform:translate(-14px,4px); }
+.sv:is([data-scene=g1],[data-scene=g2]) .sv-ch-m { transform:translate(14px,-4px); }
+.sv:is([data-scene=g1],[data-scene=g2]) .sv-flash { animation:sv-flash .5s steps(1) both; }
+.sv:is([data-scene=g1],[data-scene=g2]) .sv-halftone { opacity:.5; }
+.sv:is([data-scene=w2],[data-scene=g2]) { background:var(--primary); --sv-dot:var(--intro-ink); }
+.sv:is([data-scene=w3],[data-scene=exit]) { background:var(--secondary); --sv-text:var(--intro-ink); --sv-dot:var(--intro-paper); }
+.sv:is([data-scene=w3],[data-scene=exit]) .sv-ch-c { color:var(--primary); }
+.sv:is([data-scene=w3],[data-scene=exit]) .sv-ch-m { color:var(--intro-paper); }
 .sv[data-scene=exit] { animation:sv-out .6s ease forwards; }
-.sv[data-scene=exit] .sv-ch-c,.sv[data-scene=exit] .sv-ch-m { opacity:0; }
-@keyframes sv-shear { 0%{transform:translateX(0)} 25%{transform:translateX(-6%)} 50%{transform:translateX(4%)} 75%{transform:translateX(-2%) skewX(-8deg)} 100%{transform:translateX(0)} }
-@keyframes sv-rgb-c { 0%{transform:translate(-8px,3px)} 100%{transform:translate(6px,-2px)} }
-@keyframes sv-rgb-m { 0%{transform:translate(7px,-4px)} 100%{transform:translate(-5px,3px)} }
-@keyframes sv-flash { 0%,100%{opacity:0} 10%{opacity:1} 14%{opacity:0} 52%{opacity:1} 55%{opacity:0} }
-@keyframes sv-dots { 0%{background-size:9px 9px} 100%{background-size:14px 14px} }
-@keyframes sv-hop { 0%{transform:none} 25%{transform:scale(1.12) rotate(-2deg)} 50%{transform:translate(3%,-4%) scaleX(.9)} 75%{transform:scale(.94) skewX(10deg)} }
-@keyframes sv-collapse { to{transform:scaleY(.02); opacity:0} }
-@keyframes sv-settle { 0%{opacity:1} 100%{transform:none; opacity:0} }
+@keyframes sv-jolt { 0%{transform:translateX(-3%) skewX(-6deg)} 100%{transform:translateX(3%) skewX(6deg)} }
+@keyframes sv-flash { 0%{opacity:1} 30%{opacity:0} 60%{opacity:.8} 80%,100%{opacity:0} }
+@keyframes sv-settle { to{transform:none; opacity:0} }
 @keyframes sv-out { to{opacity:0} }
-@media(max-width:600px) { .sv-boot{font-size:10px;left:6%} }
+@media(max-width:600px) { .sv-boot{font-size:10px;left:6%} .sv-stickers svg{width:44px;height:44px} }
