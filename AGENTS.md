@@ -16,4 +16,4 @@
 - Keep structured academic records in `src/lib/education.ts` and render them through the dedicated Education section, so course status and credential links stay independently testable.
 - Register reusable Interests uploads through descriptively named asset pointers and `src/lib/interests-assets.ts`, so importing media does not prematurely change the gallery presentation.
 - Keep the animated greeting's full text in the layout and accessible labels, revealing characters after hydration and skipping motion when requested, to avoid layout shifts and preserve readability.
-- Keep the intro isolated in its own component with deterministic scene timers and original SVG/CSS textures; start the portfolio typewriter only after dismissal so presentation experiments cannot change portfolio content.
+- The cinematic intro is archived in `src/archive/intro/` (not imported anywhere); see its README to restore.

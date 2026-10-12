@@ -1,23 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useCallback, useEffect, useRef, useState } from "react";
-import { CinematicIntro } from "@/components/cinematic-intro";
+import { useEffect, useRef, useState } from "react";
 import { EducationSection } from "@/components/education-section";
 import { InterestsArc } from "@/components/interests-arc";
-import { ArrowUpRight, Download, Github, Linkedin, Menu, Play, X } from "lucide-react";
-
-function PumpkinToggle() {
-  return (
-    <svg width="20" height="22" viewBox="0 0 40 44" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <path d="M20 8 C20 4 23 1 26 4" stroke="#4a7520" strokeWidth="2.5" strokeLinecap="round"/>
-      <ellipse cx="7" cy="28" rx="7" ry="10" fill="#CC5500"/>
-      <ellipse cx="33" cy="28" rx="7" ry="10" fill="#CC5500"/>
-      <ellipse cx="20" cy="28" rx="14" ry="14" fill="#E86400"/>
-      <polygon points="12,25 15,21 18,25" fill="#1a0500"/>
-      <polygon points="22,25 25,21 28,25" fill="#1a0500"/>
-      <path d="M11 33 L14 36 L17 33 L20 36 L23 33 L26 36 L29 33" stroke="#1a0500" strokeWidth="1.8" fill="none" strokeLinecap="round" strokeLinejoin="round"/>
-    </svg>
-  );
-}
+import { ArrowUpRight, Download, Github, Linkedin, Menu, X } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -51,19 +36,6 @@ function ResumeLink() {
 
 function Index() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [altTheme, setAltTheme] = useState(false);
-  const [showToast, setShowToast] = useState(false);
-  const toastTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const toggleTheme = () => {
-    const next = !altTheme;
-    document.documentElement.classList.toggle("alt-theme", next);
-    setAltTheme(next);
-    if (next) {
-      if (toastTimer.current) clearTimeout(toastTimer.current);
-      setShowToast(true);
-      toastTimer.current = setTimeout(() => setShowToast(false), 3500);
-    }
-  };
   const progressRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const onScroll = () => {
@@ -98,24 +70,10 @@ function Index() {
   const [active, setActive] = useState(0);
   const [paused, setPaused] = useState(false);
   const [typedCharacters, setTypedCharacters] = useState(0);
-  const [intro, setIntro] = useState<"pending" | "playing" | "done">("pending");
   const greeting = "Hi I'm";
   const name = "Paavan Randhawa!";
   const greetingLength = greeting.length + name.length;
-  const finishIntro = useCallback(() => {
-    setIntro("done");
-  }, []);
   useEffect(() => {
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    setIntro(reduce ? "done" : "playing");
-  }, []);
-  useEffect(() => {
-    const previousOverflow = document.documentElement.style.overflow;
-    document.documentElement.style.overflow = intro === "done" ? "" : "hidden";
-    return () => { document.documentElement.style.overflow = previousOverflow; };
-  }, [intro]);
-  useEffect(() => {
-    if (intro !== "done") { setTypedCharacters(0); return; }
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       setTypedCharacters(greetingLength);
       return;
@@ -127,7 +85,7 @@ function Index() {
       });
     }, 85);
     return () => window.clearInterval(timer);
-  }, [greetingLength, intro]);
+  }, [greetingLength]);
   useEffect(() => {
     if (!api) return;
     const update = () => setActive(api.selectedScrollSnap());
@@ -142,13 +100,10 @@ function Index() {
   }, [api, paused, active]);
   return <div className="portfolio-shell">
     <div ref={progressRef} className="scroll-progress" aria-hidden="true" />
-    {intro === "pending" && <div className="intro" aria-hidden="true" />}
-    {intro === "playing" && <CinematicIntro onDone={finishIntro} />}
     <header className="portfolio-nav">
       <a href="#about" className="wordmark">Paavan Randhawa</a>
       <Button variant="ghost" size="icon" className="menu-toggle" aria-label={menuOpen ? "Close menu" : "Open menu"} aria-expanded={menuOpen} aria-controls="main-navigation" onClick={() => setMenuOpen(!menuOpen)}>{menuOpen ? <X /> : <Menu />}</Button>
       <nav id="main-navigation" className="nav-links" data-open={menuOpen} aria-label="Main navigation">{sections.map(section => <a key={section} href={`#${section.toLowerCase()}`} onClick={() => setMenuOpen(false)}>{section}</a>)}</nav>
-      <Button variant="ghost" size="icon" onClick={toggleTheme} aria-label="Toggle Halloween theme" title="Toggle Halloween theme"><PumpkinToggle /></Button>
       <Button asChild className="nav-cta"><a href={github} target="_blank" rel="noopener noreferrer">Visit GitHub <ArrowUpRight size={15} /></a></Button>
     </header>
     <main>
@@ -207,11 +162,6 @@ function Index() {
         )}
       </section>
     </main>
-    <footer className="portfolio-footer"><nav aria-label="Footer navigation">{sections.map(section => <a key={section} href={`#${section.toLowerCase()}`}>{section}</a>)}</nav><Button variant="ghost" className="replay-intro" onClick={() => { window.scrollTo({ top: 0, behavior: "instant" }); setIntro("playing"); }}><Play size={11} /> Replay Intro</Button><p>© All Rights Reserved | Paavan Randhawa</p></footer>
-    {showToast && (
-      <div className="halloween-toast" role="status" aria-live="polite">
-        <PumpkinToggle /> You've switched to the Special Halloween Edition
-      </div>
-    )}
+    <footer className="portfolio-footer"><nav aria-label="Footer navigation">{sections.map(section => <a key={section} href={`#${section.toLowerCase()}`}>{section}</a>)}</nav><p>© All Rights Reserved | Paavan Randhawa</p></footer>
   </div>;
 }

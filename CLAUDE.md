@@ -25,8 +25,6 @@ Single-page portfolio rendered via **TanStack Start** (SSR framework on top of T
 - `src/routes/index.tsx` — the entire portfolio (one route, one component `Index`)
 
 **`src/routes/index.tsx`** is the heart of the site. It owns:
-- The `altTheme` (Halloween) toggle state — session-only, never persisted
-- The cinematic intro lifecycle (`intro` state: `"playing" | "done"`)
 - Scroll progress bar (via `progressRef` updated in the scroll listener)
 - The typewriter greeting, project carousel, and contact form
 
@@ -34,7 +32,7 @@ Single-page portfolio rendered via **TanStack Start** (SSR framework on top of T
 - `src/lib/portfolio-content.json` — bio, projects, skills, interests text
 - `src/lib/education.ts` — structured course list with SFU calendar links; edit here for course changes
 
-**Styling** is entirely in `src/styles.css` — Tailwind 4 with CSS custom properties. Theme tokens (`--background`, `--primary`, `--secondary`, etc.) are defined on `:root`; the Halloween alt-theme overrides them on `html.alt-theme`. No Tailwind utility classes for layout/typography — everything is hand-authored CSS classes (`.portfolio-nav`, `.portfolio-shell`, etc.).
+**Styling** is entirely in `src/styles.css` — Tailwind 4 with CSS custom properties. Theme tokens (`--background`, `--primary`, `--secondary`, etc.) are defined on `:root`. No Tailwind utility classes for layout/typography — everything is hand-authored CSS classes (`.portfolio-nav`, `.portfolio-shell`, etc.).
 
 **shadcn/ui** components are in `src/components/ui/` and use the `new-york` style. Add new ones with `npx shadcn@latest add <component>`.
 
@@ -47,7 +45,7 @@ Single-page portfolio rendered via **TanStack Start** (SSR framework on top of T
   - When portaled, inline `bottom:"auto"` and `right:"auto"` cancel any conflicting CSS class properties (e.g. `.portrait-heart-wrap { bottom:12px; right:-18px }` would otherwise stretch the element).
   - CSS color rules for stickers must not require a parent selector (e.g. `.projects-star`, not `.section-heading .projects-star`) — the portaled element loses its original DOM ancestry.
 - `InterestsArc` — polaroid stack carousel. The `cards` array at the top of the file controls photo order and badge overlays; edit there to add/reorder photos. Images are served from `/images/interests/` and `/stickers/` (public folder), not imported as assets.
-- `CinematicIntro` — self-contained animated intro with deterministic scene timers; total runtime is 8500ms. Skip via Escape or click. Calls `onDone` when complete.
+- Cinematic intro is archived in `src/archive/intro/` (see its README to restore). Halloween mode was removed permanently.
 - `PixelSticker` — inline SVG pixel-art stickers using CSS custom property colors (`var(--foreground)`, `var(--secondary)`, etc.).
 
 ## Important constraints

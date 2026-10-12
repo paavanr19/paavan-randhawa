@@ -1,6 +1,6 @@
 import { act, fireEvent, render, cleanup } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { CinematicIntro } from "@/components/cinematic-intro";
+import { CinematicIntro } from "./cinematic-intro";
 
 describe("Intro playback", () => {
   beforeEach(() => {
