@@ -490,7 +490,7 @@ html::-webkit-scrollbar,body::-webkit-scrollbar { display:none; }
 .sv[data-scene=storm] .sv-slice { animation-duration:.24s; }
 .sv[data-scene=storm] .sv-flash { animation:sv-flash 2.1s steps(1) infinite; }
 .sv[data-scene=storm] .sv-layered { animation:sv-hop .66s steps(1) infinite; }
-.sv[data-scene=collapse] .sv-slices { animation:sv-collapse .6s steps(4) forwards; }
+.sv[data-scene=collapse] .sv-slice { animation-duration:.9s; }
 .sv:is([data-scene=name],[data-scene=exit]) .sv-name { display:flex; }
 .sv[data-scene=name] .sv-ch-c,.sv[data-scene=name] .sv-ch-m { animation:sv-settle .7s steps(5) forwards; }
 .sv[data-scene=exit] { animation:sv-out .6s ease forwards; }

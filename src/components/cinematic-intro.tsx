@@ -51,7 +51,7 @@ export function CinematicIntro({ onDone }: { onDone: () => void }) {
   const lines = Math.min(BOOT_LINES.length, Math.floor(time / 420) + 1);
 
   return (
-    <div className="intro sv" data-scene={scene} role="dialog" aria-modal="true" aria-label="Welcome to my portfolio — Paavan Randhawa">
+    <div className="intro sv" data-scene={scene} role="dialog" aria-modal="true" aria-label="Welcome to my portfolio">
       <svg className="intro-grain" aria-hidden="true" width="100%" height="100%"><filter id="intro-noise"><feTurbulence type="fractalNoise" baseFrequency=".78" numOctaves="3" stitchTiles="stitch" /><feColorMatrix type="saturate" values="0" /></filter><rect width="100%" height="100%" filter="url(#intro-noise)" /></svg>
       <div className="intro-scanlines" aria-hidden="true" />
       <div className="sv-halftone" aria-hidden="true" />
@@ -70,7 +70,7 @@ export function CinematicIntro({ onDone }: { onDone: () => void }) {
             </div>
           ))}
         </div>
-        <div className="sv-name"><Layered text="PAAVAN" className="sv-big" /><Layered text="RANDHAWA" className="sv-big" /></div>
+        <div className="sv-name">{WORDS.map(w => <Layered key={w} text={w} className={w === "TO MY" ? "sv-small" : "sv-big"} />)}</div>
       </div>
       <Button ref={skipRef} type="button" variant="ghost" className="intro-skip" onClick={onDone} aria-label="Skip intro">SKIP INTRO <span aria-hidden="true">↗</span></Button>
     </div>
