@@ -14,7 +14,7 @@ My personal portfolio website. It introduces me, showcases my projects, lists my
 - **Education section** with my relevant SFU courses and grouped technical skills
 - **Interests section** with photos (lazy-loaded)
 - **Contact form** sent through [Web3Forms](https://web3forms.com/), with a hidden spam-trap field, so no backend is needed
-- **Pixel-art stickers** as decorative accents throughout the page
+- **Pixel-art envelope** sticker beside the Contact heading
 - **Responsive layout** with a collapsible menu on small screens
 - Links to my **GitHub** and **LinkedIn**
 
@@ -57,7 +57,7 @@ paavan-randhawa/
 ├── public/                 # Static files
 ├── src/
 │   ├── routes/             # Pages (index.tsx is the portfolio)
-│   ├── components/         # UI components and pixel stickers
+│   ├── components/         # UI components and the pixel envelope sticker
 │   ├── lib/                # Portfolio text content
 │   ├── assets/             # Photos and resume
 │   └── styles.css          # Global styles and typography

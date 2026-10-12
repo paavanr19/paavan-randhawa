@@ -69,21 +69,24 @@ function Index() {
   const [active, setActive] = useState(0);
   const [paused, setPaused] = useState(false);
   const [typedCharacters, setTypedCharacters] = useState(0);
-  const greeting = "Hi I'm";
   const name = "Paavan Randhawa!";
+  const greeting = "Hi I'm";
   const greetingLength = greeting.length + name.length;
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       setTypedCharacters(greetingLength);
       return;
     }
-    const timer = window.setInterval(() => {
-      setTypedCharacters(count => {
-        if (count + 1 >= greetingLength) window.clearInterval(timer);
-        return Math.min(count + 1, greetingLength);
-      });
-    }, 85);
-    return () => window.clearInterval(timer);
+    let timer: number | undefined;
+    const start = window.setTimeout(() => {
+      timer = window.setInterval(() => {
+        setTypedCharacters(count => {
+          if (count + 1 >= greetingLength) window.clearInterval(timer);
+          return Math.min(count + 1, greetingLength);
+        });
+      }, 85);
+    }, 1500);
+    return () => { window.clearTimeout(start); window.clearInterval(timer); };
   }, [greetingLength]);
   useEffect(() => {
     if (!api) return;
@@ -108,18 +111,16 @@ function Index() {
     <main>
       <section id="about" className="original-about">
         <div className="original-about-copy">
-          <p className="hello" aria-label={greeting}><span aria-hidden="true">{greeting.slice(0, typedCharacters)}<span className="typewriter-pending">{greeting.slice(typedCharacters)}</span></span></p>
+          <p className="hello" aria-label={greeting}><span className="terminal-prompt" aria-hidden="true">&gt;_</span> {typedCharacters === 0 && <span className="terminal-caret" aria-hidden="true">|</span>}<span aria-hidden="true">{greeting.slice(0, typedCharacters)}<span className="typewriter-pending">{greeting.slice(typedCharacters)}</span></span></p>
           <h1 aria-label={name} data-typing={typedCharacters > greeting.length && typedCharacters < greetingLength}><span aria-hidden="true">{name.slice(0, Math.max(0, typedCharacters - greeting.length))}<span className="typewriter-pending">{name.slice(Math.max(0, typedCharacters - greeting.length))}</span></span></h1>
-          <p className="lead">Student at Simon Fraser University</p>
-          <span className="status-badge"><span className="status-dot" aria-hidden="true" />Currently seeking Summer 2027 Co-op</span>
           <p className="bio">{content.bio}</p>
           <div className="btn-group"><ResumeLink /><Button asChild className="portfolio-button"><a href="#contact">Contact <ArrowUpRight size={16} /></a></Button></div>
           <div className="socials"><Button asChild variant="ghost" size="icon"><a href={github} target="_blank" rel="noopener noreferrer" aria-label="GitHub" title="GitHub"><Github /></a></Button><Button asChild variant="ghost" size="icon"><a href={linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" title="LinkedIn"><Linkedin /></a></Button></div>
         </div>
-        <figure className="original-portrait"><img src={portrait.url} alt="Paavan Randhawa" fetchPriority="high" /><span className="portrait-star-wrap"><PixelSticker className="portrait-star" /></span><span className="portrait-heart-wrap"><PixelSticker kind="heart" className="portrait-heart" /></span></figure>
+        <figure className="original-portrait"><img src={portrait.url} alt="Paavan Randhawa" fetchPriority="high" /></figure>
       </section>
       <section id="projects" className="original-projects">
-        <div className="section-heading"><h2 className="section-title">Projects</h2><PixelSticker className="projects-star" /></div>
+        <div className="section-heading"><h2 className="section-title">Projects</h2></div>
         <Carousel opts={{ loop: true }} setApi={setApi} className="original-carousel" aria-label="Projects" onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)} onFocusCapture={() => setPaused(true)} onBlurCapture={event => { if (!event.currentTarget.contains(event.relatedTarget)) setPaused(false); }}>
           <CarouselContent>{content.projects.map((project, index) => <CarouselItem key={project.title} aria-hidden={active !== index}><article className="original-project"><h3>{project.title}</h3><div className="tech-chips">{project.tech.map(t => <span key={t} className="tech-chip">{t}</span>)}</div><Button asChild variant="outline" className="portfolio-button"><a href={project.href} target="_blank" rel="noopener noreferrer" tabIndex={active === index ? 0 : -1}>View project <ArrowUpRight size={16} /></a></Button><p>{project.description}</p></article></CarouselItem>)}</CarouselContent>
           <CarouselPrevious className="project-arrow" aria-label="Previous project" title="Previous project" /><CarouselNext className="project-arrow" aria-label="Next project" title="Next project" />
@@ -128,12 +129,12 @@ function Index() {
       </section>
       <EducationSection />
       <section id="interests" className="original-interests">
-        <div><div className="section-heading"><h2 className="section-title">Interests</h2><PixelSticker kind="heart" className="interests-heart" /></div><p>{content.interests}</p></div>
+        <div><div className="section-heading"><h2 className="section-title">Interests</h2></div><p>{content.interests}</p></div>
         <InterestsArc />
       </section>
       <section id="contact" className="original-contact">
         <div className="contact-header">
-          <div className="section-heading"><h2 className="section-title">Contact Me</h2><PixelSticker kind="envelope" className="contact-envelope" /></div>
+          <div className="section-heading"><h2 className="section-title">Contact Me</h2><PixelSticker className="contact-envelope" /></div>
           <p>{content.contact}</p>
         </div>
         {formState === "success" ? (

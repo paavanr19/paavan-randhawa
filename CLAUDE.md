@@ -40,7 +40,7 @@ Single-page portfolio rendered via **TanStack Start** (SSR framework on top of T
 
 - `InterestsArc` — polaroid stack carousel. The `cards` array at the top of the file controls photo order and badge overlays; edit there to add/reorder photos. Images are served from `/images/interests/` and `/stickers/` (public folder), not imported as assets.
 - Cinematic intro is archived in `src/archive/intro/` (see its README to restore). Halloween mode was removed permanently.
-- `PixelSticker` — inline SVG pixel-art stickers using CSS custom property colors (`var(--foreground)`, `var(--secondary)`, etc.).
+- `PixelSticker` — the single inline SVG pixel-art envelope shown beside "Contact Me"; the other stickers were removed.
 
 ## Important constraints
 
