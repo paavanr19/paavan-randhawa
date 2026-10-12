@@ -7,7 +7,6 @@ import { ArrowUpRight, Download, Github, Linkedin, Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext, type CarouselApi } from "@/components/ui/carousel";
 import { PixelSticker } from "@/components/pixel-sticker";
 import content from "@/lib/portfolio-content.json";
 const portrait = { url: "/images/pfp.png" };
@@ -65,12 +64,9 @@ function Index() {
       setFormState("error");
     }
   };
-  const [api, setApi] = useState<CarouselApi>();
-  const [active, setActive] = useState(0);
-  const [paused, setPaused] = useState(false);
   const [typedCharacters, setTypedCharacters] = useState(0);
   const name = "Paavan Randhawa!";
-  const greeting = "Hi I'm";
+  const greeting = "Hi, I'm";
   const greetingLength = greeting.length + name.length;
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
@@ -88,18 +84,6 @@ function Index() {
     }, 1500);
     return () => { window.clearTimeout(start); window.clearInterval(timer); };
   }, [greetingLength]);
-  useEffect(() => {
-    if (!api) return;
-    const update = () => setActive(api.selectedScrollSnap());
-    update();
-    api.on("select", update);
-    return () => { api.off("select", update); };
-  }, [api]);
-  useEffect(() => {
-    if (!api || paused || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const timer = window.setInterval(() => api.scrollNext(), 5000);
-    return () => window.clearInterval(timer);
-  }, [api, paused, active]);
   return <div className="portfolio-shell">
     <div ref={progressRef} className="scroll-progress" aria-hidden="true" />
     <header className="portfolio-nav">
@@ -121,11 +105,9 @@ function Index() {
       </section>
       <section id="projects" className="original-projects">
         <div className="section-heading"><h2 className="section-title">Projects</h2></div>
-        <Carousel opts={{ loop: true }} setApi={setApi} className="original-carousel" aria-label="Projects" onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)} onFocusCapture={() => setPaused(true)} onBlurCapture={event => { if (!event.currentTarget.contains(event.relatedTarget)) setPaused(false); }}>
-          <CarouselContent>{content.projects.map((project, index) => <CarouselItem key={project.title} aria-hidden={active !== index}><article className="original-project"><h3>{project.title}</h3><div className="tech-chips">{project.tech.map(t => <span key={t} className="tech-chip">{t}</span>)}</div><Button asChild variant="outline" className="portfolio-button"><a href={project.href} target="_blank" rel="noopener noreferrer" tabIndex={active === index ? 0 : -1}>View project <ArrowUpRight size={16} /></a></Button><p>{project.description}</p></article></CarouselItem>)}</CarouselContent>
-          <CarouselPrevious className="project-arrow" aria-label="Previous project" title="Previous project" /><CarouselNext className="project-arrow" aria-label="Next project" title="Next project" />
-          <div className="carousel-dots">{content.projects.map((project, index) => <Button key={project.title} variant="ghost" size="icon" className="carousel-dot" data-active={active === index} aria-label={`Go to project ${index + 1}`} aria-pressed={active === index} onClick={() => api?.scrollTo(index)}><span /></Button>)}</div>
-        </Carousel>
+        <div className="project-grid">
+          {content.projects.map(project => <article key={project.title} className="original-project"><img className="project-image" src={project.image} alt={project.imageAlt} loading="lazy" /><div className="project-body"><h3>{project.title}</h3><Button asChild variant="outline" className="portfolio-button"><a href={project.href} target="_blank" rel="noopener noreferrer">View project <ArrowUpRight size={16} /></a></Button><p>{project.description}</p></div></article>)}
+        </div>
       </section>
       <EducationSection />
       <section id="interests" className="original-interests">
@@ -162,6 +144,6 @@ function Index() {
         )}
       </section>
     </main>
-    <footer className="portfolio-footer"><nav aria-label="Footer navigation">{sections.map(section => <a key={section} href={`#${section.toLowerCase()}`}>{section}</a>)}</nav><p>© All Rights Reserved | Paavan Randhawa</p></footer>
+    <footer className="portfolio-footer"><nav aria-label="Footer navigation">{sections.map(section => <a key={section} href={`#${section.toLowerCase()}`}>{section}</a>)}</nav><p>© 2026 Paavan Randhawa</p></footer>
   </div>;
 }

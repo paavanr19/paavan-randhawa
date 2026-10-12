@@ -1,29 +1,51 @@
 {
-  "bio": "I'm a third-year Mathematics and Computing Science student at Simon Fraser University. I love solving problems, whether that's building software, working with data, or figuring out what makes a product great for the people using it.",
+  "bio": "I'm a third-year Mathematics and Computing Science student at Simon Fraser University. I love solving problems, whether that's building software, working with data, or figuring out what makes a product great for the people using it. I'm currently looking for Summer 2027 internship and co-op opportunities in software engineering, data, and product management.",
   "projects": [
     {
-      "title": "Rubik’s Cube Solver",
-      "href": "https://github.com/paavanr19/rubikscubesolver",
-      "tech": ["Java"],
-      "description": "A Rubik’s Cube solving program that takes a cube configuration as input and uses the two-phase Kociemba algorithm to calculate an efficient solution. It parses cube states from files, processes the cube configuration, and generates step-by-step instructions for solving the cube."
-    },
-    {
-      "title": "Pocoloco",
-      "href": "https://github.com/paavanr19/pocoloco",
-      "tech": ["Python"],
-      "description": "A multiplayer dice game where players compete to be the first to lose all of their chips. The game features randomized turn order, custom scoring mechanics, and special dice combinations such as Poco, Loco, and three-of-a-kind rolls. It processes each player’s dice rolls, applies the corresponding scoring rules, and updates chip counts throughout each round."
+      "title": "Unix Shell",
+      "image": "/images/projects/unixshell.png",
+      "imageAlt": "Terminal running the custom Unix shell with ls, pwd, cd, echo and history commands",
+      "href": "https://github.com/SFU-CMPT-201/a8-paavanr13",
+      "tech": [
+        "Linux",
+        "C",
+        "CMake"
+      ],
+      "description": "A Unix-style command-line shell in C with support for process creation and execution, foreground and background processes, built-in commands, signal handling, and command history. Process management uses fork(), exec(), and waitpid(), with Linux system calls and CMake for configuration and builds."
     },
     {
       "title": "Mythos Seafarer",
+      "image": "/images/projects/mythosseafarer.png",
+      "imageAlt": "Screenshot of Mythos Seafarer: a top-down dungeon level with enemies, traps and treasure",
       "href": "https://github.sfu.ca/saba/CMPT276S26_Group7",
-      "tech": ["Java", "Maven", "JUnit", "JaCoCo", "Javadoc"],
+      "tech": [
+        "Java",
+        "Maven",
+        "JUnit",
+        "JaCoCo",
+        "Javadoc"
+      ],
       "description": "A Java-based arcade-style game built using Processing. Players navigate through multiple levels, avoid enemies, collect rewards, and progress through different maps. The game features interactive gameplay, level progression, and increasing challenges as players advance."
     },
     {
-      "title": "Unix Shell",
-      "href": "https://github.com/SFU-CMPT-201/a8-paavanr13",
-      "tech": ["Linux", "C", "CMake"],
-      "description": "A Unix-style command-line shell in C with support for process creation and execution, foreground and background processes, built-in commands, signal handling, and command history. Process management uses fork(), exec(), and waitpid(), with Linux system calls and CMake for configuration and builds."
+      "title": "Pocoloco",
+      "image": "/images/projects/pocoloco.png",
+      "imageAlt": "Terminal output of Pocoloco showing the player turn order and dice rolls drawn in ASCII",
+      "href": "https://github.com/paavanr19/pocoloco",
+      "tech": [
+        "Python"
+      ],
+      "description": "A multiplayer dice game where players compete to be the first to lose all of their chips. The game features randomized turn order, custom scoring mechanics, and special dice combinations such as Poco, Loco, and three-of-a-kind rolls. It processes each player’s dice rolls, applies the corresponding scoring rules, and updates chip counts throughout each round."
+    },
+    {
+      "title": "Rubik’s Cube Solver",
+      "image": "/images/projects/rubiks.png",
+      "imageAlt": "Terminal running the Rubik’s Cube solver on an input cube file and printing the solution",
+      "href": "https://github.com/paavanr19/rubikscubesolver",
+      "tech": [
+        "Java"
+      ],
+      "description": "A Rubik’s Cube solving program that takes a cube configuration as input and uses the two-phase Kociemba algorithm to calculate an efficient solution. It parses cube states from files, processes the cube configuration, and generates step-by-step instructions for solving the cube."
     }
   ],
   "courses": [
@@ -44,11 +66,11 @@
     },
     {
       "title": "Web Development",
-      "description": "HTML · CSS · JavaScript · Bootstrap"
+      "description": "HTML · CSS · Bootstrap"
     },
     {
       "title": "Systems & Tools",
-      "description": "Unix · Linux · CMake · Maven · MATLAB · Claude Code"
+      "description": "Unix · Linux · CMake · Maven · MATLAB · Git / GitHub · Claude Code"
     },
     {
       "title": "Testing & Documentation",

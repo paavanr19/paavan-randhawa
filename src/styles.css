@@ -181,8 +181,6 @@ html::-webkit-scrollbar,body::-webkit-scrollbar { display:none; }
 .menu-toggle { display:none; }
 .scroll-progress { position:fixed; top:0; left:0; height:4px; width:0%; background:var(--leaf); z-index:100; pointer-events:none; box-shadow:0 0 8px var(--leaf); }
 .nav-links a.active { font-weight:600; text-decoration:underline; text-underline-offset:5px; }
-.tech-chips { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:18px; }
-.tech-chip { font-size:11px; padding:3px 10px; border:1.5px solid var(--foreground); color:var(--foreground); opacity:0.55; letter-spacing:0.03em; }
 .original-about { display:grid; grid-template-columns:1.1fr 1fr; gap:4%; align-items:center; padding:65px 8% 75px; }
 .hello { font-family:var(--font-display); font-size:35px; color:var(--primary); }
 .original-about h1 { font-family:var(--font-display); font-weight:400; font-size:64px; line-height:1.1; color:var(--primary); margin:8px 0 28px; min-height:1.15em; max-width:none; }
@@ -205,22 +203,16 @@ html::-webkit-scrollbar,body::-webkit-scrollbar { display:none; }
 .contact-envelope { color:var(--leaf); transform:rotate(-8deg); }
 h2,h3 { font-family:var(--font-display); font-weight:400; }
 .section-title { font-family:var(--font-display); font-size:50px; line-height:1.15; font-weight:400; color:var(--primary); margin-bottom:36px; }
-.original-projects { padding:60px max(8%,76px); background:var(--primary); color:var(--background); }
+.original-projects { padding:40px 8%; background:var(--primary); color:var(--background); }
 .original-projects .section-title { color:var(--background); }
-.original-carousel { max-width:820px; margin:auto; }
-.original-carousel .project-arrow { background:var(--leaf); color:var(--primary); border-color:var(--leaf); width:38px; height:38px; }
-.original-carousel .project-arrow.project-arrow:first-of-type { left:-58px; }
-.original-carousel .project-arrow.project-arrow:last-of-type { right:-58px; }
-.original-carousel .project-arrow:hover { background:var(--background); color:var(--primary); }
-.original-carousel .project-arrow svg { width:22px; height:22px; stroke-width:2.5; }
-.original-project { min-height:310px; padding:32px; background:var(--background); color:var(--foreground); border-radius:4px; }
-.original-project h3 { font-family:var(--font-display); font-size:34px; color:var(--primary); margin-bottom:20px; }
-.original-project p { font-size:15px; line-height:1.85; margin-top:22px; }
-.carousel-dots { display:flex; justify-content:center; margin-top:20px; gap:4px; }
-.carousel-dot { width:30px; height:30px; color:var(--background); }
-.carousel-dot span { width:7px; height:7px; border-radius:50%; background:currentColor; opacity:.4; }
-.carousel-dot[data-active=true] span { opacity:1; width:20px; border-radius:3px; }
-.carousel-dot:hover { background:var(--soil); color:var(--background); }
+.project-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px; max-width:1240px; margin:auto; align-items:stretch; grid-auto-rows:1fr; }
+.original-project { display:grid; grid-template-columns:240px minmax(0,1fr); gap:18px; align-items:start; height:100%; padding:16px; background:var(--background); color:var(--foreground); border-radius:4px; }
+.project-image { width:100%; aspect-ratio:4/3; object-fit:cover; border:1.5px solid var(--foreground); }
+.project-body { display:flex; flex-direction:column; align-items:flex-start; min-width:0; }
+.original-project .portfolio-button { min-height:30px; height:30px; padding:0 12px; font-size:12px; gap:4px; }
+.original-project .portfolio-button svg { width:13px; height:13px; }
+.original-project h3 { font-family:var(--font-display); font-size:32px; line-height:1.1; color:var(--primary); margin-bottom:8px; }
+.original-project p { font-size:13px; line-height:1.55; margin-top:10px; }
 .original-education { padding:65px 8%; }
 .education-note { color:var(--muted-foreground); }
 .education-note { font-size:12px; line-height:1.7; }
@@ -279,8 +271,7 @@ h2,h3 { font-family:var(--font-display); font-weight:400; }
  .original-about {grid-template-columns:1fr;padding:40px 7% 45px;gap:20px;} .original-about h1 {font-size:44px;margin-bottom:20px;} .hello {font-size:28px;} .bio {font-size:14px;} .original-portrait {max-width:310px;justify-self:center;} .original-portrait img {aspect-ratio:4/4.5;border-radius:75px 0 75px 0;}
  .section-title {font-size:38px;margin-bottom:25px;} .original-projects,.original-education,.original-interests,.original-contact {padding:45px 7%;}
  .section-heading {gap:12px;margin-bottom:25px;} .section-heading .pixel-sticker {width:30px;height:30px;}
- .original-carousel {margin:0 40px;} .original-carousel .project-arrow {width:30px;height:30px;} .original-carousel .project-arrow.project-arrow:first-of-type {left:-40px;} .original-carousel .project-arrow.project-arrow:last-of-type {right:-40px;}
- .original-project {padding:22px;min-height:470px;} .original-project h3 {font-size:29px;} .original-project p {font-size:14px;line-height:1.85;}
+ .original-project {padding:14px;grid-template-columns:1fr;gap:12px;} .project-image {aspect-ratio:16/9;} .original-project h3 {font-size:26px;} .original-project p {font-size:12px;line-height:1.6;}
  .education-grid,.original-interests {grid-template-columns:1fr;gap:20px;} .education-grid h3,.certifications h3 {font-size:22px;} .original-interests p {font-size:14px;} .polaroid-stack-wrap {align-self:center;} .portfolio-footer {font-size:11px;} .portfolio-footer nav {gap:15px;}
 }
 @media(prefers-reduced-motion:reduce) { html {scroll-behavior:auto;} *,*::before,*::after {transition:none!important;animation:none!important;} }
@@ -329,4 +320,4 @@ h2,h3 { font-family:var(--font-display); font-weight:400; }
 .nf-tagline { font-size:15px; color:var(--muted-foreground); margin:0; }
 .not-found-home { display:inline-flex; align-items:center; gap:8px; padding:11px 28px; border:1.5px solid var(--primary); color:var(--primary); background:transparent; font-size:13px; letter-spacing:0.04em; cursor:pointer; text-decoration:none; transition:background 0.15s,color 0.15s; }
 .not-found-home:hover { background:var(--primary); color:var(--background); }
-
+@media(max-width:767px) { .project-grid { grid-template-columns:1fr; } }
