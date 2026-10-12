@@ -127,11 +127,11 @@ export function InterestsArc() {
 
   const handleTouchMove = (e: React.TouchEvent) => {
     if (dragRef.current !== null && !departing)
-      setDragX(Math.max(-90, Math.min(90, e.touches[0].clientX - dragRef.current)));
+      setDragX(Math.max(-90, Math.min(90, (e.touches[0]?.clientX ?? dragRef.current) - dragRef.current)));
   };
   const endTouchDrag = (e: React.TouchEvent) => {
     if (dragRef.current === null) return;
-    const diff = dragRef.current - e.changedTouches[0].clientX;
+    const diff = dragRef.current - (e.changedTouches[0]?.clientX ?? dragRef.current);
     if (Math.abs(diff) > THRESHOLD) triggerDepart(diff > 0 ? "left" : "right");
     else setDragX(0);
     dragRef.current = null;
@@ -156,14 +156,14 @@ export function InterestsArc() {
       <div
         ref={stackRef}
         className="polaroid-stack"
-        onTouchStart={e => startDrag(e.touches[0].clientX)}
+        onTouchStart={e => { const t = e.touches[0]; if (t) startDrag(t.clientX); }}
         onTouchMove={handleTouchMove}
         onTouchEnd={endTouchDrag}
         onMouseDown={e => startDrag(e.clientX)}
         style={{ cursor: grabbing ? "grabbing" : "grab" }}
       >
         {renderItems.map(({ cardIdx, transform, zIndex, transition }) => {
-          const card = cards[cardIdx];
+          const card = cards[cardIdx]; if (!card) return null;
           return (
             <div key={cardIdx} className="polaroid-card" style={{ transform, zIndex, transition }}>
               <img src={card.url} alt={card.alt} loading="lazy" draggable={false} />
