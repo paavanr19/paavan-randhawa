@@ -268,7 +268,7 @@ h2,h3 { font-family:var(--font-display); font-weight:400; }
 .contact-form button { align-self:flex-start; min-width:125px; }
 .contact-error { font-size:13px; color:var(--destructive); }
 .contact-success { grid-area:1/1; width:100%; display:flex; align-items:center; justify-content:center; pointer-events:none; text-align:center; }
-.original-contact .contact-confirm-msg { font-family:var(--font-display); font-size:38px; line-height:1.3; color:var(--primary); text-align:center; margin:0; opacity:0; animation:contact-confirm-in .5s ease 2.8s forwards; }
+.original-contact .contact-confirm-msg { font-family:var(--font-display); font-size:38px; line-height:1.3; color:var(--primary); text-align:center; margin:0; opacity:0; animation:contact-confirm-in .5s ease 2.8s forwards; display:inline-block; width:fit-content; max-width:100%; padding:30px 44px; background:var(--card); border:1px solid var(--border); box-shadow:2px 4px 18px color-mix(in oklch, var(--foreground) 18%, transparent), 0 1px 4px color-mix(in oklch, var(--foreground) 10%, transparent); }
 @keyframes contact-ink-fade { to { opacity:0; } }
 @keyframes contact-fold-left { 0%,10%{opacity:0;transform:rotateY(0deg)} 25%{opacity:1;transform:rotateY(0deg)} 70%,100%{opacity:1;transform:rotateY(155deg)} }
 @keyframes contact-fold-right { 0%,20%{opacity:0;transform:rotateY(0deg)} 40%{opacity:1;transform:rotateY(0deg)} 85%,100%{opacity:1;transform:rotateY(-155deg)} }
@@ -280,8 +280,8 @@ h2,h3 { font-family:var(--font-display); font-weight:400; }
   67% { clip-path:polygon(0 100%,50% 0,100% 100%,73% 86%,50% 68%,27% 86%); transform:translate(-25px,15px) scale(.3) rotate(35deg); opacity:1; }
   100% { clip-path:polygon(0 100%,50% 0,100% 100%,73% 86%,50% 68%,27% 86%); transform:translate(440px,-360px) scale(.15) rotate(55deg); opacity:0; visibility:hidden; }
 }
-@keyframes contact-confirm-in { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
-@media(max-width:800px) { .original-contact .contact-confirm-msg {font-size:32px;} }
+@keyframes contact-confirm-in { from{opacity:0;transform:translateY(14px) scale(.96)} to{opacity:1;transform:translateY(0) scale(1)} }
+@media(max-width:800px) { .original-contact .contact-confirm-msg {font-size:32px; padding:22px 26px;} }
 @media(prefers-reduced-motion:reduce) { .contact-origami-stage[data-sent=true] .contact-form{visibility:hidden} .original-contact .contact-confirm-msg{opacity:1;animation:none} }
 .portfolio-footer { padding:30px 8%; border-top:1px solid var(--border); font-size:12px; display:flex; justify-content:space-between; flex-wrap:wrap; gap:24px; background:var(--secondary); }
 .portfolio-footer nav { display:flex; flex-wrap:wrap; gap:20px; }
