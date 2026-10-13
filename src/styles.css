@@ -268,7 +268,7 @@ h2,h3 { font-family:var(--font-display); font-weight:400; }
 .contact-form button { align-self:flex-start; min-width:125px; }
 .contact-error { font-size:13px; color:var(--destructive); }
 .contact-success { grid-area:1/1; width:100%; display:flex; align-items:center; justify-content:center; pointer-events:none; text-align:center; }
-.original-contact .contact-confirm-msg { font-family:var(--font-display); font-size:38px; line-height:1.3; color:var(--primary); text-align:center; margin:0; opacity:0; animation:contact-confirm-in .5s ease 2.8s forwards; display:inline-block; width:fit-content; max-width:100%; padding:30px 44px; background:var(--card); border:1px solid var(--border); box-shadow:2px 4px 18px color-mix(in oklch, var(--foreground) 18%, transparent), 0 1px 4px color-mix(in oklch, var(--foreground) 10%, transparent); }
+.original-contact .contact-confirm-msg { font-family:var(--font-display); font-size:38px; line-height:1.3; color:var(--primary); text-align:center; margin:0; opacity:0; animation:contact-confirm-in .5s ease 2.8s forwards; display:inline-block; width:fit-content; max-width:100%; padding:30px 44px; background:var(--secondary); border:1px solid color-mix(in oklab, var(--primary) 26%, transparent); box-shadow:2px 4px 18px color-mix(in oklch, var(--foreground) 18%, transparent), 0 1px 4px color-mix(in oklch, var(--foreground) 10%, transparent); }
 @keyframes contact-ink-fade { to { opacity:0; } }
 @keyframes contact-fold-left { 0%,10%{opacity:0;transform:rotateY(0deg)} 25%{opacity:1;transform:rotateY(0deg)} 70%,100%{opacity:1;transform:rotateY(155deg)} }
 @keyframes contact-fold-right { 0%,20%{opacity:0;transform:rotateY(0deg)} 40%{opacity:1;transform:rotateY(0deg)} 85%,100%{opacity:1;transform:rotateY(-155deg)} }
