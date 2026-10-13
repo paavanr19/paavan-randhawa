@@ -1,4 +1,5 @@
 # Portfolio redesign
+- [x] Fold the contact form into a paper airplane after successful delivery and enlarge the centered Instrument Serif confirmation; tests and simulated-send preview verified, including reduced motion.
 - [x] Apply degree, GPA, linked courses, and certifications from PLAN.md; verified all 12 tests and the live course-link flow.
 - [x] Register uploaded photos with descriptive asset names and replace the Wicked Playbill source; verified all 15 asset URLs.
 - [x] Intro upgrades: staged cracks, boot loader, CS pixel stickers, paper-rip reveal (intro since archived to `src/archive/intro/`).
