@@ -255,11 +255,11 @@ h2,h3 { font-family:var(--font-display); font-weight:400; }
 .contact-form { grid-area:1/1; width:100%; position:relative; transform-origin:50% 45%; }
 .contact-form-fields { display:flex; flex-direction:column; gap:18px; }
 .contact-paper-fold,.contact-paper-crease { position:absolute; pointer-events:none; opacity:0; }
-.contact-paper-fold { inset:0; background:var(--card); backface-visibility:hidden; }
+.contact-paper-fold { inset:0; background:var(--leaf); backface-visibility:hidden; }
 .contact-paper-fold-left { clip-path:polygon(0 0,50% 0,50% 100%,0 100%); transform-origin:50% 50%; }
-.contact-paper-fold-right { clip-path:polygon(50% 0,100% 0,100% 100%,50% 100%); transform-origin:50% 50%; background:var(--muted); }
-.contact-paper-crease { inset:0; background:var(--leaf); clip-path:polygon(50% 0,52% 69%,73% 100%,50% 79%); }
-.contact-origami-stage[data-sent=true] .contact-form { background:var(--card); animation:contact-origami 3.2s ease-in-out forwards; }
+.contact-paper-fold-right { clip-path:polygon(50% 0,100% 0,100% 100%,50% 100%); transform-origin:50% 50%; background:var(--primary); }
+.contact-paper-crease { inset:0; background:var(--background); clip-path:polygon(50% 0,52% 69%,73% 100%,50% 79%); }
+.contact-origami-stage[data-sent=true] .contact-form { background:linear-gradient(90deg,var(--leaf) 0 50%,var(--primary) 50% 100%); animation:contact-origami 3.2s ease-in-out forwards; }
 .contact-origami-stage[data-sent=true] .contact-form-fields { animation:contact-ink-fade .4s ease forwards; }
 .contact-origami-stage[data-sent=true] .contact-paper-fold-left { animation:contact-fold-left 1.6s ease-in-out forwards; }
 .contact-origami-stage[data-sent=true] .contact-paper-fold-right { animation:contact-fold-right 1.6s ease-in-out forwards; }
