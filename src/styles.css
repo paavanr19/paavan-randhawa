@@ -245,7 +245,7 @@ h2,h3 { font-family:var(--font-display); font-weight:400; }
 .polaroid-card > img:first-child { width:100%; aspect-ratio:1; object-fit:cover; display:block; filter:sepia(8%) contrast(95%) brightness(0.97); }
 .polaroid-badge { position:absolute; height:auto; filter:drop-shadow(1px 2px 3px rgba(0,0,0,.4)); z-index:2; }
 .polaroid-text-badge { position:absolute; background:var(--background); border:1.5px solid var(--foreground); box-shadow:2px 2px 0 var(--leaf); color:var(--foreground); font-size:10px; font-weight:500; padding:5px 8px; line-height:1.4; max-width:128px; z-index:3; }
-.polaroid-caption { display:block; font-family:"Reenie Beanie", cursive; font-size:22px; text-align:center; color:var(--primary); padding-top:10px; line-height:1; }
+.polaroid-caption { display:block; font-family:"Rock Salt", "Reenie Beanie", cursive; font-size:15px; letter-spacing:.02em; text-align:center; color:var(--primary); padding-top:10px; line-height:1; }
 .polaroid-map-wrap { position:relative; width:100%; aspect-ratio:1; overflow:hidden; }
 .original-contact { padding:65px 8%; display:flex; flex-direction:column; align-items:center; gap:36px; }
 .contact-header { display:flex; flex-direction:column; align-items:center; text-align:center; max-width:580px; }
