@@ -4,6 +4,7 @@ import { EducationSection } from "@/components/education-section";
 import { ContactForm } from "@/components/contact-form";
 import { InterestsArc } from "@/components/interests-arc";
 import { ProjectCard } from "@/components/project-card";
+import { ThemeToggle } from "@/components/theme-toggle";
 import { ArrowUpRight, Download, Github, Linkedin, Menu, X } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -94,6 +95,7 @@ function Index() {
       <Button variant="ghost" size="icon" className="menu-toggle" aria-label={menuOpen ? "Close menu" : "Open menu"} aria-expanded={menuOpen} aria-controls="main-navigation" onClick={() => setMenuOpen(!menuOpen)}>{menuOpen ? <X /> : <Menu />}</Button>
       <nav id="main-navigation" className="nav-links" data-open={menuOpen} aria-label="Main navigation">{sections.map(section => <a key={section} href={`#${section.toLowerCase()}`} onClick={() => setMenuOpen(false)}>{section}</a>)}</nav>
       <Button asChild className="nav-cta"><a href={github} target="_blank" rel="noopener noreferrer">Visit GitHub <ArrowUpRight size={15} /></a></Button>
+      <ThemeToggle />
     </header>
     <main>
       <section id="about" className="original-about">

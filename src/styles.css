@@ -115,6 +115,30 @@
   --sidebar-ring: oklch(0.704 0.04 256.788);
 }
 
+/* Dark theme: Night (toggled via the sun/moon button; light is the default) */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --background: oklch(0.221 0.018 215.0); /* #111D20 */
+  --foreground: oklch(0.944 0.030 90.3); /* #F4ECD6 */
+  --primary: oklch(0.713 0.084 214.8); /* #5FB0C3 */
+  --leaf: oklch(0.653 0.083 215.2); /* #4C9DB0 */
+  --card: oklch(0.269 0.022 216.2); /* #1A292D */
+  --popover: oklch(0.269 0.022 216.2);
+  --secondary: oklch(0.269 0.022 216.2); /* #1A292D */
+  --muted: oklch(0.269 0.022 216.2); /* #1A292D */
+  --band-projects: oklch(0.389 0.038 214.2); /* #2C4A51 */
+  --band-projects-fg: white;
+  --band-education: oklch(0.246 0.020 218.9); /* #162327 */
+  --band-interests: oklch(0.389 0.038 214.2); /* #2C4A51 */
+  --band-interests-heading: white;
+  --band-interests-text: var(--foreground);
+  --band-contact: oklch(0.229 0.018 215.0); /* #131F22 */
+  --band-footer: oklch(0.163 0.010 220.2); /* #090F11 */
+  --band-footer-fg: var(--foreground);
+  --polaroid-paper: oklch(0.729 0.018 103.3); /* #A9A89B */
+  --polaroid-ink: oklch(0.427 0.064 226.3);
+}
+
 .dark {
   --background: oklch(0.129 0.042 264.695);
   --foreground: oklch(0.984 0.003 247.858);
@@ -252,11 +276,11 @@ h2,h3 { font-family:var(--font-display); font-weight:400; }
 .polaroid-stack-wrap { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:20px; justify-self:center; }
 .polaroid-stack { position:relative; width:340px; height:440px; }
 .polaroid-stack .polaroid-card { position:absolute; top:0; left:0; }
-.polaroid-card { position:relative; background:var(--background); padding:12px 12px 56px; box-shadow:2px 4px 18px color-mix(in oklch, var(--foreground) 18%, transparent), 0 1px 4px color-mix(in oklch, var(--foreground) 10%, transparent); width:340px; border:1px solid var(--border); }
+.polaroid-card { position:relative; background:var(--polaroid-paper, var(--background)); padding:12px 12px 56px; box-shadow:2px 4px 18px color-mix(in oklch, var(--foreground) 18%, transparent), 0 1px 4px color-mix(in oklch, var(--foreground) 10%, transparent); width:340px; border:1px solid var(--border); }
 .polaroid-card > img:first-child { width:100%; aspect-ratio:1; object-fit:cover; display:block; filter:sepia(8%) contrast(95%) brightness(0.97); }
 .polaroid-badge { position:absolute; height:auto; filter:drop-shadow(1px 2px 3px rgba(0,0,0,.4)); z-index:2; }
 .polaroid-text-badge { position:absolute; background:var(--background); border:1.5px solid var(--foreground); box-shadow:2px 2px 0 var(--leaf); color:var(--foreground); font-size:10px; font-weight:500; padding:5px 8px; line-height:1.4; max-width:128px; z-index:3; }
-.polaroid-caption { display:block; font-family:"Reenie Beanie", cursive; font-size:22px; text-align:center; color:var(--primary); padding-top:10px; line-height:1; }
+.polaroid-caption { display:block; font-family:"Reenie Beanie", cursive; font-size:22px; text-align:center; color:var(--polaroid-ink, var(--primary)); padding-top:10px; line-height:1; }
 .polaroid-map-wrap { position:relative; width:100%; aspect-ratio:1; overflow:hidden; }
 .original-contact { padding:65px 8%; background:var(--band-contact); display:flex; flex-direction:column; align-items:center; gap:36px; }
 .contact-header { display:flex; flex-direction:column; align-items:center; text-align:center; max-width:580px; }
@@ -378,3 +402,5 @@ h2,h3 { font-family:var(--font-display); font-weight:400; }
 .project-modal-tech { display:flex; flex-wrap:wrap; gap:6px; list-style:none; padding:0; margin:0; }
 .project-modal-tech li { font-size:11px; padding:3px 9px; border:1.5px solid var(--foreground); }
 .project-modal-close { position:absolute; top:10px; right:10px; width:32px; height:32px; display:grid; place-items:center; border:1.5px solid var(--foreground); border-radius:50%; background:var(--background); color:var(--foreground); cursor:pointer; z-index:2; }
+:root[data-theme="dark"] .polaroid-card > img:first-child { filter:sepia(8%) contrast(95%) brightness(0.74); }
+:root[data-theme="dark"] .polaroid-card { box-shadow:2px 4px 10px rgba(0,0,0,.55); }

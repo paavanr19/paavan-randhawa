@@ -97,6 +97,9 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       { rel: "icon", href: "/star.png", type: "image/png" },
     ],
+  scripts: [
+      { children: `try{if(localStorage.getItem("mode")==="dark")document.documentElement.setAttribute("data-theme","dark")}catch(e){}` },
+    ],
   }),
   shellComponent: RootShell,
   component: RootComponent,
@@ -106,7 +109,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <HeadContent />
       </head>
