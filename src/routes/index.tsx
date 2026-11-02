@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { EducationSection } from "@/components/education-section";
 import { ContactForm } from "@/components/contact-form";
 import { InterestsArc } from "@/components/interests-arc";
+import { ProjectCard } from "@/components/project-card";
 import { ArrowUpRight, Download, Github, Linkedin, Menu, X } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -108,7 +109,7 @@ function Index() {
       <section id="projects" className="original-projects">
         <div className="section-heading"><h2 className="section-title">Projects</h2></div>
         <div className="project-grid">
-          {content.projects.map(project => <article key={project.title} className="original-project"><img className="project-image" src={project.image} alt={project.imageAlt} loading="lazy" /><div className="project-body"><h3>{project.title}</h3><Button asChild variant="outline" className="portfolio-button"><a href={project.href} target="_blank" rel="noopener noreferrer">View project <ArrowUpRight size={16} /></a></Button><p>{project.description}</p></div></article>)}
+          {content.projects.map(project => <ProjectCard key={project.title} project={project} />)}
         </div>
       </section>
       <EducationSection />

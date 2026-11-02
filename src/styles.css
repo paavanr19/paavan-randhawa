@@ -245,7 +245,7 @@ h2,h3 { font-family:var(--font-display); font-weight:400; }
 .polaroid-card > img:first-child { width:100%; aspect-ratio:1; object-fit:cover; display:block; filter:sepia(8%) contrast(95%) brightness(0.97); }
 .polaroid-badge { position:absolute; height:auto; filter:drop-shadow(1px 2px 3px rgba(0,0,0,.4)); z-index:2; }
 .polaroid-text-badge { position:absolute; background:var(--background); border:1.5px solid var(--foreground); box-shadow:2px 2px 0 var(--leaf); color:var(--foreground); font-size:10px; font-weight:500; padding:5px 8px; line-height:1.4; max-width:128px; z-index:3; }
-.polaroid-caption { display:block; font-family:"Rock Salt", "Reenie Beanie", cursive; font-size:15px; letter-spacing:.02em; text-align:center; color:var(--primary); padding-top:10px; line-height:1; }
+.polaroid-caption { display:block; font-family:"Reenie Beanie", cursive; font-size:22px; text-align:center; color:var(--primary); padding-top:10px; line-height:1; }
 .polaroid-map-wrap { position:relative; width:100%; aspect-ratio:1; overflow:hidden; }
 .original-contact { padding:65px 8%; display:flex; flex-direction:column; align-items:center; gap:36px; }
 .contact-header { display:flex; flex-direction:column; align-items:center; text-align:center; max-width:580px; }
@@ -353,3 +353,17 @@ h2,h3 { font-family:var(--font-display); font-weight:400; }
   .original-project .portfolio-button { grid-column:2; grid-row:2; align-self:start; justify-self:start; }
   .original-project p { grid-column:1 / -1; grid-row:3; margin-top:14px; }
 }
+/* Project card modal */
+.original-project { position:relative; cursor:zoom-in; }
+.project-card-trigger { position:absolute; inset:0; padding:0; border:0; background:none; cursor:zoom-in; }
+.project-card-trigger:focus-visible { outline:2px solid var(--primary); outline-offset:3px; }
+.original-project .portfolio-button { position:relative; z-index:1; cursor:pointer; }
+.project-modal { margin:auto; padding:0; width:min(92vw,680px); max-height:90vh; overflow:auto; border:1.5px solid var(--foreground); border-radius:4px; background:var(--background); color:var(--foreground); cursor:auto; }
+.project-modal::backdrop { background:rgba(0,0,0,.6); }
+.project-modal-image { display:block; width:100%; aspect-ratio:16/10; object-fit:cover; border-bottom:1.5px solid var(--foreground); }
+.project-modal-body { padding:22px 26px 26px; display:flex; flex-direction:column; align-items:flex-start; gap:12px; }
+.project-modal h3 { font-family:var(--font-display); font-size:40px; line-height:1.1; color:var(--primary); }
+.project-modal p { font-size:15px; line-height:1.7; }
+.project-modal-tech { display:flex; flex-wrap:wrap; gap:6px; list-style:none; padding:0; margin:0; }
+.project-modal-tech li { font-size:11px; padding:3px 9px; border:1.5px solid var(--foreground); }
+.project-modal-close { position:absolute; top:10px; right:10px; width:32px; height:32px; display:grid; place-items:center; border:1.5px solid var(--foreground); border-radius:50%; background:var(--background); color:var(--foreground); cursor:pointer; z-index:2; }
