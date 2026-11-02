@@ -63,19 +63,29 @@
 
 :root {
   --radius: 0.375rem;
-  --background: oklch(0.950 0.024 88.2); /* #F5EEDD */
-  --foreground: color-mix(in oklab, var(--primary) 65%, black); /* #16587B darkened for text contrast */
+  /* Theme: Vanilla & Moonstone */
+  --background: color-mix(in oklab, oklch(0.942 0.079 91.8) 22%, white); /* Vanilla #FFEBAF, mostly white */
+  --foreground: color-mix(in oklab, oklch(0.653 0.083 215.2) 38%, black); /* Moonstone, deepened for text */
+  --primary: color-mix(in oklab, oklch(0.653 0.083 215.2) 80%, black); /* Moonstone #4C9DB0, deepened for contrast */
+  --leaf: oklch(0.653 0.083 215.2); /* #4C9DB0 Moonstone */
+  --secondary: color-mix(in oklab, oklch(0.942 0.079 91.8) 50%, white); /* soft Vanilla */
+  --muted: color-mix(in oklab, oklch(0.942 0.079 91.8) 50%, white);
+  --band-projects: var(--band-interests);
+  --band-projects-fg: white;
+  --band-education: color-mix(in oklab, oklch(0.942 0.079 91.8) 48%, white);
+  --band-interests: color-mix(in oklab, oklch(0.653 0.083 215.2) 93%, white);
+  --band-interests-heading: white;
+  --band-interests-text: color-mix(in oklab, var(--leaf) 4%, black);
+  --band-contact: color-mix(in oklab, oklch(0.942 0.079 91.8) 34%, white);
+  --band-footer: var(--primary);
+  --band-footer-fg: var(--background);
   --card: oklch(1 0 0);
   --card-foreground: var(--foreground);
   --popover: oklch(1 0 0);
   --popover-foreground: var(--foreground);
-  --primary: oklch(0.438 0.086 237.3); /* #16587B */
   --primary-foreground: var(--background);
-  --secondary: color-mix(in oklab, var(--leaf) 40%, var(--background));
-  --leaf: oklch(0.743 0.063 233.9); /* #84B3CE */
   --stone: var(--leaf);
   --secondary-foreground: var(--primary);
-  --muted: color-mix(in oklab, var(--background) 88%, var(--leaf));
   --muted-foreground: color-mix(in oklab, var(--foreground) 72%, var(--background));
   --accent: var(--secondary);
   --accent-foreground: var(--primary);
@@ -203,8 +213,9 @@ html::-webkit-scrollbar,body::-webkit-scrollbar { display:none; }
 .contact-envelope { color:var(--leaf); transform:rotate(-8deg); }
 h2,h3 { font-family:var(--font-display); font-weight:400; }
 .section-title { font-family:var(--font-display); font-size:50px; line-height:1.15; font-weight:400; color:var(--primary); margin-bottom:36px; }
-.original-projects { padding:40px 8%; background:var(--primary); color:var(--background); }
-.original-projects .section-title { color:var(--background); }
+.original-projects { padding:40px 8%; background:var(--band-projects); color:var(--band-projects-fg); }
+.original-projects .section-title { color:var(--band-projects-fg); }
+.original-interests .section-title { color:var(--band-interests-heading, var(--primary)); }
 .project-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px; max-width:1240px; margin:auto; align-items:stretch; grid-auto-rows:1fr; }
 .original-project { display:grid; grid-template-columns:240px minmax(0,1fr); gap:18px; align-items:start; height:100%; padding:16px; background:var(--background); color:var(--foreground); border-radius:4px; }
 .project-image { width:100%; aspect-ratio:4/3; object-fit:cover; border:1.5px solid var(--foreground); }
@@ -213,7 +224,7 @@ h2,h3 { font-family:var(--font-display); font-weight:400; }
 .original-project .portfolio-button svg { width:13px; height:13px; }
 .original-project h3 { font-family:var(--font-display); font-size:32px; line-height:1.1; color:var(--primary); margin-bottom:8px; }
 .original-project p { font-size:13px; line-height:1.55; margin-top:10px; }
-.original-education { padding:65px 8%; }
+.original-education { padding:65px 8%; background:var(--band-education); }
 .education-note { color:var(--muted-foreground); }
 .education-note { font-size:12px; line-height:1.7; }
 .course-footnote { margin-top:14px; }
@@ -235,9 +246,9 @@ h2,h3 { font-family:var(--font-display); font-weight:400; }
 .skill-group { margin-bottom:22px; }
 .skill-group h4 { color:var(--soil); font-weight:600; font-size:13px; margin-bottom:8px; }
 .skill-list { display:flex; flex-wrap:wrap; gap:8px 10px; list-style:none; padding:0; margin:0; }
-.education-grid .skill-list li { font-size:13px; line-height:1.4; padding:5px 12px; border:1.5px solid var(--foreground); background:var(--stone); }
-.original-interests { padding:65px 8%; background:var(--secondary); display:grid; grid-template-columns:1fr 1.05fr; gap:8%; align-items:center; }
-.original-interests p { font-size:15px; line-height:1.95; }
+.education-grid .skill-list li { font-size:13px; line-height:1.4; padding:5px 12px; border:1.5px solid var(--foreground); background:color-mix(in oklab, var(--leaf) 28%, var(--background)); }
+.original-interests { padding:65px 8%; background:var(--band-interests); display:grid; grid-template-columns:1fr 1.05fr; gap:8%; align-items:center; }
+.original-interests p { color:var(--band-interests-text, var(--foreground)); font-size:15px; line-height:1.95; }
 .polaroid-stack-wrap { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:20px; justify-self:center; }
 .polaroid-stack { position:relative; width:340px; height:440px; }
 .polaroid-stack .polaroid-card { position:absolute; top:0; left:0; }
@@ -247,7 +258,7 @@ h2,h3 { font-family:var(--font-display); font-weight:400; }
 .polaroid-text-badge { position:absolute; background:var(--background); border:1.5px solid var(--foreground); box-shadow:2px 2px 0 var(--leaf); color:var(--foreground); font-size:10px; font-weight:500; padding:5px 8px; line-height:1.4; max-width:128px; z-index:3; }
 .polaroid-caption { display:block; font-family:"Reenie Beanie", cursive; font-size:22px; text-align:center; color:var(--primary); padding-top:10px; line-height:1; }
 .polaroid-map-wrap { position:relative; width:100%; aspect-ratio:1; overflow:hidden; }
-.original-contact { padding:65px 8%; display:flex; flex-direction:column; align-items:center; gap:36px; }
+.original-contact { padding:65px 8%; background:var(--band-contact); display:flex; flex-direction:column; align-items:center; gap:36px; }
 .contact-header { display:flex; flex-direction:column; align-items:center; text-align:center; max-width:580px; }
 .contact-header .section-heading { justify-content:center; }
 .original-contact p { font-size:15px; line-height:1.85; margin-bottom:20px; }
@@ -283,7 +294,7 @@ h2,h3 { font-family:var(--font-display); font-weight:400; }
 @keyframes contact-confirm-in { from{opacity:0;transform:translateY(14px) scale(.96)} to{opacity:1;transform:translateY(0) scale(1)} }
 @media(max-width:800px) { .original-contact .contact-confirm-msg {font-size:32px; padding:22px 26px;} }
 @media(prefers-reduced-motion:reduce) { .contact-origami-stage[data-sent=true] .contact-form{visibility:hidden} .original-contact .contact-confirm-msg{opacity:1;animation:none} }
-.portfolio-footer { padding:30px 8%; border-top:1px solid var(--border); font-size:12px; display:flex; justify-content:space-between; flex-wrap:wrap; gap:24px; background:var(--secondary); }
+.portfolio-footer { padding:30px 8%; border-top:1px solid var(--border); font-size:12px; display:flex; justify-content:space-between; flex-wrap:wrap; gap:24px; background:var(--band-footer); color:var(--band-footer-fg); }
 .portfolio-footer nav { display:flex; flex-wrap:wrap; gap:20px; }
 @media(max-width:1100px) { .portfolio-nav {gap:18px;} .nav-links {gap:15px;font-size:12px;} .wordmark {font-size:28px;} .original-about h1 {font-size:54px;} }
 @media(max-width:800px) {
