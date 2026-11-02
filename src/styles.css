@@ -295,6 +295,8 @@ h2,h3 { font-family:var(--font-display); font-weight:400; }
  .original-project {padding:14px;grid-template-columns:1fr;gap:12px;} .project-image {aspect-ratio:16/9;} .original-project h3 {font-size:26px;} .original-project p {font-size:12px;line-height:1.6;}
  .education-grid,.original-interests {grid-template-columns:1fr;gap:20px;} .education-grid h3,.certifications h3 {font-size:22px;} .original-interests p {font-size:14px;} .polaroid-stack-wrap {align-self:center;} .portfolio-footer {font-size:11px;} .portfolio-footer nav {gap:15px;}
 }
+.reveal { opacity:0; transform:translateY(28px); transition:opacity .7s ease var(--reveal-delay,0ms), transform .7s ease var(--reveal-delay,0ms); }
+.reveal.is-visible { opacity:1; transform:none; }
 @media(prefers-reduced-motion:reduce) { html {scroll-behavior:auto;} *,*::before,*::after {transition:none!important;animation:none!important;} }
 
 /* Interests: Sun Run card */

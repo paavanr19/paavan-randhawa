@@ -52,6 +52,20 @@ function Index() {
     sectionEls.forEach(s => observer.observe(s));
     return () => observer.disconnect();
   }, []);
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const targets = document.querySelectorAll<HTMLElement>("main section:not(#about) > *, .original-project");
+    const observer = new IntersectionObserver(
+      entries => entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add("is-visible"); observer.unobserve(e.target); } }),
+      { rootMargin: "0px 0px -10% 0px", threshold: 0.1 }
+    );
+    targets.forEach((el, i) => {
+      el.classList.add("reveal");
+      if (el.classList.contains("original-project")) el.style.setProperty("--reveal-delay", `${(i % 2) * 120}ms`);
+      observer.observe(el);
+    });
+    return () => observer.disconnect();
+  }, []);
   const [typedCharacters, setTypedCharacters] = useState(0);
   const name = "Paavan Randhawa!";
   const greeting = "Hi, I'm";
