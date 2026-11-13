@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { EducationSection } from "@/components/education-section";
 import { ContactForm } from "@/components/contact-form";
 import { InterestsArc } from "@/components/interests-arc";
+import { Lettering } from "@/components/lettering";
 import { ProjectCard } from "@/components/project-card";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { ArrowUpRight, Download, Github, Linkedin, Menu, X } from "lucide-react";
@@ -101,7 +102,7 @@ function Index() {
       <section id="about" className="original-about">
         <div className="original-about-copy">
           <p className="hello" aria-label={greeting}><span className="terminal-prompt" aria-hidden="true">&gt;_</span> {typedCharacters === 0 && <span className="terminal-caret" aria-hidden="true">|</span>}<span aria-hidden="true">{greeting.slice(0, typedCharacters)}<span className="typewriter-pending">{greeting.slice(typedCharacters)}</span></span></p>
-          <h1 aria-label={name} data-typing={typedCharacters > greeting.length && typedCharacters < greetingLength}><span aria-hidden="true">{name.slice(0, Math.max(0, typedCharacters - greeting.length))}<span className="typewriter-pending">{name.slice(Math.max(0, typedCharacters - greeting.length))}</span></span></h1>
+          <h1 className="hero-lettering" aria-label={name}>{(() => { const typed = Math.max(0, typedCharacters - greeting.length); return <><Lettering text="Paavan" reveal={Math.min(1, typed / 6)} /><Lettering text="Randhawa" reveal={Math.min(1, Math.max(0, typed - 7) / 8)} /></>; })()}</h1>
           <p className="bio">{content.bio}</p>
           <div className="btn-group"><ResumeLink /><Button asChild className="portfolio-button"><a href="#contact">Contact <ArrowUpRight size={16} /></a></Button></div>
           <div className="socials"><Button asChild variant="ghost" size="icon"><a href={github} target="_blank" rel="noopener noreferrer" aria-label="GitHub" title="GitHub"><Github /></a></Button><Button asChild variant="ghost" size="icon"><a href={linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" title="LinkedIn"><Linkedin /></a></Button></div>
@@ -109,19 +110,19 @@ function Index() {
         <figure className="original-portrait"><img src={portrait.url} alt="Paavan Randhawa" fetchPriority="high" /></figure>
       </section>
       <section id="projects" className="original-projects">
-        <div className="section-heading"><h2 className="section-title">Projects</h2></div>
+        <div className="section-heading"><h2 className="section-title"><Lettering text="Projects" /></h2></div>
         <div className="project-grid">
           {content.projects.map(project => <ProjectCard key={project.title} project={project} />)}
         </div>
       </section>
       <EducationSection />
       <section id="interests" className="original-interests">
-        <div><div className="section-heading"><h2 className="section-title">Interests</h2></div><p>{content.interests}</p></div>
+        <div><div className="section-heading"><h2 className="section-title"><Lettering text="Interests" /></h2></div><p>{content.interests}</p></div>
         <InterestsArc />
       </section>
       <section id="contact" className="original-contact">
         <div className="contact-header">
-          <div className="section-heading"><h2 className="section-title">Contact Me</h2><PixelSticker className="contact-envelope" /></div>
+          <div className="section-heading"><h2 className="section-title"><Lettering text="Contact Me" /></h2><PixelSticker className="contact-envelope" /></div>
           <p>{content.contact}</p>
         </div>
         <ContactForm />

@@ -407,3 +407,12 @@ h2,h3 { font-family:var(--font-display); font-weight:400; }
 
 /* Retro display pairing: Fraunces tuned toward a soft, wonky 70s serif */
 .wordmark, h1, h2, h3, .contact-confirm-msg { font-variation-settings: "SOFT" 100, "WONK" 1, "opsz" 144; font-weight:600; }
+
+/* Molinelo lettering: owner-exported Canva wordmarks, tinted with currentColor */
+.lettering { display:inline-block; vertical-align:baseline; height:1em; aspect-ratio:var(--lettering-ratio); max-width:100%; }
+.lettering::before { content:''; display:block; width:100%; height:100%; background:currentColor; -webkit-mask:var(--lettering-url) center / 100% 100% no-repeat; mask:var(--lettering-url) center / 100% 100% no-repeat; clip-path:inset(0 calc((1 - var(--lettering-reveal)) * 100%) 0 0); transition:clip-path 90ms linear; }
+.lettering[data-word="paavan"], .lettering[data-word="randhawa"], .lettering[data-word="projects"], .lettering[data-word="unix-shell"] { height:1.05em; }
+.hero-lettering { display:flex; flex-wrap:wrap; align-items:flex-end; gap:0 .28em; }
+.hero-lettering .lettering { height:1.1em; }
+.project-body h3 .lettering, .project-modal-body h3 .lettering { height:1.05em; }
+@media (prefers-reduced-motion: reduce) { .lettering::before { transition:none; } }

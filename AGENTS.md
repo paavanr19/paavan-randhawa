@@ -18,3 +18,4 @@
 - Keep the animated greeting's full text in the layout and accessible labels, revealing characters after hydration and skipping motion when requested, to avoid layout shifts and preserve readability.
 - The cinematic intro is archived in `src/archive/intro/` (not imported anywhere); see its README to restore.
 - Keep contact submission and its success-only origami animation in `src/components/contact-form.tsx`; retaining the form during folding preserves the visual transition and user input on failed sends.
+- Section, project and hero name headings use owner-exported Molinelo lettering images (src/assets/lettering + Lettering component) tinted via CSS mask, because the font is Canva-only; new headings need a new export.
