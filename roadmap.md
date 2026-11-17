@@ -1,4 +1,5 @@
 # Portfolio redesign
+- [x] Fix prompt greeting playback while retaining Instrument Serif and a Perandory fallback; verify reloads and reduced motion.
 - [x] Fold the contact form into a paper airplane after successful delivery and enlarge the centered Instrument Serif confirmation; tests and simulated-send preview verified, including reduced motion.
 - [x] Apply degree, GPA, linked courses, and certifications from PLAN.md; verified all 12 tests and the live course-link flow.
 - [x] Register uploaded photos with descriptive asset names and replace the Wicked Playbill source; verified all 15 asset URLs.

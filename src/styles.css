@@ -95,7 +95,7 @@
   --input: var(--border);
   --ring: var(--primary);
   --soil: var(--foreground);
-  --font-display: "Instrument Serif", "Times New Roman", serif;
+  --font-display: "Instrument Serif", "Perandory", "Times New Roman", serif;
   --font-script: "Symphony", "Pinyon Script", cursive;
   --font-body: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   --font-mono: var(--font-body);

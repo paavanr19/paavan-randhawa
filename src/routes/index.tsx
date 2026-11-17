@@ -10,6 +10,7 @@ import { ArrowUpRight, Download, Github, Linkedin, Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button";
 import { PixelSticker } from "@/components/pixel-sticker";
 import content from "@/lib/portfolio-content.json";
+import { useTypewriter } from "@/hooks/use-typewriter";
 const portrait = { url: "/images/pfp.png" };
 const resume = { url: "/images/PaavanRandhawa-Resume.pdf" };
 
@@ -68,26 +69,10 @@ function Index() {
     });
     return () => observer.disconnect();
   }, []);
-  const [typedCharacters, setTypedCharacters] = useState(0);
   const name = "Paavan Randhawa!";
   const greeting = "Hi, I'm";
   const greetingLength = greeting.length + name.length;
-  useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      setTypedCharacters(greetingLength);
-      return;
-    }
-    let timer: number | undefined;
-    const start = window.setTimeout(() => {
-      timer = window.setInterval(() => {
-        setTypedCharacters(count => {
-          if (count + 1 >= greetingLength) window.clearInterval(timer);
-          return Math.min(count + 1, greetingLength);
-        });
-      }, 85);
-    }, 1500);
-    return () => { window.clearTimeout(start); window.clearInterval(timer); };
-  }, [greetingLength]);
+  const typedCharacters = useTypewriter(greetingLength);
   return <div className="portfolio-shell">
     <div ref={progressRef} className="scroll-progress" aria-hidden="true" />
     <header className="portfolio-nav">
@@ -100,8 +85,8 @@ function Index() {
     <main>
       <section id="about" className="original-about">
         <div className="original-about-copy">
-          <p className="hello" aria-label={greeting}><span className="terminal-prompt" aria-hidden="true">&gt;_</span> {typedCharacters === 0 && <span className="terminal-caret" aria-hidden="true">|</span>}<span aria-hidden="true">{greeting.slice(0, typedCharacters)}<span className="typewriter-pending">{greeting.slice(typedCharacters)}</span></span></p>
-          <h1 aria-label={name} data-typing={typedCharacters > greeting.length && typedCharacters < greetingLength}><span aria-hidden="true">{name.slice(0, Math.max(0, typedCharacters - greeting.length))}<span className="typewriter-pending">{name.slice(Math.max(0, typedCharacters - greeting.length))}</span></span></h1>
+          <p className="hello" aria-label={greeting}><span className="terminal-prompt" aria-hidden="true">&gt;_</span> <span aria-hidden="true"><span className="typewriter-visible">{greeting.slice(0, typedCharacters)}</span>{typedCharacters < greeting.length && <span className="terminal-caret">|</span>}<span className="typewriter-pending">{greeting.slice(typedCharacters)}</span></span></p>
+          <h1 aria-label={name} data-typing={typedCharacters >= greeting.length && typedCharacters < greetingLength}><span aria-hidden="true"><span className="typewriter-visible">{name.slice(0, Math.max(0, typedCharacters - greeting.length))}</span>{typedCharacters >= greeting.length && typedCharacters < greetingLength && <span className="terminal-caret">|</span>}<span className="typewriter-pending">{name.slice(Math.max(0, typedCharacters - greeting.length))}</span></span></h1>
           <p className="bio">{content.bio}</p>
           <div className="btn-group"><ResumeLink /><Button asChild className="portfolio-button"><a href="#contact">Contact <ArrowUpRight size={16} /></a></Button></div>
           <div className="socials"><Button asChild variant="ghost" size="icon"><a href={github} target="_blank" rel="noopener noreferrer" aria-label="GitHub" title="GitHub"><Github /></a></Button><Button asChild variant="ghost" size="icon"><a href={linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" title="LinkedIn"><Linkedin /></a></Button></div>
